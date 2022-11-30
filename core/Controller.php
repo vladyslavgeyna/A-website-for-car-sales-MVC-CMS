@@ -4,7 +4,7 @@ namespace core;
 
 class Controller
 {
-    protected $viewPath;
+    protected string $viewPath;
     public function __construct()
     {
         $moduleName = Core::getInstance()->app['moduleName'];

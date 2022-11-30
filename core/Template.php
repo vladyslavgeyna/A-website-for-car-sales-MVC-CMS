@@ -4,8 +4,8 @@ namespace core;
 
 class Template
 {
-    protected $path;
-    protected $params;
+    protected string $path;
+    protected array $params;
     public function __construct($path)
     {
         $this->path = $path;

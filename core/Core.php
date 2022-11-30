@@ -7,16 +7,16 @@ use controllers\SiteController;
 
 class Core
 {
-    public $app;
+    public array $app;
     private function __construct()
     {
         $this->app = [];
     }
 
-    private static $instance = null;
+    private static ?Core $instance = null;
 
 
-    public static function getInstance()
+    public static function getInstance(): ?Core
     {
         if(empty(self::$instance))
         {
