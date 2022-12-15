@@ -2,19 +2,23 @@
 
 namespace core;
 
-
 use controllers\SiteController;
 
 class Core
 {
     public array $app;
+    public DB $db;
+    public string $requestMethod;
+    public array $pageParams;
+
     private function __construct()
     {
+        global $layoutParams;
         $this->app = [];
+        $this->pageParams = $layoutParams;
     }
 
     private static ?Core $instance = null;
-
 
     public static function getInstance(): ?Core
     {
@@ -27,7 +31,9 @@ class Core
 
     public function initialize()
     {
-
+        session_start();
+        $this->db = new DB(DATABASE_HOST, DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_BASENAME);
+        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
     }
 
     public function run()
@@ -54,7 +60,7 @@ class Core
             $controller = new $controllerName();
             if(method_exists($controller, $controllerActionName))
             {
-                $this->app['actionResult'] = $controller->$controllerActionName();
+                $this->pageParams['content'] = $controller->$controllerActionName();
             }
             else
             {
@@ -69,7 +75,7 @@ class Core
         if($statusCodeType == 4 || $statusCodeType == 5)
         {
             $siteController = new SiteController();
-            $siteController->errorAction($statusCode);
+            $this->pageParams["content"] = $siteController->errorAction($statusCode);
         }
     }
 
@@ -77,7 +83,7 @@ class Core
     {
         $pathToLayout = "themes/light/layout.php";
         $tpl = new Template($pathToLayout);
-        $tpl->setParam('content', $this->app['actionResult']);
+        $tpl->setParams($this->pageParams);
         $html = $tpl->getHTML();
         echo $html;
     }

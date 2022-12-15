@@ -23,7 +23,7 @@ class SiteController extends Controller
         switch ($code)
         {
             case 404:
-                echo "Error 404. Not found";
+                return $this->render("views/site/error.php");
                 break;
         }
     }
