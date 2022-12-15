@@ -49,26 +49,25 @@ use models\User;
         </nav>
     </header>
     <?= $content ?>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-2 border-top container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-3 border-top container">
         <div class="col-md-4 d-flex align-items-center footer-left-flex">
             <a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1 primary-color-hover footer-logo">
                 <i class="bi bi-car-front-fill" style="font-size: 33px"></i>
             </a>
             <span class="mb-3 mb-md-0 text-muted">© 2022 auto-sale by Vladyslav Geyna</span>
         </div>
-
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3">
+            <li >
                 <a class="footer-logo footer-logo-telegram" href="#">
                     <i class="bi bi-telegram"></i>
                 </a>
             </li>
-            <li class="ms-3">
+            <li >
                 <a class="footer-logo footer-logo-instagram" href="#">
                     <i  class="bi bi-instagram"></i>
                 </a>
             </li>
-            <li class="ms-3">
+            <li >
                 <a class="footer-logo footer-logo-facebook" href="#">
                     <i class="bi bi-facebook"></i>
                 </a>

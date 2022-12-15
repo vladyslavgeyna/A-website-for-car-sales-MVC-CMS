@@ -90,6 +90,9 @@ a {
 .footer-logo-facebook:hover {
     color: #3b5998;
 }
+footer ul {
+    column-gap: 20px;
+}
 .navbar-buttons {
     column-gap: 20px;
 }
@@ -103,6 +106,66 @@ a {
 .navbar-buttons a:hover {
     color: white;
     border: 3px solid #fff;
+}
+
+@media (max-width: 767px) {
+    footer {
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    footer > div:first-child {
+        flex-direction: column;
+    }
+    footer > div:first-child a {
+        margin: 0 0 10px 0 !important;
+    }
+}
+/*Сторінка помилок*/
+.main-error h1 {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.main-error .image-wrapper {
+    position: relative;
+}
+.main-error img {
+    width: 30%;
+}
+@media (min-width: 700px) {
+    .main-error .image-wrapper:before {
+        content: "...халепа";
+        position: absolute;
+        top: 0;
+        right: 22%;
+        font-size: 60px;
+        font-weight: 700;
+    }
+}
+
+
+@media (max-width: 1400px) {
+    .main-error .image-wrapper:before {
+        right: 13%;
+
+    }
+}
+@media (max-width: 991px) {
+    .main-error .image-wrapper:before {
+        right: 0;
+
+    }
+    .main-error img {
+        width: 50%;
+    }
+}
+@media (max-width: 767px) {
+    .main-error .image-wrapper:before {
+        right: -12%;
+
+    }
 }
 /*Сторінка реєстрації шаблон*/
 .main-register {

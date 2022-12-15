@@ -1,5 +1,6 @@
 <?php
-
+/** @var array $errors */
+/** @var array $data */
 use core\Core;
 
 Core::getInstance()->pageParams['title'] = 'Реєстрація';
@@ -9,31 +10,31 @@ Core::getInstance()->pageParams['title'] = 'Реєстрація';
 <main class="main main-register">
     <div class="container container-register">
         <h1 class="fw-bold text-center mb-4">Реєстрація</h1>
-        <form action="" class="d-flex flex-column" method="post">
+        <form action="" class="d-flex flex-column" method="post" enctype="multipart/form-data">
             <div class="form-floating">
-                <input required type="text" class="form-control" name="name"  id="floatingName" placeholder="Ім'я">
+                <input required type="text" class="form-control" name="name" value="<?= $data['name'] ?>" id="floatingName" placeholder="Ім'я">
                 <label for="floatingName">Ім'я</label>
                 <?php if (!empty($errors['name'])): ?>
                     <div class="error-form-validation"><?= $errors['name']; ?></div>
                 <?php endif; ?>
             </div>
             <div class="form-floating">
-                <input required type="text" class="form-control" name="surname" id="floatingSurname" placeholder="Прізвище">
+                <input required type="text" value="<?= $data['surname'] ?>" class="form-control" name="surname" id="floatingSurname" placeholder="Прізвище">
                 <label for="floatingSurname">Прізвище</label>
                 <?php if (!empty($errors['surname'])): ?>
                     <div class="error-form-validation"><?= $errors['surname']; ?></div>
                 <?php endif; ?>
             </div>
             <div class="form-floating">
-                <input required type="text" class="form-control" name="lastname" id="floatingLastname" placeholder="По-батькові">
+                <input required type="text" class="form-control" name="lastname" value="<?= $data['lastname'] ?>" id="floatingLastname" placeholder="По-батькові">
                 <label for="floatingLastname">По-батькові</label>
                 <?php if (!empty($errors['lastname'])): ?>
                     <div class="error-form-validation"><?= $errors['lastname']; ?></div>
                 <?php endif; ?>
             </div>
             <div class="form-floating">
-                <input required type="email" name="login" class="form-control" id="floatingLogin" placeholder="Логін (email)">
-                <label for="floatingLogin">Логін (email)</label>
+                <input required type="email" value="<?= $data['login'] ?>"  name="login" class="form-control" id="floatingLogin" placeholder="Логін (email)">
+                <label for="floatingLogin">Логін (електронна пошта)</label>
                 <?php if (!empty($errors['login'])): ?>
                     <div class="error-form-validation"><?= $errors['login']; ?></div>
                 <?php endif; ?>
@@ -53,7 +54,7 @@ Core::getInstance()->pageParams['title'] = 'Реєстрація';
                 <?php endif; ?>
             </div>
             <div class="form-floating">
-                <input required type="text" class="form-control" name="password2"  id="floatingPhone" placeholder="Телефон">
+                <input required type="text" class="form-control" value="<?= $data['phone'] ?>" name="phone"  id="floatingPhone" placeholder="Телефон">
                 <label for="floatingPhone">Телефон</label>
                 <?php if (!empty($errors['phone'])): ?>
                     <div class="error-form-validation"><?= $errors['phone']; ?></div>
@@ -64,6 +65,9 @@ Core::getInstance()->pageParams['title'] = 'Реєстрація';
                 <div>
                     <input accept="image/jpeg, image/png" type="file" name="avatar" class="form-control" id="inputAvatar">
                 </div>
+                <?php if (!empty($errors['avatar'])): ?>
+                    <div class="error-form-validation"><?= $errors['avatar']; ?></div>
+                <?php endif; ?>
             </div>
             <button class="btn primary-color-bg primary-color-hover" type="submit">Зареєструватися</button>
         </form>

@@ -82,6 +82,7 @@ class User
         $_SESSION["user"] = $user;
     }
 
+
     public static function logoutUser()
     {
         unset($_SESSION["user"]);

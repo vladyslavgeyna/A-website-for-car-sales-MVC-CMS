@@ -16,4 +16,14 @@ class Utils
         }
         return $filteredArray;
     }
+
+    public static function getHashedString($string): string
+    {
+        return md5($string);
+    }
+
+    public static function getFileExtension($fileName)
+    {
+        return pathinfo($fileName, PATHINFO_EXTENSION);
+    }
 }
