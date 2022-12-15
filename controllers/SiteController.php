@@ -18,13 +18,20 @@ class SiteController extends Controller
         ]);
     }
 
-    public function errorAction($code)
+    public function errorAction($code = null)
     {
-        switch ($code)
+        if(!empty($code))
         {
-            case 404:
-                return $this->render("views/site/error.php");
-                break;
+            switch ($code)
+            {
+                case 404:
+                    return $this->render("views/site/error.php");
+                    break;
+            }
+        }
+        else
+        {
+            return $this->render("views/site/error.php");
         }
     }
 }
