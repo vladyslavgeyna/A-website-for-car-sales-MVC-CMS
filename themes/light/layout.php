@@ -19,10 +19,7 @@
 </head>
 <body>
 
-
     <?=$content?>
-
-
 
 
     <script src="/themes/light/bootstrap/js/bootstrap.bundle.min.js"></script>
