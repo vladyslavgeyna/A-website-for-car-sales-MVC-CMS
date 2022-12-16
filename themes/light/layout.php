@@ -13,14 +13,14 @@ use models\User;
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $siteName ?> — <?= $title ?></title>
-    <link rel="stylesheet" href="/themes/light/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/themes/bootstrap/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/themes/light/css/style.css">
-    <link rel="stylesheet" href="/themes/light/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/themes/bootstrap/bootstrap-icons/bootstrap-icons.css">
 </head>
 <body>
 <div class="wrapper ">
     <header class="pt-3 pb-3 ">
-        <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-2 pb-2">
+        <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-1 pb-1">
             <div class="container align-items-center">
                 <a class="navbar-brand " href="/">
                     <i class="bi bi-car-front-fill" style="font-size: 35px"></i>
@@ -49,7 +49,7 @@ use models\User;
         </nav>
     </header>
     <?= $content ?>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-3 border-top container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-5 border-top container">
         <div class="col-md-4 d-flex align-items-center footer-left-flex">
             <a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1 primary-color-hover footer-logo">
                 <i class="bi bi-car-front-fill" style="font-size: 33px"></i>
@@ -75,6 +75,10 @@ use models\User;
         </ul>
     </footer>
 </div>
-<script src="/themes/light/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/themes/bootstrap/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 </body>
 </html>

@@ -13,7 +13,7 @@ Core::getInstance()->pageParams['title'] = 'Помилка 404';
         </div>
         <div class="text-center mt-5">
             <div class="image-wrapper">
-                <img src="/themes/light/images/error_robot.svg" alt="Робот">
+                <img src="/themes/images/error_robot.svg" alt="Робот">
             </div>
         </div>
     </div>

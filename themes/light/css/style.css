@@ -1,7 +1,8 @@
 /*Головний шаблон*/
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap');
+@import url("/themes/css/fonts.css");
 html *:not(i) {
     font-family: "Nunito", sans-serif !important;
+    font-weight: 400;
 }
 body, html {
     height: 100%;
@@ -50,12 +51,13 @@ a {
     line-height: 120%;
     position: relative;
 }
+
 @media (min-width:768px) {
     .nav-link:after {
         content: "";
         position: absolute;
         bottom: 0;
-        left: 10%;
+        left: 8%;
         width: 85%;
         background-color: #fff;
         opacity: 0;
@@ -145,7 +147,6 @@ footer ul {
     }
 }
 
-
 @media (max-width: 1400px) {
     .main-error .image-wrapper:before {
         right: 13%;
@@ -167,7 +168,7 @@ footer ul {
 
     }
 }
-/*Сторінка реєстрації шаблон*/
+/*Сторінка реєстрації */
 .main-register {
     display: flex;
     align-items: center;
@@ -199,10 +200,14 @@ footer ul {
     margin: 0 auto;
     max-width: 500px;
     row-gap: 15px;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 0 50px -10px rgba(0,0,0,0.7);
 }
 .error-form-validation {
+    cursor: help;
     padding-top: 3px;
-    padding-left: 0.75rem;
+    padding-left: 1rem;
     margin-bottom: -10px;
     color: red;
     font-weight: 700;
@@ -211,7 +216,8 @@ footer ul {
 
 .form-floating>.form-control:not(:placeholder-shown) {
     padding-top: 2.3rem;
-    padding-bottom: 0.75rem
+    padding-bottom: 0.75rem;
+
 }
 .main-register button {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
@@ -227,7 +233,15 @@ footer ul {
 }
 
 .input-file label {
-    padding-left: 0.75rem;
+    padding-left: 1rem;
     padding-top: 0;
 }
 
+.form-floating>.form-control {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.form-floating>label {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
