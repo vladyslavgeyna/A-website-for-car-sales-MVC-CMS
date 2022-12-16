@@ -23,4 +23,16 @@ class Image
         ]);
     }
 
+    public static function getImageById($id)
+    {
+        $image = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id,
+        ]);
+        if(!empty($image))
+        {
+            return $image[0];
+        }
+        return null;
+    }
+
 }

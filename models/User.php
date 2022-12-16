@@ -47,6 +47,12 @@ class User
         return !empty($user);
     }
 
+    public static function hasUserImage(): bool
+    {
+        $user = self::getCurrentAuthenticatedUser();
+        return $user["image_id"] == 1;
+    }
+
     public static function isPhoneExists($phone): bool
     {
         $user = Core::getInstance()->db->select(self::$tableName, "*", [

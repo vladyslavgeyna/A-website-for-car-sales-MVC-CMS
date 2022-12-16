@@ -94,9 +94,6 @@ class UserController extends Controller
                 }
                 $password = Utils::getHashedString($_POST["password"]);
                 User::addUser($_POST["name"], $_POST["surname"], $_POST["lastname"], $_POST["login"], $password, $_POST["phone"], $image_id);
-//                return $this->renderByViewName("login", [
-//                    "success_register" => "Вітаємо, Ви успішно зареєструвалися"
-//                ]);
                 $_SESSION["success_register"] = "Вітаємо, Ви успішно зареєструвалися";
                 $this->redirect("/user/login");
             }

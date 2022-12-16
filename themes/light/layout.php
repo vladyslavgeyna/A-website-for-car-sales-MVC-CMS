@@ -2,7 +2,14 @@
 /** @var string $title */
 /** @var string $content */
 /** @var string $siteName */
+
+use models\Image;
 use models\User;
+if (User::isUserAuthenticated())
+{
+    $currentUser = User::getCurrentAuthenticatedUser();
+}
+
 ?>
 
 <!doctype html>
@@ -36,10 +43,25 @@ use models\User;
                             <a class="nav-link" aria-current="page" href="/">Головна</a>
                         </li>
                     </ul>
-                    <div class="d-flex navbar-buttons">
+                    <div class="d-flex align-items-center navbar-buttons">
                         <?php if(User::isUserAuthenticated()):?>
-                            <a href="user/logout" class="btn btn-light primary-color-bg-hover primary-color">Вийти</a>
-                        <?php else: ?>
+                                <div class="dropdown text-end">
+                                    <a href="#" class="d-block link-triangle link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php if(!User::hasUserImage()):?>
+                                            <img src="/themes/images/default_avatar.svg" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
+                                        <?php else: ?>
+                                            <img src="/files/user/<?=Image::getImageById($currentUser['image_id'])['name']?>" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
+                                        <?php endif;?>
+                                    </a>
+                                    <ul class="dropdown-menu text-small" >
+                                        <li><a class="dropdown-item " href="#">New project</a></li>
+                                        <li><a class="dropdown-item " href="#">Settings</a></li>
+                                        <li><a class="dropdown-item " href="#">Profile</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item " href="/user/logout">Вийти</a></li>
+                                    </ul>
+                                </div>
+                            <?php else: ?>
                             <a href="/user/register" class="btn btn-light primary-color-bg-hover primary-color">Реєстрація</a>
                             <a href="/user/login" class="btn btn-light primary-color-bg-hover primary-color">Ввійти</a>
                         <?php endif;?>

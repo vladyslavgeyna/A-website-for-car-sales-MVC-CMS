@@ -34,6 +34,9 @@ a {
 .primary-color-bg-hover:hover {
     background-color: rgb(112.520718,44.062154,249.437846);
 }
+.primary-color-hover:hover {
+    color: rgb(112.520718,44.062154,249.437846);
+}
 .primary-color:hover {
     color: #000
 }
@@ -77,9 +80,7 @@ a {
     color: #333;
     font-size: 24px;
 }
-.primary-color-hover:hover {
-    color: rgb(112.520718,44.062154,249.437846);
-}
+
 .footer-left-flex {
     column-gap: 15px;
 }
@@ -105,9 +106,36 @@ footer ul {
     border: 3px solid #fff;
     background-color: #fff;
 }
+.dropdown-toggle::after {
+    vertical-align: 0.1em !important;
+}
+.link-dark {
+    color: black !important;
+}
+.navbar-buttons a.link-triangle {
+    font-size: 20px;
+}
 .navbar-buttons a:hover {
     color: white;
     border: 3px solid #fff;
+}
+.dropdown-item {
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.dropdown-item:not(:focus) {
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.dropdown-item:focus {
+    color: rgb(112.520718,44.062154,249.437846);
+    background-color: transparent;
+}
+.dropdown-item:active {
+    color: white !important;
+    background-color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.dropdown-item:hover {
+    color: white;
+    background-color: rgb(112.520718,44.062154,249.437846);
 }
 
 @media (max-width: 767px) {
