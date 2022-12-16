@@ -27,7 +27,7 @@ if (User::isUserAuthenticated())
 <body>
 <div class="wrapper ">
     <header class="pt-3 pb-3 ">
-        <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-1 pb-1">
+        <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-0 pb-0">
             <div class="container align-items-center">
                 <a class="navbar-brand " href="/">
                     <i class="bi bi-car-front-fill" style="font-size: 35px"></i>
@@ -45,25 +45,26 @@ if (User::isUserAuthenticated())
                     </ul>
                     <div class="d-flex align-items-center navbar-buttons">
                         <?php if(User::isUserAuthenticated()):?>
-                                <div class="dropdown text-end">
-                                    <a href="#" class="d-block link-triangle link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <?php if(!User::hasUserImage()):?>
-                                            <img src="/themes/images/default_avatar.svg" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
-                                        <?php else: ?>
-                                            <img src="/files/user/<?=Image::getImageById($currentUser['image_id'])['name']?>" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
-                                        <?php endif;?>
-                                    </a>
-                                    <ul class="dropdown-menu text-small" >
-                                        <li><a class="dropdown-item " href="#">New project</a></li>
-                                        <li><a class="dropdown-item " href="#">Settings</a></li>
-                                        <li><a class="dropdown-item " href="#">Profile</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item " href="/user/logout">Вийти</a></li>
-                                    </ul>
-                                </div>
-                            <?php else: ?>
-                            <a href="/user/register" class="btn btn-light primary-color-bg-hover primary-color">Реєстрація</a>
-                            <a href="/user/login" class="btn btn-light primary-color-bg-hover primary-color">Ввійти</a>
+                            <a href="#" class="btn btn-icon primary-color-bg-hover primary-color"><span>Додати оголошення</span><i class="bi bi-plus-circle-fill"></i></a>
+                            <div class="dropdown text-end">
+                                <a href="#" class="d-block link-triangle link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php if(!User::hasUserImage()):?>
+                                        <img src="/themes/images/default_avatar.svg" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
+                                    <?php else: ?>
+                                        <img src="/files/user/<?=Image::getImageById($currentUser['image_id'])['name']?>" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
+                                    <?php endif;?>
+                                </a>
+                                <ul class="dropdown-menu text-small" >
+                                    <li><a class="dropdown-item " href="#">New project</a></li>
+                                    <li><a class="dropdown-item " href="#">Settings</a></li>
+                                    <li><a class="dropdown-item " href="#">Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item dropdown-item-flex d-flex align-items-center" href="/user/logout"><span>Вийти</span><i style="font-size: 24px" class="bi bi-box-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                            <a href="/user/register" class="btn btn-icon btn-light primary-color-bg-hover primary-color"><span>Реєстрація</span><i class="bi bi-person-plus-fill"></i></a>
+                            <a href="/user/login" class="btn btn-icon btn-light primary-color-bg-hover primary-color"><span>Ввійти</span><i class="bi bi-person-check-fill"></i></a>
                         <?php endif;?>
                     </div>
                 </div>
