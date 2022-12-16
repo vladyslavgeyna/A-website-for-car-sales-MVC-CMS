@@ -2,15 +2,15 @@
 @import url("/themes/css/fonts.css");
 html *:not(i) {
     font-family: "Nunito", sans-serif !important;
-    font-weight: 400;
 }
 body, html {
     height: 100%;
+    font-weight: 400;
 }
 body {
-    padding-top: 4rem
 }
 .wrapper {
+    padding-top: 4rem;
     min-height: 100%;
     overflow: hidden;
     display: flex;
@@ -169,19 +169,21 @@ footer ul {
     }
 }
 /*Сторінка реєстрації */
-.main-register {
+.main-register, .main-login {
     display: flex;
     align-items: center;
 }
 
-.container-register h1 {
+.container-register h1, .container-login h1 {
     font-size: 50px;
+    font-weight: 900;
 }
 .input-file {
     display: flex;
     flex-direction: column;
 }
-.container-register input[type="password"], .container-register input[type="text"], .container-register input[type="email"], label {
+.container-register input[type="password"], .container-register input[type="text"], .container-register input[type="email"], .container-register label,
+.container-login input[type="password"],  .container-login input[type="email"], .container-login label {
     font-weight: 700;
     font-size: 18px;
     border-radius: 25px;
@@ -196,7 +198,7 @@ footer ul {
     border-color: #000;
     box-shadow: none;
 }
-.container-register form {
+.container-register form, .container-login form {
     margin: 0 auto;
     max-width: 500px;
     row-gap: 15px;
@@ -219,17 +221,17 @@ footer ul {
     padding-bottom: 0.75rem;
 
 }
-.main-register button {
+.main-register button, .main-login button[type="submit"] {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
     border-radius: 25px;
     color: white;
     font-size: 18px;
     font-weight: 700;
     transition: all 0.3s ease;
-
 }
-.main-register button:hover {
+.main-register button:hover, .main-login button[type="submit"]:hover {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
 }
 
 .input-file label {
@@ -244,4 +246,8 @@ footer ul {
 .form-floating>label {
     padding-left: 1rem;
     padding-right: 1rem;
+}
+.container-login button[type="button"] {
+    top: 50%;
+    transform: translate(0, -50%);
 }

@@ -9,8 +9,11 @@ class Image
 {
     protected static string $tableName = "image";
 
-    public static function addImage($path, $imageExtension, $moduleName)
+    public const ALLOWED_PHOTO_TYPES = ["image/jpeg", "image/png"];
+
+    public static function addImage($path, $imageExtension)
     {
+        $moduleName = Core::getInstance()->app["moduleName"];
         $name = uniqid();
         $fileName = $name.".".$imageExtension;
         $fullPath = "files/{$moduleName}/".$fileName;

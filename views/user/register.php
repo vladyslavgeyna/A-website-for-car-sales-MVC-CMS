@@ -41,9 +41,13 @@ Core::getInstance()->pageParams['title'] = 'Реєстрація';
             <div class="form-floating">
                 <input required type="email" value="<?= $data['login'] ?>"  name="login" class="form-control" id="floatingLogin" placeholder="Логін (email)">
                 <label for="floatingLogin">Логін (електронна пошта)</label>
-                <?php if (!empty($errors['login'])): ?>
+                <?php if (!empty($errors['login_exist'])): ?>
                 <div class="error-form-validation" >
-                    <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Email має бути в форматі: example@gmail.com"><?= $errors['login']; ?></span>
+                    <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Введіть інший логін"><?= $errors['login_exist']; ?></span>
+                </div>
+                <?php elseif (!empty($errors['login_error'])): ?>
+                <div class="error-form-validation" >
+                    <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Email має бути в форматі: example@gmail.com"><?= $errors['login_error']; ?></span>
                 </div>
                 <?php endif; ?>
             </div>
@@ -68,10 +72,14 @@ Core::getInstance()->pageParams['title'] = 'Реєстрація';
             <div class="form-floating">
                 <input required type="text" class="form-control" value="<?= $data['phone'] ?>" name="phone"  id="floatingPhone" placeholder="Телефон">
                 <label for="floatingPhone">Телефон</label>
-                <?php if (!empty($errors['phone'])): ?>
+                <?php if (!empty($errors['phone_error'])): ?>
                 <div class="error-form-validation">
-                    <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Телефон має бути в форматі: 0931231231"><?= $errors['phone']; ?></span>
+                    <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Телефон має бути в форматі: 0931231231"><?= $errors['phone_error']; ?></span>
                 </div>
+                <?php elseif (!empty($errors['phone_exist'])): ?>
+                    <div class="error-form-validation">
+                        <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Введіть інший номер телефону"><?= $errors['phone_exist']; ?></span>
+                    </div>
                 <?php endif; ?>
             </div>
             <div class="input-group input-file">

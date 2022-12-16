@@ -23,7 +23,6 @@ class UserController extends Controller
         }
         if(Core::getInstance()->requestMethod === "POST")
         {
-            $allowedPhotoTypes = ["image/jpeg", "image/png"];
             $errors = [];
             $image_id = null;
             $isAvatarExist = false;
@@ -41,11 +40,11 @@ class UserController extends Controller
             }
             if (!filter_var($_POST["login"], FILTER_VALIDATE_EMAIL))
             {
-                $errors['login'] = "Помилка при введенні логіну";
+                $errors['login_error'] = "Помилка при введенні логіну";
             }
             if(User::isLoginExists($_POST["login"]))
             {
-                $errors['login'] = "Даний логін вже зайнятий";
+                $errors['login_exist'] = "Даний логін вже зайнятий";
             }
             if(($_POST["password"] == $_POST["password2"]) && (strlen($_POST["password2"]) < 6))
             {
@@ -57,15 +56,19 @@ class UserController extends Controller
             }
             if(strlen($_POST["phone"]) < 10)
             {
-                $errors['phone'] = "Номер телефону повинен містити принаймні 10 символів";
+                $errors['phone_error'] = "Номер телефону повинен містити принаймні 10 символів";
             }
-            if (!preg_match('/^(?:\+38)?0[3569]\d{8}$/', $_POST["phone"]))
+            if (!preg_match('/^0[3569]\d{8}$/', $_POST["phone"])) // ^(?:\+38)?0[3569]\d{8}$ - на випадок, якщо треба буде +38
             {
-                $errors['phone'] = "Помилка при введені номеру телефону";
+                $errors['phone_error'] = "Помилка при введені номеру телефону";
+            }
+            if (User::isPhoneExists($_POST["phone"]))
+            {
+                $errors['phone_exist'] = "Користувач з таким номером вже зареєстрований";
             }
             if(empty($_FILES["avatar"]["error"]))
             {
-                if(!in_array($_FILES["avatar"]["type"], $allowedPhotoTypes))
+                if(!in_array($_FILES["avatar"]["type"], Image::ALLOWED_PHOTO_TYPES))
                 {
                     $errors['avatar'] = "Некоректний тип файлу. Дозволені типи: png та jpeg";
                 }
@@ -87,10 +90,15 @@ class UserController extends Controller
                 if($isAvatarExist === true)
                 {
                     $extension = Utils::getFileExtension($_FILES["avatar"]["name"]);
-                    $image_id = Image::addImage($_FILES["avatar"]["tmp_name"], $extension, $this->moduleName);
+                    $image_id = Image::addImage($_FILES["avatar"]["tmp_name"], $extension);
                 }
                 $password = Utils::getHashedString($_POST["password"]);
                 User::addUser($_POST["name"], $_POST["surname"], $_POST["lastname"], $_POST["login"], $password, $_POST["phone"], $image_id);
+//                return $this->renderByViewName("login", [
+//                    "success_register" => "Вітаємо, Ви успішно зареєструвалися"
+//                ]);
+                $_SESSION["success_register"] = "Вітаємо, Ви успішно зареєструвалися";
+                $this->redirect("/user/login");
             }
 
         }
@@ -100,5 +108,37 @@ class UserController extends Controller
         }
     }
 
+    public function loginAction()
+    {
+        if(User::isUserAuthenticated())
+        {
+            $this->redirect("/");
+        }
+        if(Core::getInstance()->requestMethod === "POST")
+        {
+            $password = Utils::getHashedString($_POST["password"]);
+            $user = User::getUserByLoginAndPassword($_POST["login"], $password);
+            $error = null;
+            if(empty($user))
+            {
+                $error = "Неправильний логін або пароль";
+            }
+            else
+            {
+                User::authenticateUser($user);
+                $this->redirect("/");
+            }
+        }
+        return $this->render(null, [
+            "error" => $error
+        ]);
+
+    }
+
+    public function logoutAction()
+    {
+        User::logoutUser();
+        $this->redirect("/user/login");
+    }
 
 }
