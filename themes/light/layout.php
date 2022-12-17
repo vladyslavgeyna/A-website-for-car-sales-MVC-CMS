@@ -25,8 +25,8 @@ if (User::isUserAuthenticated())
     <link rel="stylesheet" href="/themes/bootstrap/bootstrap-icons/bootstrap-icons.css">
 </head>
 <body>
-<div class="wrapper ">
-    <header class="pt-3 pb-3 ">
+<div class="wrapper-layout">
+    <header class="pt-3 pb-3 header-layout">
         <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-0 pb-0">
             <div class="container align-items-center">
                 <a class="navbar-brand " href="/">
@@ -64,7 +64,7 @@ if (User::isUserAuthenticated())
                             </div>
                         <?php else: ?>
                             <a href="/user/register" class="btn btn-icon btn-light primary-color-bg-hover primary-color"><span>Реєстрація</span><i class="bi bi-person-plus-fill"></i></a>
-                            <a href="/user/login" class="btn btn-icon btn-light primary-color-bg-hover primary-color"><span>Ввійти</span><i class="bi bi-person-check-fill"></i></a>
+                            <a href="/user/login" class="btn btn-icon btn-light primary-color-bg-hover primary-color"><span>Увійти</span><i class="bi bi-person-check-fill"></i></a>
                         <?php endif;?>
                     </div>
                 </div>
@@ -103,5 +103,6 @@ if (User::isUserAuthenticated())
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>
+
 </body>
 </html>

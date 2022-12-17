@@ -6,6 +6,8 @@ use controllers\SiteController;
 
 class Core
 {
+
+    public string $layoutName;
     public array $app;
     public DB $db;
     public string $requestMethod;
@@ -16,6 +18,7 @@ class Core
         global $layoutParams;
         $this->app = [];
         $this->pageParams = $layoutParams;
+        $this->layoutName = "layout";
     }
 
     private static ?Core $instance = null;
@@ -81,7 +84,7 @@ class Core
 
     public function done()
     {
-        $pathToLayout = "themes/light/layout.php";
+        $pathToLayout = "themes/light/{$this->layoutName}.php";
         $tpl = new Template($pathToLayout);
         $tpl->setParams($this->pageParams);
         $html = $tpl->getHTML();

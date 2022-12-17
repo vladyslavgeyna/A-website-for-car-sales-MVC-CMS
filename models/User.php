@@ -110,4 +110,9 @@ class User
         return $user["is_admin"] == 1;
     }
 
+    public static function getCountOfUsers(): int
+    {
+        $users = Core::getInstance()->db->select(self::$tableName);
+        return count($users);
+    }
 }

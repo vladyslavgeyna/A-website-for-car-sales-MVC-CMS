@@ -11,12 +11,19 @@ class Image
 
     public const ALLOWED_PHOTO_TYPES = ["image/jpeg", "image/png"];
 
-    public static function addImage($path, $imageExtension)
+    public static function addImage($path, $imageExtension, $moduleName = null)
     {
-        $moduleName = Core::getInstance()->app["moduleName"];
+        if(empty($moduleName))
+        {
+            $module = Core::getInstance()->app["moduleName"];
+        }
+        else
+        {
+            $module = $moduleName;
+        }
         $name = uniqid();
         $fileName = $name.".".$imageExtension;
-        $fullPath = "files/{$moduleName}/".$fileName;
+        $fullPath = "files/{$module}/".$fileName;
         move_uploaded_file($path, $fullPath);
         return Core::getInstance()->db->insert(self::$tableName, [
             "name" => $fileName

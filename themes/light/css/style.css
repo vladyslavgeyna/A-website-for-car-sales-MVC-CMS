@@ -1,4 +1,3 @@
-/*Головний шаблон*/
 @import url("/themes/css/fonts.css");
 html *:not(i) {
     font-family: "Nunito", sans-serif !important;
@@ -7,9 +6,30 @@ body, html {
     height: 100%;
     font-weight: 400;
 }
-body {
+.wrapper-admin-layout {
+    min-width: 320px;
 }
-.wrapper {
+/*Все що з адміном*/
+.admin-main-error {
+    margin: auto;
+    height: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+.admin-main-error div div {
+    margin-top: 50px;
+}
+.wrapper-admin-layout nav.main-header .nav-item a {
+    font-weight: 700;
+    font-size: 18px;
+}
+.wrapper-admin-layout nav.main-header .nav-item:not(:first-child) a {
+}
+
+/*Головний шаблон*/
+
+.wrapper-layout {
     padding-top: 4rem;
     min-height: 100%;
     overflow: hidden;
@@ -26,27 +46,25 @@ a {
     transition: all 0.3s ease;
 }
 .primary-color {
-    color: rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846) ;
 }
 .primary-color-bg {
-    background-color: rgb(112.520718,44.062154,249.437846);
+    background-color: rgb(112.520718,44.062154,249.437846) ;
 }
 .primary-color-bg-hover:hover {
-    background-color: rgb(112.520718,44.062154,249.437846);
+    background-color: rgb(112.520718,44.062154,249.437846) ;
 }
 .primary-color-hover:hover {
-    color: rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846) ;
 }
-.primary-color:hover {
-    color: #000
-}
-.navbar-brand {
+
+.header-layout .navbar-brand {
     padding: 5px;
 }
-.navbar-brand:hover {
+.header-layout .navbar-brand:hover {
     opacity: 0.7;
 }
-.nav-link {
+.header-layout .nav-link {
     font-weight: 700;
     padding: 10px;
     font-size: 18px;
@@ -56,7 +74,7 @@ a {
 }
 
 @media (min-width:768px) {
-    .nav-link:after {
+    .header-layout .nav-link:after {
         content: "";
         position: absolute;
         bottom: 0;
@@ -70,7 +88,7 @@ a {
         transition: all 0.3s ease;
         transform: scale(0);
     }
-    .nav-link:hover:after {
+    .header-layout .nav-link:hover:after {
         opacity: 0.7;
         transform: scale(1);
     }
@@ -96,10 +114,10 @@ a {
 footer ul {
     column-gap: 20px;
 }
-.navbar-buttons {
+.header-layout .navbar-buttons {
     column-gap: 20px;
 }
-.navbar-buttons a {
+.header-layout .navbar-buttons a {
     font-size: 18px;
     font-weight: 700;
     border-radius: 25px;
@@ -112,12 +130,14 @@ footer ul {
 .link-dark {
     color: black !important;
 }
-.navbar-buttons a.link-triangle {
+.header-layout .navbar-buttons a.link-triangle {
     font-size: 20px;
+    color: black;
 }
-.navbar-buttons a:hover {
+.header-layout .navbar-buttons a:not(.link-triangle):hover {
     color: white;
     border: 3px solid #fff;
+    background-color: rgb(112.520718,44.062154,249.437846) !important;
 }
 .dropdown-item {
     color: rgb(112.520718,44.062154,249.437846);
@@ -137,7 +157,7 @@ footer ul {
     color: white;
     background-color: rgb(112.520718,44.062154,249.437846);
 }
-.navbar-buttons > a:not(:disabled):not(:disabled):active {
+.header-layout .navbar-buttons > a:not(:disabled):not(:disabled):active {
     background-color: rgb(112.520718,44.062154,249.437846);
     border: 3px solid #fff;
     color: white;
@@ -249,6 +269,14 @@ footer ul {
     padding: 30px;
     border-radius: 25px;
     box-shadow: 0 0 50px -10px rgba(0,0,0,0.7);
+}
+.container-register form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.container-login form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
 }
 .error-form-validation {
     cursor: help;

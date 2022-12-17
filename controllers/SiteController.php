@@ -3,6 +3,7 @@
 namespace controllers;
 
 use core\Controller;
+use models\User;
 
 class SiteController extends Controller
 {
@@ -13,25 +14,36 @@ class SiteController extends Controller
 
     public function indexAction()
     {
-        return $this->render(null, [
-           'title' => 'Головна сторінка сайту'
-        ]);
+        if (User::isUserAdmin())
+        {
+            $data["users_count"] = User::getCountOfUsers();
+            return $this->renderAdmin(null, [
+                "data" => $data
+            ]);
+        }
+        else
+        {
+            return $this->render(null, [
+                'title' => 'Головна сторінка сайту'
+            ]);
+        }
     }
 
     public function errorAction($code = null)
     {
+        $viewPath = User::isUserAdmin() ? "views/admin/site/error.php" : "views/site/error.php";
         if(!empty($code))
         {
             switch ($code)
             {
                 case 404:
-                    return $this->render("views/site/error.php");
+                    return $this->render($viewPath);
                     break;
             }
         }
         else
         {
-            return $this->render("views/site/error.php");
+            return $this->render($viewPath);
         }
     }
 }

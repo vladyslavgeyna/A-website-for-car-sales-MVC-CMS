@@ -129,7 +129,6 @@ class UserController extends Controller
         return $this->render(null, [
             "error" => $error
         ]);
-
     }
 
     public function logoutAction()
