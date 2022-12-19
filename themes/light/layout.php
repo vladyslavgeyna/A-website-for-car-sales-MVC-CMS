@@ -25,9 +25,10 @@ if (User::isUserAuthenticated())
     <link rel="stylesheet" href="/themes/bootstrap/bootstrap-icons/bootstrap-icons.css">
 </head>
 <body>
+
 <div class="wrapper-layout">
     <header class="pt-3 pb-3 header-layout">
-        <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-0 pb-0">
+        <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-md-0 pb-md-0">
             <div class="container align-items-center">
                 <a class="navbar-brand " href="/">
                     <i class="bi bi-car-front-fill" style="font-size: 35px"></i>

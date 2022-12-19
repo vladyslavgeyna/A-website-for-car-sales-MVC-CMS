@@ -26,6 +26,25 @@ body, html {
 }
 .wrapper-admin-layout nav.main-header .nav-item:not(:first-child) a {
 }
+.nav-pills .nav-link {
+    border-radius: 25px;
+}
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: rgb(112.520718,44.062154,249.437846) ;
+}
+.section-index-admin .small-box {
+    border-radius: 25px;
+}
+.section-index-admin .small-box-footer {
+    border-radius: 0 0 25px 25px;
+}
+
+ul.nav-pills.nav-sidebar .nav-link {
+    transition: padding 0.3s ease-in-out;
+}
+div.os-host-scrollbar-horizontal-hidden .nav-link {
+    padding: .5rem .3rem;
+}
 
 /*Головний шаблон*/
 
@@ -270,14 +289,29 @@ footer ul {
     border-radius: 25px;
     box-shadow: 0 0 50px -10px rgba(0,0,0,0.7);
 }
+.main-register button, .main-login button {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    border-radius: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.main-register button:hover, .main-login button:hover {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
 .container-register form button:active{
     border-color: rgb(112.520718,44.062154,249.437846) !important;
     color: rgb(112.520718,44.062154,249.437846) !important;
 }
+
 .container-login form button:active{
     border-color: rgb(112.520718,44.062154,249.437846) !important;
     color: rgb(112.520718,44.062154,249.437846) !important;
 }
+
+
 .error-form-validation {
     cursor: help;
     padding-top: 3px;
@@ -293,18 +327,7 @@ footer ul {
     padding-bottom: 0.75rem;
 
 }
-.main-register button, .main-login button[type="submit"] {
-    border: 4px solid rgb(112.520718,44.062154,249.437846);
-    border-radius: 25px;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    transition: all 0.3s ease;
-}
-.main-register button:hover, .main-login button[type="submit"]:hover {
-    border: 4px solid rgb(112.520718,44.062154,249.437846);
-    color: rgb(112.520718,44.062154,249.437846);
-}
+
 
 .input-file label {
     padding-left: 1rem;

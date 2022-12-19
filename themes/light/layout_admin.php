@@ -18,23 +18,19 @@ if (User::isUserAuthenticated())
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $siteName ?> — <?= $title ?></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="/themes/admin/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/themes/admin-lte/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/themes/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="/themes/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/themes/admin/plugins/jqvmap/jqvmap.min.css">
-    <link rel="stylesheet" href="/themes/admin/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="/themes/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="/themes/admin/plugins/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="/themes/admin/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="/themes/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="/themes/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="/themes/admin-lte/plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="/themes/admin-lte/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/themes/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/themes/admin-lte/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/themes/admin-lte/plugins/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="/themes/light/css/style.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper wrapper-admin-layout">
-
-    <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="/themes/admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
     <nav class="main-header navbar navbar-expand navbar-white navbar-light pt-1 pb-1">
         <ul class="navbar-nav d-flex align-items-center">
             <li class="nav-item">
@@ -56,7 +52,7 @@ if (User::isUserAuthenticated())
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="/" class="brand-link">
-            <img src="/themes/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="/themes/admin-lte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Адмін панель</span>
         </a>
 
@@ -77,37 +73,220 @@ if (User::isUserAuthenticated())
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
                         <a href="/" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                            <i style="width: 30px"  class="fa-solid fa-house px-1"></i>
                             <p>
                                 Головна
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px"  class="fa-solid fa-users px-1"></i>
                             <p>
-                                Dashboard
+                                Користувачі
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link active">
+                                <a href="./index.html" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v1</p>
+                                    <p>Всі користувачі</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="./index2.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v2</p>
+                                    <p>Додати користувача</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-solid fa-pager px-1"></i>
+                            <p>
+                                Оголошення
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="./index.html" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі оголошення</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index3.html" class="nav-link">
+                                <a href="./index2.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v3</p>
+                                    <p>Додати оголошення</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px"  class="fa-solid fa-car px-1"></i>
+                            <p>
+                                Автомобілі
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі автомобілі</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Марки
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Всі марки</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Додати марку</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Моделі
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Всі моделі</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Додати модель</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-solid fa-screwdriver-wrench px-1"></i>
+                            <p>
+                                Характеристики авто
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Види палива
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Всі види палива</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Додати вид палива</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Трансмісії
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Всі трансмісії</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Додати трансмісію</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Приводи
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Всі приводи</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Додати привід</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-solid fa-map-location-dot px-1"></i>
+                            <p>
+                                Області України
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="./index.html" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі області</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./index2.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Додати область</p>
                                 </a>
                             </li>
                         </ul>
@@ -123,25 +302,27 @@ if (User::isUserAuthenticated())
     </aside>
 </div>
 
-<script src="/themes/admin/plugins/jquery/jquery.min.js"></script>
-<script src="/themes/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/themes/admin-lte/plugins/jquery/jquery.min.js"></script>
+<script src="/themes/admin-lte/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
-<script src="/themes/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/themes/admin/plugins/chart.js/Chart.min.js"></script>
-<script src="/themes/admin/plugins/sparklines/sparkline.js"></script>
-<script src="/themes/admin/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/themes/admin/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<script src="/themes/admin/plugins/jquery-knob/jquery.knob.min.js"></script>
-<script src="/themes/admin/plugins/moment/moment.min.js"></script>
-<script src="/themes/admin/plugins/daterangepicker/daterangepicker.js"></script>
-<script src="/themes/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="/themes/admin/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="/themes/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="/themes/admin/dist/js/adminlte.js"></script>
+<script src="/themes/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/themes/admin-lte/plugins/chart.js/Chart.min.js"></script>
+<script src="/themes/admin-lte/plugins/sparklines/sparkline.js"></script>
+<script src="/themes/admin-lte/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="/themes/admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="/themes/admin-lte/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="/themes/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/themes/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/themes/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="/themes/admin-lte/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="/themes/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/themes/admin-lte/dist/js/adminlte.js"></script>
 <script src="https://kit.fontawesome.com/8a5dbfaed5.js" crossorigin="anonymous"></script>
 <!--<script src="/themes/admin/dist/js/demo.js"></script>-->
-<script src="/themes/admin/dist/js/pages/dashboard.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/themes/admin-lte/dist/js/pages/dashboard.js"></script>
+<script src="/themes/js/admin.js"></script>
 </body>
 </html>
