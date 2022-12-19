@@ -27,4 +27,15 @@ class Carmodel
         }
         return null;
     }
+
+    public static function getAllCarModels(): ?array
+    {
+        $car_models = Core::getInstance()->db->select(self::$tableName);
+        if(!empty($car_models))
+        {
+            return $car_models;
+        }
+        return null;
+    }
+
 }

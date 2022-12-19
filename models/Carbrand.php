@@ -27,6 +27,15 @@ class Carbrand
         return null;
     }
 
+    public static function getAllCarBrands(): ?array
+    {
+        $car_brands = Core::getInstance()->db->select(self::$tableName);
+        if(!empty($car_brands))
+        {
+            return $car_brands;
+        }
+        return null;
+    }
 
 
 }

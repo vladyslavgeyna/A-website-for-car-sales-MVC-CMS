@@ -3,15 +3,9 @@
 /** @var string $content */
 /** @var string $siteName */
 
-use models\Image;
 use models\User;
-if (User::isUserAuthenticated())
-{
-    $currentUser = User::getCurrentAuthenticatedUser();
-}
 
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -46,13 +40,13 @@ if (User::isUserAuthenticated())
                     </ul>
                     <div class="d-flex align-items-center navbar-buttons">
                         <?php if(User::isUserAuthenticated()):?>
-                            <a href="#" class="btn btn-icon primary-color-bg-hover primary-color"><span>Додати оголошення</span><i class="bi bi-plus-circle-fill"></i></a>
+                            <a href="/carad/add" class="btn btn-icon primary-color-bg-hover primary-color"><span>Додати оголошення</span><i class="bi bi-plus-circle-fill"></i></a>
                             <div class="dropdown text-end">
                                 <a href="#" class="d-block link-triangle link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php if(!User::hasUserImage()):?>
+                                    <?php if(!User::hasCurrentUserImage()):?>
                                         <img src="/themes/images/default_avatar.svg" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
                                     <?php else: ?>
-                                        <img src="/files/user/<?=Image::getImageById($currentUser['image_id'])['name']?>" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
+                                        <img src="<?=User::getCurrentUserImagePath()?>" alt="Аватар користувача" width="34" height="34" class="rounded-circle">
                                     <?php endif;?>
                                 </a>
                                 <ul class="dropdown-menu text-small" >
@@ -100,6 +94,7 @@ if (User::isUserAuthenticated())
     </footer>
 </div>
 <script src="/themes/bootstrap/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/8a5dbfaed5.js" crossorigin="anonymous"></script>
 <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

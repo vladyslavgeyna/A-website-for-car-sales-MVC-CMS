@@ -277,7 +277,7 @@ footer ul {
     border-radius: 25px;
     width: 100%;
 }
-.form-control:focus {
+.form-control:focus, .form-select:focus {
     border-color: #000;
     box-shadow: none;
 }
@@ -289,7 +289,7 @@ footer ul {
     border-radius: 25px;
     box-shadow: 0 0 50px -10px rgba(0,0,0,0.7);
 }
-.main-register button, .main-login button {
+.main-register button, .main-login form button {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
     border-radius: 25px;
     color: white;
@@ -297,7 +297,7 @@ footer ul {
     font-weight: 700;
     transition: all 0.3s ease;
 }
-.main-register button:hover, .main-login button:hover {
+.main-register button:hover, .main-login form button:hover {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
     color: rgb(112.520718,44.062154,249.437846);
 }
@@ -312,7 +312,7 @@ footer ul {
 }
 
 
-.error-form-validation {
+.container-register .error-form-validation {
     cursor: help;
     padding-top: 3px;
     padding-left: 1rem;
@@ -321,7 +321,16 @@ footer ul {
     font-weight: 700;
     font-size: 16px;
 }
-
+.container-carad-add .error-form-validation.hidden {
+    display: none;
+}
+.container-carad-add .error-form-validation {
+    padding-top: 3px;
+    margin-bottom: -10px;
+    color: red;
+    font-weight: 700;
+    font-size: 16px;
+}
 .form-floating>.form-control:not(:placeholder-shown) {
     padding-top: 2.3rem;
     padding-bottom: 0.75rem;
@@ -329,7 +338,7 @@ footer ul {
 }
 
 
-.input-file label {
+.container-register .input-file label {
     padding-left: 1rem;
     padding-top: 0;
 }
@@ -345,4 +354,36 @@ footer ul {
 .container-login button[type="button"] {
     top: 50%;
     transform: translate(0, -50%);
+}
+/*Сторінка додавання оголошення*/
+.container-carad-add h1 {
+    font-size: 40px;
+    font-weight: 900;
+}
+.container-carad-add .images-block {
+    flex-wrap: wrap;
+}
+.container-carad-add .images-block.hidden {
+    display: none !important;
+}
+
+.selected_car_image_block  {
+    overflow: hidden;
+    position: relative;
+    height: 150px;
+    width: 150px;
+}
+@media (max-width: 768px) {
+    .selected_car_image_block  {
+        height: 100px;
+        width: 100px;
+    }
+}
+.selected_car_image_block img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

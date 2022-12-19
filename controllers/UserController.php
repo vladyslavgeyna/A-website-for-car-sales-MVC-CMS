@@ -111,11 +111,11 @@ class UserController extends Controller
         {
             $this->redirect("/");
         }
+        $error = null;
         if(Core::getInstance()->requestMethod === "POST")
         {
             $password = Utils::getHashedString($_POST["password"]);
             $user = User::getUserByLoginAndPassword($_POST["login"], $password);
-            $error = null;
             if(empty($user))
             {
                 $error = "Неправильний логін або пароль";

@@ -31,7 +31,7 @@ class SiteController extends Controller
 
     public function errorAction($code = null)
     {
-        $viewPath = User::isUserAdmin() ? "views/admin/site/error.php" : "views/site/error.php";
+        $viewPath = User::isUserAdmin() ? "views/admin/site/error-{$code}.php" : "views/site/error-{$code}.php";
         if(!empty($code))
         {
             switch ($code)

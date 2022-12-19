@@ -47,10 +47,32 @@ class User
         return !empty($user);
     }
 
-    public static function hasUserImage(): bool
+    public static function hasCurrentUserImage(): ?bool
     {
-        $user = self::getCurrentAuthenticatedUser();
-        return $user["image_id"] == 1;
+        if(self::isUserAuthenticated())
+        {
+            $user = self::getCurrentAuthenticatedUser();
+            return (!empty($user["image_id"]));
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getCurrentUserImagePath(): ?string
+    {
+        if(self::hasCurrentUserImage())
+        {
+            $user = self::getCurrentAuthenticatedUser();
+            $image_id = $user["image_id"];
+            $image = Image::getImageById($image_id);
+            return "/files/user/".$image["name"];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public static function isPhoneExists($phone): bool
@@ -106,8 +128,15 @@ class User
 
     public static function isUserAdmin(): bool
     {
-        $user = self::getCurrentAuthenticatedUser();
-        return $user["is_admin"] == 1;
+        if (self::isUserAuthenticated())
+        {
+            $user = self::getCurrentAuthenticatedUser();
+            return $user["is_admin"] == 1;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static function getCountOfUsers(): int
@@ -115,4 +144,20 @@ class User
         $users = Core::getInstance()->db->select(self::$tableName);
         return count($users);
     }
+
+    public static function getCurrentUserFullName(): ?string
+    {
+        if(self::isUserAuthenticated())
+        {
+            $user = self::getCurrentAuthenticatedUser();
+            return $user["name"]." ".$user["surname"];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
+
 }

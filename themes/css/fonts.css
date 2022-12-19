@@ -2,95 +2,95 @@
     font-family: "Nunito";
     font-weight: 200;
     font-style: normal;
-    src: url("/themes/fonts/nunito/woff2/Nunito-ExtraLight.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-ExtraLight.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-ExtraLight.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 200;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-ExtraLight.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-ExtraLight.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-ExtraLight.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 300;
     font-style: normal;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Light.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Light.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Light.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 300;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Light.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Light.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Light.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 400;
     font-style: normal;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Regular.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Regular.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Regular.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 400;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Regular.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Regular.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Regular.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 500;
     font-style: normal;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Medium.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Medium.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Medium.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 500;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Medium.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Medium.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Medium.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 600;
     font-style: normal;
-    src: url("/themes/fonts/nunito/woff2/Nunito-SemiBold.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-SemiBold.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-SemiBold.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 600;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-SemiBold.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-SemiBold.woff") format("woff");
+    src:   url("/themes/fonts/nunito/woff/Nunito-SemiBold.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 700;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Bold.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Bold.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Bold.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 700;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Bold.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Bold.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Bold.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 800;
     font-style: normal;
-    src: url("/themes/fonts/nunito/woff2/Nunito-ExtraBold.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-ExtraBold.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-ExtraBold.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 800;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-ExtraBold.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-ExtraBold.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-ExtraBold.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 900;
     font-style: normal;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Black.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Black.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Black.woff") format("woff");
 }
 @font-face {
     font-family: "Nunito";
     font-weight: 900;
     font-style: italic;
-    src: url("/themes/fonts/nunito/woff2/Nunito-Black.woff2") format("woff2"),  url("/themes/fonts/nunito/woff/Nunito-Black.woff") format("woff");
+    src: url("/themes/fonts/nunito/woff/Nunito-Black.woff") format("woff");
 }

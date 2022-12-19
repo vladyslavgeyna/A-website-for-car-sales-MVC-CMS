@@ -3,12 +3,7 @@
 /** @var string $content */
 /** @var string $siteName */
 
-use models\Image;
 use models\User;
-if (User::isUserAuthenticated())
-{
-    $currentUser = User::getCurrentAuthenticatedUser();
-}
 
 ?>
 <!DOCTYPE html>
@@ -49,24 +44,22 @@ if (User::isUserAuthenticated())
             </li>
         </ul>
     </nav>
-
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="/" class="brand-link">
             <img src="/themes/admin-lte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Адмін панель</span>
         </a>
-
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <?php if(!User::hasUserImage()):?>
+                    <?php if(!User::hasCurrentUserImage()):?>
                         <img src="/themes/images/default_avatar.svg" class="img-circle elevation-2" alt="Аватар користувача">
                     <?php else: ?>
-                        <img src="/files/user/<?=Image::getImageById($currentUser['image_id'])['name']?>" class="img-circle elevation-2" alt="Аватар користувача">
+                        <img src="<?=User::getCurrentUserImagePath()?>" class="img-circle elevation-2" alt="Аватар користувача">
                     <?php endif;?>
                 </div>
                 <div class="info">
-                    <a href="/" class="d-block"><?=$currentUser["name"]." ".$currentUser["surname"]?></a>
+                    <a href="/" class="d-block"><?=User::getCurrentUserFullName()?></a>
                 </div>
             </div>
             <nav class="mt-2">
