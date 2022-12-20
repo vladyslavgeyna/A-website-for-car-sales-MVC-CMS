@@ -38,4 +38,16 @@ class Carmodel
         return null;
     }
 
+    public static function getCarModelById($id)
+    {
+        $car_model = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id
+        ]);
+        if(!empty($car_model))
+        {
+            return $car_model[0];
+        }
+        return null;
+    }
+
 }

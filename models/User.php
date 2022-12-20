@@ -158,6 +158,18 @@ class User
         }
     }
 
+    public static function getCurrentUserId()
+    {
+        if(self::isUserAuthenticated())
+        {
+            $user = self::getCurrentAuthenticatedUser();
+            return $user["id"];
+        }
+        else
+        {
+            return null;
+        }
+    }
 
 
 }

@@ -6,7 +6,6 @@ use core\Core;
 Core::getInstance()->pageParams['title'] = 'Реєстрація';
 
 ?>
-
 <main class="main main-register">
     <div class="container container-register">
         <h1  class="text-center mb-4">Реєстрація</h1>

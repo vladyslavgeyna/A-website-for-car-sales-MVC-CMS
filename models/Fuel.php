@@ -17,4 +17,16 @@ class Fuel
         }
         return null;
     }
+
+    public static function getFuelById($id)
+    {
+        $fuel = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id
+        ]);
+        if(!empty($fuel))
+        {
+            return $fuel[0];
+        }
+        return null;
+    }
 }

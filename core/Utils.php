@@ -26,4 +26,28 @@ class Utils
     {
         return pathinfo($fileName, PATHINFO_EXTENSION);
     }
+
+    public static function isIntDigit($value): bool
+    {
+        return !(false !== strpos($value, '.')) && is_numeric($value);
+    }
+
+    public static function hasTheSameIdAsInArray($array, $id): bool
+    {
+        $allId = [];
+        foreach ($array as $item)
+        {
+            $allId []= $item["id"];
+        }
+        if(in_array($id, $allId))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
 }

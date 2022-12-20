@@ -3,6 +3,7 @@
 namespace controllers;
 
 use core\Controller;
+use models\Carad;
 use models\User;
 
 class SiteController extends Controller
@@ -23,8 +24,10 @@ class SiteController extends Controller
         }
         else
         {
-            return $this->render(null, [
-                'title' => 'Головна сторінка сайту'
+            $data = [];
+            $data["ads"] = Carad::getAllCarAdsInnered();
+            return $this->render("views/carad/index.php", [
+                "data" => $data
             ]);
         }
     }
@@ -38,6 +41,9 @@ class SiteController extends Controller
             {
                 case 404:
                     return $this->render($viewPath);
+                    break;
+                case 403:
+                    return "sdfsdf";
                     break;
             }
         }

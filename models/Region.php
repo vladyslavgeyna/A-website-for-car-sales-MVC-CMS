@@ -18,4 +18,15 @@ class Region
         return null;
     }
 
+    public static function getRegionById($id)
+    {
+        $region = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id
+        ]);
+        if(!empty($region))
+        {
+            return $region[0];
+        }
+        return null;
+    }
 }

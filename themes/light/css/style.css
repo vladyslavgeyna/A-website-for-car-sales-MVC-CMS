@@ -387,3 +387,38 @@ footer ul {
     top: 0;
     left: 0;
 }
+
+.container-carad-add form input, .container-carad-add form select, .container-carad-add form textarea  {
+    border-radius: 25px;
+}
+
+
+.main-carad-add form button {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    border-radius: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.main-carad-add form button:hover {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.container-carad-add form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+
+.container-carad-add form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.container-carad-add form hr {
+    border-top: 2px solid;
+    border-radius: 25px;
+}
+.container-carad-add button[type="button"] {
+    top: 50%;
+    transform: translate(0, -50%);
+}

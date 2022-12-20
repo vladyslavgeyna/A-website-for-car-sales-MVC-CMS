@@ -8,14 +8,14 @@ class Carbrand
 {
     protected static string $tableName = "car_brand";
 
-    public static function addCarbrand($name)
+    public static function addCarBrand($name)
     {
         Core::getInstance()->db->insert(self::$tableName, [
             "name" => $name,
         ]);
     }
 
-    public static function getCarbrandById($id)
+    public static function getCarBrandById($id)
     {
         $car_brand = Core::getInstance()->db->select(self::$tableName, "*", [
             "id" =>  $id,

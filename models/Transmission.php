@@ -17,4 +17,16 @@ class Transmission
         }
         return null;
     }
+
+    public static function getTransmissionById($id)
+    {
+        $transmission = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id
+        ]);
+        if(!empty($transmission))
+        {
+            return $transmission[0];
+        }
+        return null;
+    }
 }

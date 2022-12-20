@@ -50,9 +50,8 @@ use models\User;
                                     <?php endif;?>
                                 </a>
                                 <ul class="dropdown-menu text-small" >
-                                    <li><a class="dropdown-item " href="#">New project</a></li>
-                                    <li><a class="dropdown-item " href="#">Settings</a></li>
-                                    <li><a class="dropdown-item " href="#">Profile</a></li>
+                                    <li><a class="dropdown-item " href="#">Мої оголошення</a></li>
+                                    <li><a class="dropdown-item " href="#">Профіль</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item dropdown-item-flex d-flex align-items-center" href="/user/logout"><span>Вийти</span><i style="font-size: 24px" class="bi bi-box-arrow-right"></i></a></li>
                                 </ul>
@@ -76,17 +75,17 @@ use models\User;
         </div>
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li >
-                <a class="footer-logo footer-logo-telegram" href="#">
+                <a target="_blank" class="footer-logo footer-logo-telegram" href="https://t.me/what_is_lovechik">
                     <i class="bi bi-telegram"></i>
                 </a>
             </li>
             <li >
-                <a class="footer-logo footer-logo-instagram" href="#">
+                <a target="_blank" class="footer-logo footer-logo-instagram" href="https://www.instagram.com/_what_is_lovechik_/">
                     <i  class="bi bi-instagram"></i>
                 </a>
             </li>
             <li >
-                <a class="footer-logo footer-logo-facebook" href="#">
+                <a target="_blank" class="footer-logo footer-logo-facebook" href="https://www.facebook.com/profile.php?id=100072210826751">
                     <i class="bi bi-facebook"></i>
                 </a>
             </li>
