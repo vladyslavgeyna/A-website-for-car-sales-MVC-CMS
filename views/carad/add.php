@@ -21,7 +21,6 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                 <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-xmark"></i><span style="margin-left: 10px" >Перевірте коректність заповнених даних</span></span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <?php unset($_SESSION["success_car_ad_added"]); ?>
         <?php endif; ?>
         <h1 class="mb-3">Додавання оголошення</h1>
         <form action="" method="post" enctype="multipart/form-data">
@@ -44,6 +43,11 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                 <?php if (!empty($errors['car_photos_exist'])): ?>
                     <div class="error-form-validation">
                         <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Оберіть фотографії"><?= $errors['car_photos_exist']; ?></span>
+                    </div>
+                <?php endif; ?>
+                <?php if (!empty($errors['main_photo'])): ?>
+                    <div class="error-form-validation">
+                        <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Оберіть головне фото"><?= $errors['main_photo']; ?></span>
                     </div>
                 <?php endif; ?>
                 <div class="error-form-validation hidden">
@@ -193,6 +197,18 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                     </div>
                 <?php endif; ?>
             </div>
+            <div class="mb-3" id="inputEngineCapacityBlock">
+                <label for="inputEngineCapacity" class="form-label">Об'єм двигуна (в літрах):</label>
+                <input value="<?=$auto_complete['car_engine_capacity']?>" name="car_engine_capacity" type="text" class="form-control" placeholder="Наприклад: 2.2" id="inputEngineCapacity" >
+                <?php if (!empty($errors['car_engine_capacity'])): ?>
+                    <div class="error-form-validation">
+                        <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Введіть коректно об'єм двигуна"><?= $errors['car_engine_capacity']; ?></span>
+                    </div>
+                <?php endif; ?>
+                <div class="error-form-validation hidden">
+                    <span>Ви помилилися при виборі об'єму двигуна</span>
+                </div>
+            </div>
             <div class="mb-3">
                 <label for="inputWheelDrive" class="form-label">Привід:</label>
                 <select name="car_wheel_drive" required class="form-select" id="inputWheelDrive" >
@@ -210,18 +226,6 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                         <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Оберіть один із вказаних привід"><?= $errors['car_wheel_drive']; ?></span>
                     </div>
                 <?php endif; ?>
-            </div>
-            <div class="mb-3">
-                <label for="inputEngineCapacity" class="form-label">Об'єм двигуна (в літрах):</label>
-                <input required value="<?=$auto_complete['car_engine_capacity']?>" name="car_engine_capacity" type="text" class="form-control" placeholder="Наприклад: 2.2" id="inputEngineCapacity" >
-                <?php if (!empty($errors['car_engine_capacity'])): ?>
-                    <div class="error-form-validation">
-                        <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Введіть коректно об'єм двигуна"><?= $errors['car_engine_capacity']; ?></span>
-                    </div>
-                <?php endif; ?>
-                <div class="error-form-validation hidden">
-                    <span>Ви помилилися при виборі об'єму двигуна</span>
-                </div>
             </div>
             <div class="mb-3">
                 <label for="inputColor" class="form-label">Колір:</label>
@@ -325,6 +329,8 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
     function isInt(value) {
         return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
     }
+    const inputEngineCapacityBlock = document.getElementById("inputEngineCapacityBlock");
+    const inputFuel = document.getElementById("inputFuel");
     const MAX_ALLOWED_IMAGE_COUNT = 5;
     const inputFiles = document.getElementById("exampleInputPhotos");
     const buttonAddAd = document.getElementById("btn-add-ad");
@@ -336,6 +342,22 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
     const inputMileage = document.getElementById("inputMileage");
     const inputEngineCapacity = document.getElementById("inputEngineCapacity");
     const inputPrice = document.getElementById("inputPrice");
+    window.addEventListener("load", () => {
+        if (inputFuel.value == 4) {
+            inputEngineCapacityBlock.classList.add("hidden");
+            inputEngineCapacity.value = "";
+        } else {
+            inputEngineCapacityBlock.classList.remove("hidden");
+        }
+    });
+    inputFuel.addEventListener("change", () => {
+        if (inputFuel.value == 4) {
+            inputEngineCapacityBlock.classList.add("hidden");
+            inputEngineCapacity.value = "";
+        } else {
+            inputEngineCapacityBlock.classList.remove("hidden");
+        }
+    });
     inputPrice.addEventListener("input", () => {
         inputPrice.value = inputPrice.value.replace(/[^\d.]/g, '');
         if(isNaN(inputPrice.value) || parseFloat(inputPrice.value) <= 0 ) {
@@ -367,6 +389,8 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
         }
     });
     inputFiles.addEventListener("change", () => {
+        console.log(inputFiles.files);
+        imagesBlock.innerHTML = "";
         if(inputFiles.files.length > MAX_ALLOWED_IMAGE_COUNT) {
             buttonAddAd.setAttribute("disabled", "disabled");
             blockMessageErrorPhoto.classList.remove("hidden");
@@ -378,13 +402,33 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
             imagesBlock.classList.remove("hidden");
             for (let i = 0; i < inputFiles.files.length; i++) {
                 const div = document.createElement("div");
+                const div2 = document.createElement("div");
+                const radio = document.createElement("input");
+                radio.setAttribute("id", `radio-{${i}}`);
+                radio.setAttribute("required", "required");
+                const radioLabel = document.createElement("label");
+                radioLabel.innerHTML = "головне фото";
+                radioLabel.setAttribute("for", `radio-{${i}}`);
+                const divRadioBlock = document.createElement("div");
+                divRadioBlock.classList.add("radio-block");
+                if(i === 0) {
+                    radio.setAttribute("checked", "checked");
+                }
+                radio.setAttribute("type", "radio");
+                radio.setAttribute("name", "main_photo");
+                radio.setAttribute("value", inputFiles.files[i].name);
+                div2.classList.add("column");
                 div.classList.add("selected_car_image_block");
                 const image = document.createElement("img");
                 image.classList.add("img-thumbnail");
                 image.setAttribute("alt", "Зображення автомобіля");
                 image.src = URL.createObjectURL(inputFiles.files[i]);
                 div.appendChild(image);
-                imagesBlock.appendChild(div);
+                div2.appendChild(div);
+                divRadioBlock.appendChild(radio);
+                divRadioBlock.appendChild(radioLabel);
+                div2.appendChild(divRadioBlock);
+                imagesBlock.appendChild(div2);
             }
         }
     });

@@ -220,7 +220,7 @@ footer ul {
     width: 30%;
 }
 @media (min-width: 700px) {
-    .main-error .image-wrapper:before {
+    .main-error-404 .image-wrapper:before {
         content: "...халепа";
         position: absolute;
         top: 0;
@@ -229,26 +229,41 @@ footer ul {
         font-weight: 700;
     }
 }
-
+@media (min-width: 992px) {
+    .main-error-403 .image-wrapper:before {
+        content: "...як ти сюди попав..?";
+        position: absolute;
+        top: 0;
+        right: -5%;
+        font-size: 60px;
+        font-weight: 700;
+    }
+}
 @media (max-width: 1400px) {
-    .main-error .image-wrapper:before {
+    .main-error-404 .image-wrapper:before {
         right: 13%;
-
+    }
+    .main-error-403 .image-wrapper:before {
+        font-size: 50px;
+    }
+}
+@media (max-width: 1200px) {
+    .main-error-403 .image-wrapper:before {
+        font-size: 40px;
+        right: -3%;
     }
 }
 @media (max-width: 991px) {
-    .main-error .image-wrapper:before {
+    .main-error-404 .image-wrapper:before {
         right: 0;
-
     }
     .main-error img {
         width: 50%;
     }
 }
 @media (max-width: 767px) {
-    .main-error .image-wrapper:before {
+    .main-error-404 .image-wrapper:before {
         right: -12%;
-
     }
 }
 /*Сторінка реєстрації */
@@ -391,7 +406,9 @@ footer ul {
 .container-carad-add form input, .container-carad-add form select, .container-carad-add form textarea  {
     border-radius: 25px;
 }
-
+#inputEngineCapacityBlock.hidden {
+    display: none;
+}
 
 .main-carad-add form button {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
@@ -421,4 +438,83 @@ footer ul {
 .container-carad-add button[type="button"] {
     top: 50%;
     transform: translate(0, -50%);
+}
+.container-carad-add .images-block .column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.container-carad-add .images-block .column .radio-block {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.container-carad-add .images-block .column input[type="radio"], .container-carad-add .images-block .column label {
+    cursor: pointer;
+}
+/*Сторінка перегляду всіх оголошень*/
+
+.container-car-ad-index .card .image-wrapper {
+    overflow: hidden;
+
+}
+.container-car-ad-index .card {
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+.container-car-ad-index .card:hover {
+    box-shadow: 0 0 25px 12px rgba(0,0,0,0.2);
+    transform: scale(1.02);
+
+}
+.container-car-ad-index .card img {
+    border-radius: 25px;
+    transition: all 0.5s ease;
+}
+.container-car-ad-index .card .image-wrapper{
+    border-radius: 25px;
+}
+.container-car-ad-index .card img:hover {
+    transform: scale(1.05);
+}
+.container-car-ad-index .card .card-body a.btn-view {
+    border-radius: 25px;
+}
+.container-car-ad-index .card .card-body a.card-title {
+    transition: all 0.3s ease;
+    display: inline-block;
+    color: rgb(112.520718,44.062154,249.437846);
+    text-decoration: none;
+    font-weight: 700;
+}
+.container-car-ad-index .card .card-body a.card-title:hover {
+    color: rgb(52, 0, 162);
+}
+
+.main-car-ad-index a.btn-view {
+    padding: 0.3rem 0.5rem;
+    border: 2px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.main-car-ad-index a.btn-view:hover {
+    border: 2px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.container-car-ad-index .card-body a.btn-view:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.container-car-ad-index .card-body .card-price {
+    font-size: 18px;
+    font-weight: 600;
+}
+.container-car-ad-index .card-body div.info {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
 }

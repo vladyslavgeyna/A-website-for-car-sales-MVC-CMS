@@ -39,6 +39,7 @@ class CaradController extends Controller
             $data = [];
             $data["ads"] = Carad::getAllCarAdsInnered();
             return $this->render(null, [
+                "title" => "Оголошення",
                 "data" => $data
             ]);
         }
@@ -46,6 +47,10 @@ class CaradController extends Controller
 
     public function addAction()
     {
+//        echo "<pre>";
+//        var_dump(Carad::getAllCarAdsInnered());
+//        echo "</pre>";
+//        die();
         if(!User::isUserAdmin())
         {
             if(!User::isUserAuthenticated())
@@ -85,6 +90,10 @@ class CaradController extends Controller
                         }
                     }
                 }
+                if (empty($_POST["main_photo"]))
+                {
+                    $errors["main_photo"] = "Ви не обрали головне фото";
+                }
                 if (empty($_POST["car_brand"]) || $_POST["car_brand"] == -1 || !Utils::hasTheSameIdAsInArray($data["car_brands"], $_POST["car_brand"]) )
                 {
                     $errors['car_brand'] = "Ви не обрали одну із запропонованих марок авто";
@@ -121,13 +130,17 @@ class CaradController extends Controller
                 {
                     $errors['car_fuel'] = "Ви не обрали один із запропонованих вид палива";
                 }
-                if (empty($_POST["car_wheel_drive"]) || $_POST["car_wheel_drive"] == -1 || !Utils::hasTheSameIdAsInArray($data["wheel_drives"], $_POST["car_wheel_drive"]))
-                {
-                    $errors['car_wheel_drive'] = "Ви не обрали один із запропонованих вид палива";
-                }
-                if ($_POST["car_engine_capacity"] <= 0 || !is_numeric($_POST["car_engine_capacity"]) || substr( $_POST["car_engine_capacity"], 0, 1 ) === ".")
+                if (($_POST["car_fuel"] != 4 || Fuel::getFuelById($_POST["car_fuel"])["name"] != "Електро") && ($_POST["car_engine_capacity"] <= 0 || !is_numeric($_POST["car_engine_capacity"]) || substr( $_POST["car_engine_capacity"], 0, 1 ) === "."))
                 {
                     $errors['car_engine_capacity'] = "Некоректно введений об'єм двигуна";
+                }
+                if (($_POST["car_fuel"] == 4 || Fuel::getFuelById($_POST["car_fuel"])["name"] == "Електро") && !empty($_POST["car_engine_capacity"]))
+                {
+                    $errors['car_engine_capacity'] = "Двигун не може мати об'єм, якщо вид палива - електро";
+                }
+                if (empty($_POST["car_wheel_drive"]) || $_POST["car_wheel_drive"] == -1 || !Utils::hasTheSameIdAsInArray($data["wheel_drives"], $_POST["car_wheel_drive"]))
+                {
+                    $errors['car_wheel_drive'] = "Ви не обрали один із запропонованих вид трансмісії";
                 }
                 if (strlen($_POST["car_color"]) <= 2)
                 {
@@ -163,6 +176,7 @@ class CaradController extends Controller
                 }
                 if(count($errors) > 0)
                 {
+
                     $auto_complete = $_POST;
                     return $this->render(null, [
                         "data" => $data,
@@ -172,7 +186,15 @@ class CaradController extends Controller
                 }
                 else
                 {
-                    $car_id = Car::addCar($_POST["car_brand"], $_POST["car_model"], $_POST["car_year_of_production"], $_POST["car_engine_capacity"],
+                    if ($_POST["car_fuel"] == 4 || Fuel::getFuelById($_POST["car_fuel"])["name"] == "Електро")
+                    {
+                        $engine_capacity = 0;
+                    }
+                    else
+                    {
+                        $engine_capacity = $_POST["car_engine_capacity"];
+                    }
+                    $car_id = Car::addCar($_POST["car_brand"], $_POST["car_model"], $_POST["car_year_of_production"], $engine_capacity,
                         $_POST["car_fuel"], $_POST["car_transmission"], $_POST["car_color"], $_POST["car_region"], $_POST["car_district"],
                         $_POST["car_city"], $_POST["car_price"], $_POST["car_type_of_currency"], $_POST["car_wheel_drive"], $_POST["car_number_of_seats"],
                         $_POST["car_mileage"], $additional_options);
@@ -184,9 +206,15 @@ class CaradController extends Controller
                     {
                         $extension = Utils::getFileExtension($_FILES["car_photos"]["name"][$i]);
                         $image_id = Image::addImage($_FILES["car_photos"]["tmp_name"][$i], $extension, "car");
-                        Carimage::addCarImage($image_id, $car_id);
+                        if ($_POST["main_photo"] != $_FILES["car_photos"]["name"][$i])
+                        {
+                            Carimage::addCarImage($image_id, $car_id);
+                        }
+                        else
+                        {
+                            Carimage::addCarImage($image_id, $car_id, 1);
+                        }
                     }
-
                     $_SESSION["success_car_ad_added"] = "Оголошення успішно додано";
                     return $this->render(null, [
                         "data" => $data

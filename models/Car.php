@@ -61,6 +61,8 @@ class Car
         if (!empty($car))
         {
             $result = $car[0];
+            $result["images"] = Carimage::getAllCarImagesByCarIdInnered($car[0]["id"]);
+            $result["main_image"] = Carimage::getMainCarImagesByCarIdInnered($car[0]["id"]);
             $result["car_brand"] = Carbrand::getCarBrandById($car[0]["car_brand_id"]);
             $result["car_model"] = Carmodel::getCarModelById($car[0]["car_model_id"]);
             $result["fuel"] = Fuel::getFuelById($car[0]["fuel_id"]);
