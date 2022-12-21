@@ -21,9 +21,12 @@ class Image
         {
             $module = $moduleName;
         }
-        $name = uniqid();
-        $fileName = $name.".".$imageExtension;
-        $fullPath = "files/{$module}/".$fileName;
+        do
+        {
+            $name = uniqid();
+            $fileName = $name.".".$imageExtension;
+            $fullPath = "files/{$module}/".$fileName;
+        } while(file_exists($fullPath));
         move_uploaded_file($path, $fullPath);
         return Core::getInstance()->db->insert(self::$tableName, [
             "name" => $fileName

@@ -70,5 +70,22 @@ class Carad
         return null;
     }
 
+    public static function getAllActiveCarAdsInnered(): ?array
+    {
+        $active_car_ads = Core::getInstance()->db->select(self::$tableName, "*",  [
+            "is_active" => 1
+        ]);
+        if(!empty($active_car_ads))
+        {
+            $result = $active_car_ads;
+            for ($i = 0; $i < count($active_car_ads); $i++)
+            {
+                $result[$i]["car"] = Car::getCarByIdInnered($active_car_ads[$i]["car_id"]);
+            }
+            return $result;
+        }
+        return null;
+    }
+
 
 }

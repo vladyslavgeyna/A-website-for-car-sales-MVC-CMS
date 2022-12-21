@@ -25,7 +25,7 @@ class SiteController extends Controller
         else
         {
             $data = [];
-            $data["ads"] = Carad::getAllCarAdsInnered();
+            $data["ads"] = Carad::getAllActiveCarAdsInnered();
             return $this->render("views/carad/index.php", [
                 "title" => "Головна сторінка",
                 "data" => $data
@@ -44,6 +44,9 @@ class SiteController extends Controller
                     return $this->render($viewPath);
                     break;
                 case 403:
+                    return $this->render($viewPath);
+                    break;
+                default:
                     return $this->render($viewPath);
                     break;
             }

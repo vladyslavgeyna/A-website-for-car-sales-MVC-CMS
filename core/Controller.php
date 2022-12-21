@@ -67,4 +67,9 @@ class Controller
         }
         return $tpl->getHTML();
     }
+
+    public function error($code, $message = null): Error
+    {
+        return new Error($code, $message);
+    }
 }

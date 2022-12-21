@@ -37,7 +37,7 @@ class CaradController extends Controller
         else
         {
             $data = [];
-            $data["ads"] = Carad::getAllCarAdsInnered();
+            $data["ads"] = Carad::getAllActiveCarAdsInnered();
             return $this->render(null, [
                 "title" => "Оголошення",
                 "data" => $data
@@ -48,7 +48,7 @@ class CaradController extends Controller
     public function addAction()
     {
 //        echo "<pre>";
-//        var_dump(Carad::getAllCarAdsInnered());
+//        var_dump(Carad::getAllActiveCarAdsInnered());
 //        echo "</pre>";
 //        die();
         if(!User::isUserAdmin())
