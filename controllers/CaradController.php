@@ -44,10 +44,6 @@ class CaradController extends Controller
 
     public function addAction()
     {
-//        echo "<pre>";
-//        var_dump(Carad::getAllActiveCarAdsInnered());
-//        echo "</pre>";
-//        die();
         if(!User::isUserAdmin())
         {
             if(!User::isUserAuthenticated())
@@ -266,6 +262,31 @@ class CaradController extends Controller
 
     public function activateAction()
     {
+
+    }
+
+    public function viewAction()
+    {
+        if(!User::isUserAdmin())
+        {
+            $car_ad_id = $_GET["id"];
+            if (!Carad::isCarAdByIdExist($car_ad_id))
+            {
+                $this->redirect("/"); // todo або перекинути на error 404
+            }
+            $data = [];
+            $data["ad"] = Carad::getCarAdByIdInnered($car_ad_id);
+
+            return $this->render(null, [
+                "data" => $data
+            ]);
+        }
+
+
+        else
+        {
+            //тут якщо користувач адмін...
+        }
 
     }
 

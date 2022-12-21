@@ -612,3 +612,64 @@ footer ul {
 .container-carad-myads .card .card-body .card-body-inner .card-body-inner-bottom a {
     border-radius: 25px;
 }
+/*Сторінка перегляду оголошення */
+.container-carad-view h1 {
+    font-size: 40px;
+    font-weight: 900;
+}
+.container-carad-view .title-block {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.container-carad-view .title-block a {
+    color: #dc3545;
+    transition: all 0.3s ease;
+    font-size: 40px;
+}
+.container-carad-view .title-block a:hover {
+    color: red;
+}
+.container-carad-view .carad-view-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 768px) {
+    .container-carad-view .carad-view-wrapper {
+        display: flex;
+        flex-direction: row;
+        column-gap: 30px;
+    }
+    .container-carad-view .carad-view-wrapper .carad-view-left-wrapper {
+        flex: 0 1 25%;
+        height: 100%;
+    }
+    .container-carad-view .carad-view-wrapper .carad-view-right-wrapper {
+        flex: 1 1 auto;
+        height: 100%;
+    }
+}
+.container-carad-view .carad-view-price {
+    color: green;
+}
+.container-carad-view .carad-view-owner {
+    border-radius: 25px;
+    background-color: rgb(112.520718,44.062154,249.437846);
+}
+.container-carad-view .carad-view-owner {
+    color: white;
+    font-size: 18px;
+}
+.container-carad-view .carad-view-owner a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+.container-carad-view .carad-view-owner a:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+}
+.container-carad-view .carad-view-left .carad-view-info {
+    font-size: 14px;
+}

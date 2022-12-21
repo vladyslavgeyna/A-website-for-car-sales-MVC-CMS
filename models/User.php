@@ -92,6 +92,27 @@ class User
         }
     }
 
+    public static function getUserByIdInnered($user_id)
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, "*", [
+           "id" => $user_id
+        ]);
+        if (!empty($user))
+        {
+            $result = $user[0];
+            $result["name"] = $user[0]["name"];
+            $result["surname"] = $user[0]["surname"];
+            $result["lastname"] = $user[0]["lastname"];
+            $result["phone"] = $user[0]["phone"];
+            $result["login"] = $user[0]["login"];
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function getCurrentUserImagePath(): ?string
     {
         if(self::hasCurrentUserImage())

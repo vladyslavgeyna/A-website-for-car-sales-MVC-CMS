@@ -4,21 +4,18 @@
 use core\Core;
 
 Core::getInstance()->pageParams['title'] = 'Мої оголошення';
-//echo "<pre>";
-//var_dump($data["user_ads"]);
-//echo "</pre>";
-//die();
 
 ?>
+<!--todo Додати відображення про успішну операції-->
 <main class="main main-carad-myads">
     <div class="container container-carad-myads">
-        <h1 class="mb-3">Мої оголошення</h1>
         <?php if (empty($data["user_ads"])):?>
             <div style="border-radius: 25px" class="alert alert-primary py-4" role="alert">
                 <div class="h1 text-center fw-bold mb-0">Наразі у вас не розміщено жодного оголошення</div>
                 <div class="h2 text-center fw-bold pt-2 mb-0">Але Ви можете його <a href="/carad/add">додати</a></div>
             </div>
         <?php else:?>
+            <h1 class="mb-3">Мої оголошення</h1>
             <p class="h3 mb-4">Всього оголошень: <?= $data["user_ads_count"]?></p>
              <div class="row row-cols-1 g-3">
                  <?php foreach ($data["user_ads"] as $car_ad):?>

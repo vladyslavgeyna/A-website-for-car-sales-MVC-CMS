@@ -55,6 +55,29 @@ class Carad
         return null;
     }
 
+    public static function getCarAdByIdInnered($car_ad_id)
+    {
+        $car_ad = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $car_ad_id
+        ]);
+        if(!empty($car_ad))
+        {
+            $result = $car_ad[0];
+            $result["car"] = Car::getCarByIdInnered($car_ad[0]["car_id"]);
+            $result["user"] = User::getUserByIdInnered($car_ad[0]["user_id"]);
+            return $result;
+        }
+        return null;
+    }
+
+    public static function isCarAdByIdExist($car_ad_id): bool
+    {
+        $car_ad = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $car_ad_id
+        ]);
+        return !empty($car_ad);
+    }
+
     public static function getAllCarAdsInnered(): ?array
     {
         $car_ads = Core::getInstance()->db->select(self::$tableName);
