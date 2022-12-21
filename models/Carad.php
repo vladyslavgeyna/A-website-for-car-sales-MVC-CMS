@@ -70,6 +70,35 @@ class Carad
         return null;
     }
 
+    public static function getCountOfCarAdsByUserId($user_id): ?int
+    {
+        $car_ads = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id" => $user_id
+        ]);
+        if(!empty($car_ads))
+        {
+            return count($car_ads);
+        }
+        return null;
+    }
+
+    public static function getAllCarAdsByUserIdInnered($user_id): ?array
+    {
+        $car_ads = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id" => $user_id
+        ]);
+        if(!empty($car_ads))
+        {
+            $result = $car_ads;
+            for ($i = 0; $i < count($car_ads); $i++)
+            {
+                $result[$i]["car"] = Car::getCarByIdInnered($car_ads[$i]["car_id"]);
+            }
+            return $result;
+        }
+        return null;
+    }
+
     public static function getAllActiveCarAdsInnered(): ?array
     {
         $active_car_ads = Core::getInstance()->db->select(self::$tableName, "*",  [
@@ -85,6 +114,12 @@ class Carad
             return $result;
         }
         return null;
+    }
+
+    public static function getCountOfCarAds(): int
+    {
+        $car_ads = Core::getInstance()->db->select(self::$tableName);
+        return count($car_ads);
     }
 
 

@@ -60,6 +60,38 @@ class User
         }
     }
 
+    public static function hasUserByIdImage($user_id): ?bool
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $user_id
+        ]);
+        if (!empty($user))
+        {
+            return !empty($user[0]["image_id"]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getUserByIdImagePath($user_id): ?string
+    {
+        if(self::hasUserByIdImage($user_id))
+        {
+            $user = Core::getInstance()->db->select(self::$tableName, "*", [
+               "id" => $user_id
+            ]);
+            $image_id = $user[0]["image_id"];
+            $image = Image::getImageById($image_id);
+            return "/files/user/".$image["name"];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function getCurrentUserImagePath(): ?string
     {
         if(self::hasCurrentUserImage())

@@ -20,52 +20,40 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Головна стор
         <section class="content section-index-admin">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-4 col-6  h-100">
                         <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>150</h3>
-                                <p>New Orders</p>
+                            <div class="inner py-3">
+                                <h3><?= $data["car_ads_count"] ?></h3>
+                                <p style="font-size: 1.2rem">Оголошень на сайті</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="fa-solid fa-pager px-1"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-4 col-6  h-100">
                         <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                                <p>Bounce Rate</p>
+                            <div class="inner py-3">
+                                <h3><?=$data["cars_average_price"]?><sup style="font-size: 20px; margin-left: 10px;">$</sup></h3>
+                                <p style="font-size: 1.2rem">Середня ціна на автомобіль</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i style="font-size: 80px;" class="fa-solid fa-dollar-sign"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-4 col-6 h-100">
                         <div class="small-box bg-warning">
-                            <div class="inner">
+                            <div class="inner py-3">
                                 <h3><?= $data["users_count"] ?></h3>
-                                <p>Кількість користувачів</p>
+                                <p style="font-size: 1.2rem">Кількість користувачів</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>65</h3>
-                                <p>Unique Visitors</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="#" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>

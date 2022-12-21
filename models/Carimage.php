@@ -18,7 +18,7 @@ class Carimage
             "is_main" => $is_main,
         ]);
     }
-    public static function getMainCarImagesByCarIdInnered($car_id): ?array
+    public static function getMainCarImageByCarIdInnered($car_id): ?array
     {
         $car_images = Core::getInstance()->db->select(self::$tableName, "*", [
             "car_id" => $car_id

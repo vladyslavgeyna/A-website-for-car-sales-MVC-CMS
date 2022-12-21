@@ -4,6 +4,8 @@ namespace core;
 
 class Utils
 {
+    private static string $UrlExchangeRateApi = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
+
     public static function filterArray($array, $fieldsList): array
     {
         $filteredArray = [];
@@ -47,6 +49,25 @@ class Utils
         {
             return false;
         }
+    }
+
+    public static function getCurrentUSDToUAH()
+    {
+        $stringContent = file_get_contents(self::$UrlExchangeRateApi);
+        $stringJSON = json_decode($stringContent, true);
+        return floatval($stringJSON[1]["buy"]);
+    }
+
+    public static function getCurrentEURToUAH()
+    {
+        $stringContent = file_get_contents(self::$UrlExchangeRateApi);
+        $stringJSON = json_decode($stringContent, true);
+        return floatval($stringJSON[0]["buy"]);
+    }
+
+    public static function getCurrentEURToUSD()
+    {
+        return self::getCurrentEURToUAH() / self::getCurrentUSDToUAH();
     }
 
 

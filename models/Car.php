@@ -3,6 +3,7 @@
 namespace models;
 
 use core\Core;
+use core\Utils;
 
 class Car
 {
@@ -62,7 +63,7 @@ class Car
         {
             $result = $car[0];
             $result["images"] = Carimage::getAllCarImagesByCarIdInnered($car[0]["id"]);
-            $result["main_image"] = Carimage::getMainCarImagesByCarIdInnered($car[0]["id"]);
+            $result["main_image"] = Carimage::getMainCarImageByCarIdInnered($car[0]["id"]);
             $result["car_brand"] = Carbrand::getCarBrandById($car[0]["car_brand_id"]);
             $result["car_model"] = Carmodel::getCarModelById($car[0]["car_model_id"]);
             $result["fuel"] = Fuel::getFuelById($car[0]["fuel_id"]);
@@ -83,6 +84,8 @@ class Car
             $result = $cars;
             for ($i = 0; $i < count($cars); $i++)
             {
+                $result[$i]["images"] = Carimage::getAllCarImagesByCarIdInnered($cars[$i]["id"]);
+                $result[$i]["main_image"] = Carimage::getMainCarImageByCarIdInnered($cars[$i]["id"]);
                 $result[$i]["car_brand"] = Carbrand::getCarBrandById($cars[$i]["car_brand_id"]);
                 $result[$i]["car_model"] = Carmodel::getCarModelById($cars[$i]["car_model_id"]);
                 $result[$i]["fuel"] = Fuel::getFuelById($cars[$i]["fuel_id"]);
@@ -94,5 +97,36 @@ class Car
             return $result;
         }
         return null;
+    }
+
+    public static function getAverageUSDCarsPrice()
+    {
+        $cars = Core::getInstance()->db->select(self::$tableName);
+        if (!empty($cars))
+        {
+            $cars_count = count($cars);
+            $total_price = 0;
+            foreach ($cars as $car)
+            {
+                if ($car["type_of_currency_id"] == 1)
+                {
+                    $total_price += $car["price"];
+                }
+                else if ($car["type_of_currency_id"] == 2)
+                {
+                    $total_price += $car["price"] / Utils::getCurrentEURToUSD();
+                }
+                else if ($car["type_of_currency_id"] == 3)
+                {
+                    $total_price += $car["price"] / Utils::getCurrentUSDToUAH();
+                }
+            }
+            return round($total_price / $cars_count);
+        }
+        else
+        {
+            return null;
+        }
+
     }
 }

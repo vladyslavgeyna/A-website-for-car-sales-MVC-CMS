@@ -29,10 +29,7 @@ class CaradController extends Controller
     {
         if (User::isUserAdmin())
         {
-            $data["users_count"] = User::getCountOfUsers();
-            return $this->renderAdmin(null, [
-                "data" => $data
-            ]);
+
         }
         else
         {
@@ -232,8 +229,44 @@ class CaradController extends Controller
 
         else
         {
+            return "sdfsdf";
             //тут якщо користувач адмін...
         }
 
     }
+
+    public function myadsAction()
+    {
+        if(!User::isUserAdmin())
+        {
+            if (!User::isUserAuthenticated())
+            {
+                $this->redirect("/");
+            }
+            $data = [];
+            $current_user = User::getCurrentAuthenticatedUser();
+            $data["user_ads"] = Carad::getAllCarAdsByUserIdInnered($current_user["id"]);
+            $data["user_ads_count"] = Carad::getCountOfCarAdsByUserId($current_user["id"]);
+            return $this->render(null, [
+                "data" => $data
+            ]);
+        }
+        else
+        {
+            //тут якщо користувач адмін...
+
+        }
+    }
+
+    public function deactivateAction()
+    {
+        $car_ad_id = $_GET["id"];
+
+    }
+
+    public function activateAction()
+    {
+
+    }
+
 }

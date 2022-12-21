@@ -50,7 +50,7 @@ use models\User;
                                     <?php endif;?>
                                 </a>
                                 <ul class="dropdown-menu text-small" >
-                                    <li><a class="dropdown-item " href="#">Мої оголошення</a></li>
+                                    <li><a class="dropdown-item " href="/carad/myads">Мої оголошення</a></li>
                                     <li><a class="dropdown-item " href="#">Профіль</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item dropdown-item-flex d-flex align-items-center" href="/user/logout"><span>Вийти</span><i style="font-size: 24px" class="bi bi-box-arrow-right"></i></a></li>
@@ -71,7 +71,7 @@ use models\User;
             <a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1 primary-color-hover footer-logo">
                 <i class="bi bi-car-front-fill" style="font-size: 33px"></i>
             </a>
-            <span class="mb-3 mb-md-0 text-muted">© 2022 auto-sale by Vladyslav Geyna</span>
+            <span class="mb-3 mb-md-0 text-muted">© 2022 auto-sale by <a target="_blank" style="color: inherit" href="https://github.com/vladyslavgeyna">Vladyslav Geyna</a></span>
         </div>
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li >
