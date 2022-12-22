@@ -632,9 +632,9 @@ footer ul {
 }
 .container-carad-view .carad-view-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .container-carad-view .carad-view-wrapper {
         display: flex;
         flex-direction: row;
@@ -673,3 +673,30 @@ footer ul {
 .container-carad-view .carad-view-left .carad-view-info {
     font-size: 14px;
 }
+.container-carad-view .carad-view-right .carousel-item,  .container-carad-view .carad-view-right .carousel-item-image-one{
+    overflow: hidden;
+    border-radius: 25px;
+    position: relative;
+    padding: 0 0 60% 0;
+}
+.container-carad-view .carad-view-right .carousel-item img, .container-carad-view .carad-view-right .carousel-item-image-one img {
+    border-radius: 25px;
+    transition: all 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+

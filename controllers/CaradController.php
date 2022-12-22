@@ -192,9 +192,7 @@ class CaradController extends Controller
                         $_POST["car_city"], $_POST["car_price"], $_POST["car_type_of_currency"], $_POST["car_wheel_drive"], $_POST["car_number_of_seats"],
                         $_POST["car_mileage"], $additional_options);
 
-                    // todo додати перевірку як в Морозова, чи існує такий файл в циклі do while
-
-                    Carad::addCarAd($car_id, $_POST["car_ad_title"], $_POST["car_ad_text"], date("Y-m-d H:i:s"), User::getCurrentUserId());
+                    Carad::addCarAd($car_id, $_POST["car_ad_title"], nl2br($_POST["car_ad_text"]), date("Y-m-d H:i:s"), User::getCurrentUserId());
                     for ($i = 0; $i < count($_FILES["car_photos"]["name"]); $i++)
                     {
                         $extension = Utils::getFileExtension($_FILES["car_photos"]["name"][$i]);
@@ -272,7 +270,8 @@ class CaradController extends Controller
             $car_ad_id = $_GET["id"];
             if (!Carad::isCarAdByIdExist($car_ad_id))
             {
-                $this->redirect("/"); // todo або перекинути на error 404
+                return $this->error(404);
+             //   $this->redirect("/"); // todo або перекинути на error 404
             }
             $data = [];
             $data["ad"] = Carad::getCarAdByIdInnered($car_ad_id);

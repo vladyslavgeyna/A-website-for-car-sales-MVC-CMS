@@ -269,7 +269,7 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
             <div class="h4 fw-bold">Опис автомобіля:</div>
             <div class="mb-3">
                 <label for="FormControlTextareaTitle" class="form-label">Заголовок оголошення (вкажіть основні деталі):</label>
-                <textarea required name="car_ad_title" class="form-control" placeholder="Наприклад: BMW X5 2015 в M пакеті" id="FormControlTextareaTitle" style="height: 70px; resize: none;"><?=$auto_complete['car_ad_title']?></textarea>
+                <input id="FormControlTextareaTitle" placeholder="Наприклад: BMW X5 2015 в M пакеті" required value="<?=$auto_complete['car_ad_title']?>" name="car_ad_title" type="text" class="form-control" >
                 <?php if (!empty($errors['car_ad_title'])): ?>
                     <div class="error-form-validation">
                         <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Введіть коректно заголовок оголошення"><?= $errors['car_ad_title']; ?></span>
