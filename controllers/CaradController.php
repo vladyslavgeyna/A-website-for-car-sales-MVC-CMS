@@ -50,6 +50,11 @@ class CaradController extends Controller
             {
                 $this->redirect("/");
             }
+            if (isset($_POST["ajax"]))
+            {
+                $car_models = Carmodel::getCarModelsByCarBrandId($_POST["car_brand_id"]);
+                exit(json_encode($car_models));
+            }
             $data = [];
             $additional_options = null;
             $data["max_image_count"] = Carimage::MAX_IMAGE_COUNT;
@@ -169,8 +174,8 @@ class CaradController extends Controller
                 }
                 if(count($errors) > 0)
                 {
-
                     $auto_complete = $_POST;
+                    $auto_complete["car_models"] = Carmodel::getCarModelsByCarBrandId($auto_complete["car_brand"]);
                     return $this->render(null, [
                         "data" => $data,
                         "auto_complete" => $auto_complete,

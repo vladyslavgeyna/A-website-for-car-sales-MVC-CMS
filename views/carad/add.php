@@ -1,4 +1,5 @@
 <?php
+
 /** @var array $errors */
 /** @var array $data */
 /** @var array $auto_complete */
@@ -79,13 +80,15 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                 <label for="inputCarModel" class="form-label">Модель автомобіля:</label>
                 <select name="car_model" required class="form-select" id="inputCarModel" >
                     <option value="-1" disabled selected >Оберіть модель</option>
-                    <?php foreach ($data["car_models"] as $item) : ?>
-                        <?php if ($auto_complete["car_model"] == $item["id"]) : ?>
-                            <option selected value="<?=$item["id"]?>"><?=$item["name"]?></option>
-                        <?php else : ?>
-                            <option value="<?=$item["id"]?>"><?=$item["name"]?></option>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                    <?php if (isset($auto_complete["car_models"])) : ?>
+                        <?php foreach ($auto_complete["car_models"] as $item) : ?>
+                            <?php if ($auto_complete["car_model"] == $item["id"]) : ?>
+                                <option selected value="<?=$item["id"]?>"><?=$item["name"]?></option>
+                            <?php else : ?>
+                                <option value="<?=$item["id"]?>"><?=$item["name"]?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </select>
                 <?php if (!empty($errors['car_model'])): ?>
                     <div class="error-form-validation">
@@ -433,21 +436,50 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
         }
     });
 </script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
-<!--<script  >-->
-<!--    $("document").ready(function () {-->
-<!--        let select = document.getElementById("select1");-->
-<!--        select.addEventListener("change", () => {-->
-<!--            $.ajax({-->
-<!--                url: "/fetch/car_brand.php",-->
-<!--                method: "post",-->
-<!--                dataType: "html",-->
-<!--                data: {"id": select.value},-->
-<!--                success: function (data) {-->
-<!--                    // let car_models = data;-->
-<!--                    console.log(data);-->
-<!--                }-->
-<!--            });-->
-<!--        })-->
-<!--    });-->
-<!--</script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script defer >
+    $(document).ready(function () {
+        function createCarModelsSelect(modelsList) {
+            const select = document.getElementById("inputCarModel");
+            if (modelsList !== null) {
+                select.innerHTML = "";
+                const option = document.createElement("option");
+                option.setAttribute("value", "-1");
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+                option.innerHTML = "Оберіть модель";
+                select.appendChild(option);
+                for (let i = 0; i < modelsList.length; i++) {
+                    const option = document.createElement("option");
+                    option.setAttribute("value", modelsList[i].id);
+                    option.innerHTML = modelsList[i].name;
+                    select.appendChild(option);
+                }
+            } else {
+                select.innerHTML = "";
+                const option = document.createElement("option");
+                option.setAttribute("value", "-1");
+                option.setAttribute("disabled", "disabled");
+                option.setAttribute("selected", "selected");
+                option.innerHTML = "Оберіть модель";
+                select.appendChild(option);
+            }
+        }
+        let inputCarBrand = document.getElementById("inputCarBrand");
+        inputCarBrand.addEventListener("change", () => {
+            let value = inputCarBrand.value;
+            $.ajax({
+                url: "/carad/add",
+                method: "POST",
+                data: {
+                    ajax: 1,
+                    car_brand_id: value
+                },
+                success: function (response) {
+                    createCarModelsSelect(JSON.parse(response));
+                },
+                dataType: "text"
+            });
+        })
+    });
+</script>
