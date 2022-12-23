@@ -181,6 +181,11 @@ class Carad
         $car_ad = Carad::getCarAdById($id);
         if (!empty($car_ad))
         {
+            $fav_ads = Favoritead::getAllFavoriteAdsByCarAdId($id);
+            if (!empty($fav_ads))
+            {
+                Favoritead::deleteAllFavoriteAdsByCarAdId($id);
+            }
             Core::getInstance()->db->delete(self::$tableName, [
                 "id" => $id
             ]);

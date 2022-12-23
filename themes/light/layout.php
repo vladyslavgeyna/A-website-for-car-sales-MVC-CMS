@@ -21,24 +21,24 @@ use models\User;
 <body>
 <div class="wrapper-layout">
     <header class="pt-3 pb-3 header-layout">
-        <nav class="navbar primary-color-bg navbar-expand-md navbar-dark fixed-top pt-md-0 pb-md-0">
+        <nav class="navbar primary-color-bg navbar-expand-lg navbar-dark fixed-top pt-lg-0 pb-lg-0">
             <div class="container align-items-center">
                 <a class="navbar-brand " href="/">
                     <i class="bi bi-car-front-fill" style="font-size: 35px"></i>
                 </a>
-                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                        aria-label="Toggle navigation">
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse align-items-center collapse" id="navbarCollapse" style="">
+                <div class="navbar-collapse align-items-center collapse" id="navbarCollapse" >
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/">Головна</a>
                         </li>
                     </ul>
-                    <div class="d-flex align-items-center navbar-buttons">
+                    <div class="d-flex align-items-start align-items-md-stretch navbar-buttons flex-column gap-2 flex-md-row">
                         <?php if(User::isUserAuthenticated()):?>
+                            <a href="#" class="btn btn-icon primary-color-bg-hover primary-color"><span>Порівняння</span><i class="fa-solid fa-scale-balanced"></i></a>
+                            <a href="#" class="btn btn-icon primary-color-bg-hover primary-color"><span>Обране</span><i class="fa-solid fa-heart"></i></a>
                             <a href="/carad/add" class="btn btn-icon primary-color-bg-hover primary-color"><span>Додати оголошення</span><i class="bi bi-plus-circle-fill"></i></a>
                             <div class="dropdown text-end">
                                 <a href="#" class="d-block link-triangle link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,8 +49,9 @@ use models\User;
                                     <?php endif;?>
                                 </a>
                                 <ul class="dropdown-menu text-small" >
-                                    <li><a class="dropdown-item " href="/carad/myads">Мої оголошення</a></li>
                                     <li><a class="dropdown-item " href="/user/profile">Профіль</a></li>
+                                    <li><a class="dropdown-item " href="/carad/myads">Мої оголошення</a></li>
+                                    <li><a class="dropdown-item " href="#">Повідомлення адміну</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item dropdown-item-flex d-flex align-items-center" href="/user/logout"><span>Вийти</span><i style="font-size: 24px" class="bi bi-box-arrow-right"></i></a></li>
                                 </ul>

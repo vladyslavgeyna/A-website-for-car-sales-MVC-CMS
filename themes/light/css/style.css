@@ -95,12 +95,6 @@ a {
     left: unset;
     right: 0;
 }
-@media (min-width: 480px) {
-    .dropdown-menu[data-bs-popper] {
-        left: 0;
-        right: unset;
-    }
-}
 
 @media (min-width:768px) {
     .header-layout .nav-link:after {

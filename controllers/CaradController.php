@@ -349,8 +349,6 @@ class CaradController extends Controller
         }
     }
 
-
-
     public function deleteAction($params)
     {
         if (!User::isUserAuthenticated())
