@@ -63,7 +63,7 @@ class Core
             $controller = new $controllerName();
             if(method_exists($controller, $controllerActionName))
             {
-                $actionResult = $controller->$controllerActionName();
+                $actionResult = $controller->$controllerActionName($routeParts);
                 if ($actionResult instanceof Error)
                 {
                     $statusCode = $actionResult->code;

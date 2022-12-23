@@ -3,6 +3,7 @@
 namespace controllers;
 
 use core\Controller;
+use core\Error;
 use core\Utils;
 use models\Car;
 use models\Carad;
@@ -28,7 +29,6 @@ class SiteController extends Controller
         }
         else
         {
-
             $data = [];
             $data["ads"] = Carad::getAllActiveCarAdsInnered();
             return $this->render("views/carad/index.php", [
@@ -44,17 +44,13 @@ class SiteController extends Controller
         $viewPath = User::isUserAdmin() ? "views/admin/site/error-{$code}.php" : "views/site/error-{$code}.php";
         if(!empty($code))
         {
-            switch ($code)
+            if (in_array($code, Error::ALLOWED_ERRORS_TYPES))
             {
-                case 404:
-                    return $this->render($viewPath);
-                    break;
-                case 403:
-                    return $this->render($viewPath);
-                    break;
-                default:
-                    return $this->render($view_error_404);
-                    break;
+                return $this->render($viewPath);
+            }
+            else
+            {
+                return $this->render($view_error_404);
             }
         }
         else

@@ -518,7 +518,7 @@ footer ul {
 }
 .container-car-ad-index .card-body .card-price {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: .05rem;
 }
 .container-car-ad-index .card-body div.info {
@@ -689,7 +689,14 @@ footer ul {
     top: 0;
     left: 0;
 }
+.container-carad-view .carad-view-right .carousel-item,  .container-carad-view .carad-view-right-wrapper .table{
+    font-size: 18px;
+}
 
+.container-carad-view .carad-view-right .carousel-item,  .container-carad-view .carad-view-left .carad-view-add-to-compare a {
+    font-size: 18px;
+    font-weight: 700;
+}
 
 
 

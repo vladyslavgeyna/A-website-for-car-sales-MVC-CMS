@@ -13,23 +13,28 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
     <div class="container container-carad-view">
         <div class="title-block mb-4 pb-2">
             <?php if (User::isUserAuthenticated()): ?>
-                <?php if (Favoritead::hasCurrentUserFavoriteAdByCarAdId($data["ad"]["id"])): ?>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Видалити оголошення з обраного" href="/favoritead/delete?id=<?=$data["ad"]["id"]?>"><i class="fa-solid fa-heart h1 m-0"></i></a>
-                <?php else: ?>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Додати оголошення до обраного" href="/favoritead/add?id=<?=$data["ad"]["id"]?>"><i class="fa-regular fa-heart h1 m-0"></i></a>
+                <?php if (User::getCurrentUserId() != $data["ad"]["user_id"]): ?>
+                    <?php if (Favoritead::hasCurrentUserFavoriteAdByCarAdId($data["ad"]["id"])): ?>
+                        <a id="heart-favorite-ad-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Видалити оголошення з обраного" href="/favoritead/delete/<?=$data["ad"]["id"]?>"><i id="heart-favorite-ad" class="fa-solid fa-heart h1 m-0"></i></a>
+                    <?php else: ?>
+                        <a id="heart-favorite-ad-link"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Додати оголошення до обраного" href="/favoritead/add/<?=$data["ad"]["id"]?>"><i id="heart-favorite-ad" class="fa-regular fa-heart h1 m-0"></i></a>
+                    <?php endif; ?>
                 <?php endif; ?>
             <?php endif; ?>
             <h1 class="m-0"><?=$data["ad"]["title"]?></h1>
         </div>
+        <?php if (!empty($data["owner_message"])): ?>
+            <p style="margin-top: -1.5rem; color: red" class="h2 fw-bold"><?=$data["owner_message"]?></p>
+        <?php endif; ?>
         <div class="carad-view-wrapper mt-4 ">
             <div class="carad-view-left-wrapper mt-lg-0 mt-3">
                 <div class="carad-view-left">
                     <div class="carad-view-price ">
-                        <div style="border-radius: 25px;" class="alert alert-success p-2 ps-3" role="alert">
+                        <div style="border-radius: 25px;" class="alert alert-success p-2 ps-3 mb-4" role="alert">
                             <p class="h2 m-0 fw-bold"><?=$data["ad"]["car"]["price"]." ".$data["ad"]["car"]["type_of_currency"]["sign"]?></p>
                         </div>
                     </div>
-                    <div class="carad-view-owner p-2">
+                    <div class="carad-view-owner p-2 mb-4">
                         <div class="carad-view-owner-content d-flex gap-3">
                             <div style="width: 100px;" class="carad-view-owner-image-wrapper">
                                 <?php if (User::hasUserByIdImage($data["ad"]["user_id"])): ?>
@@ -53,7 +58,14 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                             </div>
                         </div>
                     </div>
-                    <div class="carad-view-info ps-2 mt-3">
+                    <?php if (User::isUserAuthenticated()): ?>
+                        <?php if (User::getCurrentUserId() != $data["ad"]["user_id"]): ?>
+                            <div class="carad-view-add-to-compare mb-4">
+                                <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="#" class="btn btn-success w-100 py-2"><i class="fa-solid fa-scale-balanced pe-2"></i>Додати авто до порівняння</a></p>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <div class="carad-view-info ps-2 ">
                         <div class="carad-view-created">
                             <p class="mb-2">Оголошення створене: <strong><?=$data["ad"]["date_of_creating"]?></strong></p>
                         </div>
@@ -107,6 +119,69 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                             <img src="/files/car/<?=$data["ad"]["car"]["main_image"]["name"]?>" class="d-block w-100" alt="Зображення автомобіля">
                         </div>
                     <?php endif; ?>
+                    <div class="h2 mt-5 mb-3" style="font-weight: 900">Про авто:</div>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Марка</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["car_brand"]["name"]?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Модель</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["car_model"]["name"]?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Рік випуску</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["year_of_production"]?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Пробіг</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["mileage"]?> тис. км.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Коробка передач</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["transmission"]["name"]?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Паливо</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["fuel"]["name"]?></td>
+                            </tr>
+                            <?php if ($data["ad"]["car"]["fuel"]["name"] != "Електро" || $data["ad"]["car"]["fuel_id"] != 4):?>
+                                <tr>
+                                    <th scope="row">Об'єм двигуна </th>
+                                    <td class="ps-5"><?= $data["ad"]["car"]["engine_capacity"]?> л.</td>
+                                </tr>
+                            <?php endif; ?>
+                            <tr>
+                                <th scope="row">Привід</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["wheel_drive"]["name"]?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Колір</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["color"]?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Кількість місць</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["number_of_seats"]?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" >Додаткові опції</th>
+                                <?php if (!empty($data["ad"]["car"]["additional_options"])): ?>
+                                    <td class="ps-5"><?=$data["ad"]["car"]["additional_options"]?></td>
+                                <?php else: ?>
+                                    <td class="ps-5">Не вказано</td>
+                                <?php endif; ?>
+                            </tr>
+                            <tr>
+                                <th scope="row">Місцезнаходження</th>
+                                <td class="ps-5"><?= $data["ad"]["car"]["region"]["name"]?> область, <?= $data["ad"]["car"]["district"]?> район, <?= $data["ad"]["car"]["city"]?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="h2 mt-4 mb-3" style="font-weight: 900">Опис авто від продавця:</div>
+                    <p>
+                        <?= $data["ad"]["text"]?>
+                    </p>
                 </div>
             </div>
         </div>
@@ -114,3 +189,25 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
 </main>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
 <script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+<script defer>
+    const heart = document.getElementById("heart-favorite-ad");
+    const heartLink = document.getElementById("heart-favorite-ad-link");
+    heartLink.addEventListener("mouseover", () => {
+        if (heart.classList.contains("fa-regular")) {
+            heart.classList.remove("fa-regular");
+            heart.classList.add("fa-solid");
+        } else {
+            heart.classList.remove("fa-solid");
+            heart.classList.add("fa-regular");
+        }
+    });
+    heartLink.addEventListener("mouseout", () => {
+        if (heart.classList.contains("fa-regular")) {
+            heart.classList.remove("fa-regular");
+            heart.classList.add("fa-solid");
+        } else {
+            heart.classList.remove("fa-solid");
+            heart.classList.add("fa-regular");
+        }
+    });
+</script>

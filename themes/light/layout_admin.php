@@ -284,13 +284,35 @@ use models\User;
                             </li>
                         </ul>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-solid fa-coins  px-1"></i>
+                            <p>
+                                Валюти
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="./index.html" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі валюти</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./index2.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Додати валюту</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
     </aside>
-
     <?= $content ?>
-
     <aside class="control-sidebar control-sidebar-dark">
     </aside>
 </div>

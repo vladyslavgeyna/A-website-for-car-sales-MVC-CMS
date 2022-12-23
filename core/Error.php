@@ -14,4 +14,6 @@ class Error
         $this->message = $message;
     }
 
+    public const ALLOWED_ERRORS_TYPES = [403, 404];
+
 }

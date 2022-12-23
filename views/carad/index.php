@@ -18,12 +18,12 @@ Core::getInstance()->pageParams['title'] = $title;
                             <div class="card-wrapper h-100">
                                 <div class="car-top">
                                     <div class="m-2 image-wrapper ">
-                                        <a href="/carad/view?id=<?=$ad['id']?>">
+                                        <a href="/carad/view/<?=$ad['id']?>">
                                             <img src="/files/car/<?=$ad['car']['main_image']['name']?>" class="card-img-top " alt="<?=$ad['title']?>">
                                         </a>
                                     </div>
                                     <div class="card-body pb-0">
-                                        <a href="/carad/view?id=<?=$ad['id']?>" class="card-title h5 mb-2"><?=$ad['title']?></a>
+                                        <a href="/carad/view/<?=$ad['id']?>" class="card-title h5 mb-2"><?=$ad['title']?></a>
                                         <p class="card-text card-price mb-2"><?=$ad['car']['price']." ".$ad['car']['type_of_currency']['sign']?></p>
                                         <div class="row row-cols-sm-2 row-cols-1 mb-3 gy-1">
                                             <div class="col">
@@ -59,7 +59,7 @@ Core::getInstance()->pageParams['title'] = $title;
                                 </div>
                                 <div class="card-bottom">
                                     <div class="card-body pt-0">
-                                        <a href="/carad/view?id=<?=$ad['id']?>" class="btn btn-view primary-color-bg primary-color-hover w-100">Переглянути</a>
+                                        <a href="/carad/view/<?=$ad['id']?>" class="btn btn-view primary-color-bg primary-color-hover w-100">Переглянути</a>
                                     </div>
                                 </div>
                             </div>

@@ -80,7 +80,7 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                 <label for="inputCarModel" class="form-label">Модель автомобіля:</label>
                 <select name="car_model" required class="form-select" id="inputCarModel" >
                     <option value="-1" disabled selected >Оберіть модель</option>
-                    <?php if (isset($auto_complete["car_models"])) : ?>
+                    <?php if (!empty($auto_complete["car_models"])) : ?>
                         <?php foreach ($auto_complete["car_models"] as $item) : ?>
                             <?php if ($auto_complete["car_model"] == $item["id"]) : ?>
                                 <option selected value="<?=$item["id"]?>"><?=$item["name"]?></option>

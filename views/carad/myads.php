@@ -24,7 +24,7 @@ Core::getInstance()->pageParams['title'] = 'Мої оголошення';
                              <div class="row g-0 align-items-center">
                                  <div class="col-md-4">
                                      <div class="image-wrapper m-3">
-                                         <a href="/carad/view?id=<?=$car_ad['id']?>">
+                                         <a href="/carad/view/<?=$car_ad['id']?>">
                                              <img src="/files/car/<?=$car_ad["car"]["main_image"]["name"]?>" class="img-fluid rounded-start" alt="<?=$car_ad["title"]?>">
                                          </a>
                                      </div>
@@ -33,7 +33,7 @@ Core::getInstance()->pageParams['title'] = 'Мої оголошення';
                                      <div class="card-body py-4 py-sm-3 h-100">
                                          <div class="card-body-inner h-100">
                                              <div class="card-body-inner-top">
-                                                 <h5 class="card-title"><a href="/carad/view?id=<?=$car_ad['id']?>"><?=$car_ad["title"]?></a></h5>
+                                                 <h5 class="card-title"><a href="/carad/view/<?=$car_ad['id']?>"><?=$car_ad["title"]?></a></h5>
                                                  <div class="row row-cols-lg-1 row-cols-2 mb-xl-2 mb-lg-1 gy-1">
                                                      <div class="col">
                                                          <div class="info d-flex align-items-center gap-2">
@@ -76,13 +76,13 @@ Core::getInstance()->pageParams['title'] = 'Мої оголошення';
                                                      <p class="card-text"><small class="text-muted">Створено: <?=$car_ad['date_of_creating']?></small></p>
                                                  </div>
                                                  <div style="flex-wrap: wrap" class="d-flex gap-1">
-                                                     <a href="/carad/edit?id=<?=$car_ad['id']?>" class="btn btn-success">Редагувати</a>
+                                                     <a href="/carad/edit/<?=$car_ad['id']?>" class="btn btn-success">Редагувати</a>
                                                      <?php if ($car_ad["is_active"] == 1): ?>
-                                                         <a href="/carad/deactivate?id=<?=$car_ad['id']?>" class="btn btn-primary">Деактивувати</a>
+                                                         <a href="/carad/deactivate/<?=$car_ad['id']?>" class="btn btn-primary">Деактивувати</a>
                                                      <?php else: ?>
-                                                         <a href="/carad/activate?id=<?=$car_ad['id']?>" class="btn btn-primary">Активувати</a>
+                                                         <a href="/carad/activate/<?=$car_ad['id']?>" class="btn btn-primary">Активувати</a>
                                                      <?php endif; ?>
-                                                     <a href="/carad/delete?id=<?=$car_ad['id']?>" class="btn btn-danger">Видалити</a>
+                                                     <a href="/carad/delete/<?=$car_ad['id']?>" class="btn btn-danger">Видалити</a>
                                                  </div>
                                              </div>
                                          </div>

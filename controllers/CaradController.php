@@ -128,11 +128,11 @@ class CaradController extends Controller
                 {
                     $errors['car_fuel'] = "Ви не обрали один із запропонованих вид палива";
                 }
-                if (($_POST["car_fuel"] != 4 || Fuel::getFuelById($_POST["car_fuel"])["name"] != "Електро") && ($_POST["car_engine_capacity"] <= 0 || !is_numeric($_POST["car_engine_capacity"]) || substr( $_POST["car_engine_capacity"], 0, 1 ) === "."))
+                if ((Fuel::getFuelById($_POST["car_fuel"])["name"] != "Електро" || $_POST["car_fuel"] != 4) && ($_POST["car_engine_capacity"] <= 0 || !is_numeric($_POST["car_engine_capacity"]) || substr( $_POST["car_engine_capacity"], 0, 1 ) === "."))
                 {
                     $errors['car_engine_capacity'] = "Некоректно введений об'єм двигуна";
                 }
-                if (($_POST["car_fuel"] == 4 || Fuel::getFuelById($_POST["car_fuel"])["name"] == "Електро") && !empty($_POST["car_engine_capacity"]))
+                if ((Fuel::getFuelById($_POST["car_fuel"])["name"] == "Електро" || $_POST["car_fuel"] == 4) && !empty($_POST["car_engine_capacity"]))
                 {
                     $errors['car_engine_capacity'] = "Двигун не може мати об'єм, якщо вид палива - електро";
                 }
@@ -184,7 +184,7 @@ class CaradController extends Controller
                 }
                 else
                 {
-                    if ($_POST["car_fuel"] == 4 || Fuel::getFuelById($_POST["car_fuel"])["name"] == "Електро")
+                    if ( Fuel::getFuelById($_POST["car_fuel"])["name"] == "Електро" || $_POST["car_fuel"] == 4)
                     {
                         $engine_capacity = 0;
                     }
@@ -268,22 +268,33 @@ class CaradController extends Controller
 
     }
 
-    public function viewAction()
+    public function viewAction($params)
     {
         if(!User::isUserAdmin())
         {
-            $car_ad_id = $_GET["id"];
+            $id = intval($params[0]);
+//            $car_ad_id = $_GET["id"];
+            $car_ad_id = $id;
             if (!Carad::isCarAdByIdExist($car_ad_id))
             {
                 return $this->error(404);
-             //   $this->redirect("/"); // todo або перекинути на error 404
             }
             $data = [];
             $data["ad"] = Carad::getCarAdByIdInnered($car_ad_id);
-
-            return $this->render(null, [
-                "data" => $data
-            ]);
+            if (User::isUserAuthenticated() && User::getCurrentUserId() != $data["ad"]["user_id"] && $data["ad"]["is_active"] != 1)
+            {
+                return $this->error(404);
+            }
+            else
+            {
+                if (User::isUserAuthenticated() && User::getCurrentUserId() == $data["ad"]["user_id"] && $data["ad"]["is_active"] != 1)
+                {
+                    $data["owner_message"] = "(Оголошення не активне. Інші користувачі його не побачать.)";
+                }
+                return $this->render(null, [
+                    "data" => $data
+                ]);
+            }
         }
 
 
