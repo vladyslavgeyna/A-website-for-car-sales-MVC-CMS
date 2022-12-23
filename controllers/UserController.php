@@ -137,6 +137,29 @@ class UserController extends Controller
         $this->redirect("/user/login");
     }
 
+    public function profileAction()
+    {
+        if(!User::isUserAdmin())
+        {
+            if (!User::isUserAuthenticated())
+            {
+                $this->redirect("/");
+            }
+
+            $data = [];
+            $data["user"] = User::getCurrentAuthenticatedUser();
+            return $this->render(null, [
+               "data" => $data
+            ]);
+
+        }
+
+        else
+        {
+            // тут для адміна
+        }
+    }
+
 
 
 }

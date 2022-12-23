@@ -53,8 +53,8 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                                     <?php endif; ?>
                                 </p>
                                 <p class="mb-2"><?=$data["ad"]["user"]["surname"]." ".$data["ad"]["user"]["name"]." ".$data["ad"]["user"]["lastname"]?></p>
-                                <a class="h5" href="tel:+38<?=$data["ad"]["user"]["phone"]?>"><i style="font-size: 18px;" class="fa-solid fa-phone pe-2"></i><?=$data["ad"]["user"]["phone"]?></a>
-                                <a class="h5" href="mailto:<?=$data["ad"]["user"]["login"]?>"><i style="font-size: 18px;" class="fa-solid fa-envelope  pe-2"></i><?=$data["ad"]["user"]["login"]?></a>
+                                <a class="h5 d-flex align-items-center" href="tel:+38<?=$data["ad"]["user"]["phone"]?>"><i style="font-size: 18px;" class="fa-solid fa-phone pe-2"></i><?=$data["ad"]["user"]["phone"]?></a>
+                                <a class="h5 d-flex align-items-center" href="mailto:<?=$data["ad"]["user"]["login"]?>"><i style="font-size: 18px;" class="fa-solid fa-envelope  pe-2"></i><?=$data["ad"]["user"]["login"]?></a>
                             </div>
                         </div>
                     </div>
