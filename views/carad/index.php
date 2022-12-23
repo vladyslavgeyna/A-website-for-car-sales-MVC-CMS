@@ -10,7 +10,7 @@ Core::getInstance()->pageParams['title'] = $title;
     <div class="container container-car-ad-index">
         <div class="row row-cols-xxl-3 g-xxl-5 row-cols-xl-3 g-xl-3 row-cols-lg-3 g-lg-3 row-cols-md-2 g-md-4 row-cols-1 g-5">
             <?php if (empty($data["ads"])): ?>
-            <div class="h1 fw-bold text-center w-100" style="margin: 0 auto">Наразі оголошень немає</div>
+                <div class="h1 fw-bold text-center w-100">Наразі оголошень немає</div>
             <?php else: ?>
                 <?php foreach ($data["ads"] as $ad): ?>
                     <div class="col">

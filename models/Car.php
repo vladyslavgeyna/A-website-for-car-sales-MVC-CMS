@@ -127,6 +127,22 @@ class Car
         {
             return null;
         }
+    }
+
+    public static function deleteCarById($id)
+    {
+        $car = Car::getCarById($id);
+        if (!empty($car))
+        {
+            Carimage::deleteAllCarImagesByCarId($id);
+            Core::getInstance()->db->delete(self::$tableName, [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
 
     }
 }

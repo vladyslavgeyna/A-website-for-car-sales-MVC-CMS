@@ -32,10 +32,6 @@ class DB
             }
             $wherePartString = "WHERE ".implode(" AND ", $parts);
         }
-//        if(is_string($conditionList))
-//        {
-//            $wherePartString = "WHERE ".$conditionList;
-//        }
         $stmt = $this->pdo->prepare("SELECT {$fieldsPartString} FROM {$tableName} {$wherePartString}");
         $stmt->execute($conditionList);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -62,10 +58,6 @@ class DB
             }
             $wherePartString = "WHERE ".implode(" AND ", $whereParts);
         }
-//        if(is_string($conditionList))
-//        {
-//            $wherePartString = "WHERE ".$conditionList;
-//        }
         $stmt = $this->pdo->prepare("UPDATE {$tableName} SET {$setPartString} {$wherePartString}");
         $stmt->execute($paramsArray);
     }
@@ -97,10 +89,6 @@ class DB
             }
             $wherePartString = "WHERE ".implode(" AND ", $whereParts);
         }
-//        if(is_string($conditionList))
-//        {
-//            $wherePartString = "WHERE ".$conditionList;
-//        }
         $stmt = $this->pdo->prepare("DELETE FROM {$tableName} {$wherePartString}");
         $stmt->execute($conditionList);
     }

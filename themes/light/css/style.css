@@ -555,6 +555,40 @@ footer ul {
     position: relative;
     padding: 0 0 50% 0;
 }
+.container-carad-myads .modal-confirm-delete-car-ad .modal-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.container-carad-myads .modal-confirm-delete-car-ad button.btn-no-action, .container-carad-myads .modal-confirm-delete-car-ad a {
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.container-carad-myads .modal-confirm-delete-car-ad a {
+    border: 3px solid #dc3545;
+}
+.container-carad-myads .modal-confirm-delete-car-ad a:hover {
+    border: 3px solid #bb2d3b;
+}
+.container-carad-myads .modal-confirm-delete-car-ad button.btn-no-action {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+}
+.container-carad-myads .modal-confirm-delete-car-ad button.btn-no-action:hover {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.container-carad-myads .modal-confirm-delete-car-ad button.btn-no-action:active {
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+
+.container-carad-myads .modal-confirm-delete-car-ad .modal-body p {
+    font-size: 17px;
+    font-weight: 600;
+}
+
 @media (max-width: 991px) {
     .container-carad-myads .card .image-wrapper {
         padding: 0 0 60% 0;
@@ -619,7 +653,7 @@ footer ul {
         row-gap: 10px;
     }
 }
-.container-carad-myads .card .card-body .card-body-inner .card-body-inner-bottom a {
+.container-carad-myads .card .card-body .card-body-inner .card-body-inner-bottom a,  .container-carad-myads .card .card-body .card-body-inner .card-body-inner-bottom button{
     border-radius: 25px;
 }
 /*Сторінка перегляду оголошення */

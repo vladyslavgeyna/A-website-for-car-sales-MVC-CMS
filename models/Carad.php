@@ -70,6 +70,18 @@ class Carad
         return null;
     }
 
+    public static function getCarAdById($car_ad_id)
+    {
+        $car_ad = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $car_ad_id
+        ]);
+        if(!empty($car_ad))
+        {
+            return $car_ad[0];
+        }
+        return null;
+    }
+
     public static function isCarAdByIdExist($car_ad_id): bool
     {
         $car_ad = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -77,6 +89,7 @@ class Carad
         ]);
         return !empty($car_ad);
     }
+
 
     public static function getAllCarAdsInnered(): ?array
     {
@@ -143,6 +156,40 @@ class Carad
     {
         $car_ads = Core::getInstance()->db->select(self::$tableName);
         return count($car_ads);
+    }
+
+    public static function deactivateCarAdById($id)
+    {
+        Core::getInstance()->db->update(self::$tableName, [
+            "is_active" => 0
+        ], [
+            "id" => $id
+        ]);
+    }
+
+    public static function activateCarAdById($id)
+    {
+        Core::getInstance()->db->update(self::$tableName, [
+            "is_active" => 1
+        ], [
+            "id" => $id
+        ]);
+    }
+
+    public static function deleteCarAdById($id)
+    {
+        $car_ad = Carad::getCarAdById($id);
+        if (!empty($car_ad))
+        {
+            Core::getInstance()->db->delete(self::$tableName, [
+                "id" => $id
+            ]);
+            Car::deleteCarById($car_ad["car_id"]);
+        }
+        else
+        {
+            return null;
+        }
     }
 
 

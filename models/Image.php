@@ -45,4 +45,24 @@ class Image
         return null;
     }
 
+    public static function deleteImageById($id)
+    {
+        $image = self::getImageById($id);
+        if (!empty($image))
+        {
+            $image_path = "files/car/".$image["name"];
+            if (is_file($image_path))
+            {
+                unlink($image_path);
+            }
+            Core::getInstance()->db->delete(self::$tableName, [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }

@@ -65,7 +65,7 @@ class CaradController extends Controller
             $data["wheel_drives"] = Wheeldrive::getAllWheelDrives();
             $data["types_of_currencies"] = Typeofcurrency::getAllTypesOfCurrencies();
 //            todo тут треба буде асинзронним запитом отримати моделі, це поки тимчасово
-            $data["car_models"] = Carmodel::getAllCarModels();
+        //    $data["car_models"] = Carmodel::getAllCarModels();
             if(Core::getInstance()->requestMethod === "POST")
             {
                 $errors = [];
@@ -212,6 +212,7 @@ class CaradController extends Controller
                         }
                     }
                     $_SESSION["success_car_ad_added"] = "Оголошення успішно додано";
+                    // todo тут мабуть треба буде переробити на redirect
                     return $this->render(null, [
                         "data" => $data
                     ]);
@@ -224,7 +225,6 @@ class CaradController extends Controller
                 ]);
             }
         }
-
 
         else
         {
@@ -257,15 +257,61 @@ class CaradController extends Controller
         }
     }
 
-    public function deactivateAction()
+    public function deactivateAction($params)
     {
-        $car_ad_id = $_GET["id"];
+        if (!User::isUserAuthenticated())
+        {
+            $this->redirect("/");
+        }
+        $id = intval($params[0]);
+        if (!Carad::isCarAdByIdExist($id))
+        {
+            $this->redirect("/");
+        }
+        $car_ad = Carad::getCarAdById($id);
+        if (User::getCurrentUserId() != $car_ad["user_id"] && !User::isUserAdmin())
+        {
+            $this->redirect("/");
+        }
+        Carad::deactivateCarAdById($id);
+        if (!User::isUserAdmin())
+        {
+            $_SESSION["success_car_ad_deactivated"] = "Оголошення успішно деактивовано";
+            $this->redirect("/carad/myads");
+        }
+        else
+        {
+            // тут для адміна
+        }
 
     }
 
-    public function activateAction()
+    public function activateAction($params)
     {
-
+        if (!User::isUserAuthenticated())
+        {
+            $this->redirect("/");
+        }
+        $id = intval($params[0]);
+        if (!Carad::isCarAdByIdExist($id))
+        {
+            $this->redirect("/");
+        }
+        $car_ad = Carad::getCarAdById($id);
+        if (User::getCurrentUserId() != $car_ad["user_id"] && !User::isUserAdmin())
+        {
+            $this->redirect("/");
+        }
+        Carad::activateCarAdById($id);
+        if (!User::isUserAdmin())
+        {
+            $_SESSION["success_car_ad_activated"] = "Оголошення успішно активовано";
+            $this->redirect("/carad/myads");
+        }
+        else
+        {
+            // тут для адміна
+        }
     }
 
     public function viewAction($params)
@@ -273,7 +319,6 @@ class CaradController extends Controller
         if(!User::isUserAdmin())
         {
             $id = intval($params[0]);
-//            $car_ad_id = $_GET["id"];
             $car_ad_id = $id;
             if (!Carad::isCarAdByIdExist($car_ad_id))
             {
@@ -283,7 +328,7 @@ class CaradController extends Controller
             $data["ad"] = Carad::getCarAdByIdInnered($car_ad_id);
             if (User::isUserAuthenticated() && User::getCurrentUserId() != $data["ad"]["user_id"] && $data["ad"]["is_active"] != 1)
             {
-                return $this->error(404);
+                return $this->error(403);
             }
             else
             {
@@ -302,7 +347,36 @@ class CaradController extends Controller
         {
             //тут якщо користувач адмін...
         }
+    }
 
+
+
+    public function deleteAction($params)
+    {
+        if (!User::isUserAuthenticated())
+        {
+            $this->redirect("/");
+        }
+        $id = intval($params[0]);
+        if (!Carad::isCarAdByIdExist($id))
+        {
+            $this->redirect("/");
+        }
+        $car_ad = Carad::getCarAdById($id);
+        if (User::getCurrentUserId() != $car_ad["user_id"] && !User::isUserAdmin())
+        {
+            $this->redirect("/");
+        }
+        Carad::deleteCarAdById($id);
+        if (!User::isUserAdmin())
+        {
+            $_SESSION["success_car_ad_deleted"] = "Оголошення успішно видалено";
+            $this->redirect("/carad/myads");
+        }
+        else
+        {
+            // тут для адміна
+        }
     }
 
 }

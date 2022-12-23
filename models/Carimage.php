@@ -73,4 +73,25 @@ class Carimage
             return null;
         }
     }
+
+    public static function deleteAllCarImagesByCarId($car_id)
+    {
+        $car_images = Core::getInstance()->db->select(self::$tableName, "*", [
+            "car_id" => $car_id
+        ]);
+        if (!empty($car_images))
+        {
+            Core::getInstance()->db->delete(self::$tableName, [
+                "car_id" => $car_id
+            ]);
+            foreach ($car_images as $car_image)
+            {
+                Image::deleteImageById($car_image["image_id"]);
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

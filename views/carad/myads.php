@@ -9,6 +9,27 @@ Core::getInstance()->pageParams['title'] = 'Мої оголошення';
 <!--todo Додати відображення про успішну операції-->
 <main class="main main-carad-myads">
     <div class="container container-carad-myads">
+        <?php if (!empty($_SESSION["success_car_ad_deactivated"])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_car_ad_deactivated"]; ?></span></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION["success_car_ad_deactivated"]); ?>
+        <?php endif; ?>
+        <?php if (!empty($_SESSION["success_car_ad_activated"])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_car_ad_activated"]; ?></span></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION["success_car_ad_activated"]); ?>
+        <?php endif; ?>
+        <?php if (!empty($_SESSION["success_car_ad_deleted"])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_car_ad_deleted"]; ?></span></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION["success_car_ad_deleted"]); ?>
+        <?php endif; ?>
         <?php if (empty($data["user_ads"])):?>
             <div style="border-radius: 25px" class="alert alert-primary py-4" role="alert">
                 <div class="h1 text-center fw-bold mb-0">Наразі у вас не розміщено жодного оголошення</div>
@@ -82,10 +103,27 @@ Core::getInstance()->pageParams['title'] = 'Мої оголошення';
                                                      <?php else: ?>
                                                          <a href="/carad/activate/<?=$car_ad['id']?>" class="btn btn-primary">Активувати</a>
                                                      <?php endif; ?>
-                                                     <a href="/carad/delete/<?=$car_ad['id']?>" class="btn btn-danger">Видалити</a>
+                                                     <button data-bs-toggle="modal" data-bs-target="#confirm-delete-car-ad-<?=$car_ad['id']?>" type="button" class="btn btn-danger delete-btn">Видалити</button>
                                                  </div>
                                              </div>
                                          </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="modal modal-confirm-delete-car-ad fade" id="confirm-delete-car-ad-<?=$car_ad['id']?>" tabindex="-1" aria-hidden="false">
+                             <div class="modal-dialog modal-dialog-centered">
+                                 <div style="border-radius: 25px;" class="modal-content">
+                                     <div class="modal-header">
+                                         <h5 class="modal-title">Підтверження</h5>
+                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                     </div>
+                                     <div class="modal-body">
+                                         <p>Ви дійсно бажаєте видалити це оголошення?<br>Ця дія є безповоротною!</p>
+                                     </div>
+                                     <div class="modal-footer">
+                                         <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-bs-dismiss="modal">Відмінити</button>
+                                         <a href="/carad/delete/<?=$car_ad['id']?>" class="btn btn-danger">Видалити</a>
                                      </div>
                                  </div>
                              </div>
