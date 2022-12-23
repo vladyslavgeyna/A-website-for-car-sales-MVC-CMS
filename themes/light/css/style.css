@@ -736,6 +736,11 @@ footer ul {
     font-weight: 700;
 }
 
+.container-carad-view .carad-view-right .carad-view-right-text-ad {
+    font-size: 18px;
+    padding: 0.5rem 0.5rem;
+}
+
 /*Сторінка перегляду профілю користувача */
 .main-user-profile {
     display: flex;

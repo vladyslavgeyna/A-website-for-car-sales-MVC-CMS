@@ -64,10 +64,9 @@ class CaradController extends Controller
             $data["fuels"] = Fuel::getAllFuels();
             $data["wheel_drives"] = Wheeldrive::getAllWheelDrives();
             $data["types_of_currencies"] = Typeofcurrency::getAllTypesOfCurrencies();
-//            todo тут треба буде асинзронним запитом отримати моделі, це поки тимчасово
-        //    $data["car_models"] = Carmodel::getAllCarModels();
             if(Core::getInstance()->requestMethod === "POST")
             {
+                $car_models_from_ajax = Carmodel::getCarModelsByCarBrandId($_POST["car_brand"]);
                 $errors = [];
                 if (!empty($_FILES["car_photos"]["error"][0]))
                 {
@@ -96,7 +95,7 @@ class CaradController extends Controller
                 {
                     $errors['car_brand'] = "Ви не обрали одну із запропонованих марок авто";
                 }
-                if (empty($_POST["car_model"]) || $_POST["car_model"] == -1 || !Utils::hasTheSameIdAsInArray($data["car_models"], $_POST["car_model"]) ) // тут мабуть теж требп змінити $data["car_models"]
+                if (empty($_POST["car_model"]) || $_POST["car_model"] == -1 || !Utils::hasTheSameIdAsInArray($car_models_from_ajax, $_POST["car_model"]))
                 {
                     $errors['car_model'] = "Ви не обрали одну із запропонованих модель авто";
                 }
@@ -212,10 +211,7 @@ class CaradController extends Controller
                         }
                     }
                     $_SESSION["success_car_ad_added"] = "Оголошення успішно додано";
-                    // todo тут мабуть треба буде переробити на redirect
-                    return $this->render(null, [
-                        "data" => $data
-                    ]);
+                    $this->redirect("/carad/add");
                 }
             }
             else

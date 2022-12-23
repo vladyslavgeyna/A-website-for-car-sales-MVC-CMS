@@ -36,14 +36,21 @@ class Utils
 
     public static function hasTheSameIdAsInArray($array, $id): bool
     {
-        $allId = [];
-        foreach ($array as $item)
+        if (!empty($array))
         {
-            $allId []= $item["id"];
-        }
-        if(in_array($id, $allId))
-        {
-            return true;
+            $allId = [];
+            foreach ($array as $item)
+            {
+                $allId []= $item["id"];
+            }
+            if(in_array($id, $allId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {

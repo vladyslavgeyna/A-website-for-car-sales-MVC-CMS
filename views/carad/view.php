@@ -179,7 +179,7 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                         </tbody>
                     </table>
                     <div class="h2 mt-4 mb-3" style="font-weight: 900">Опис авто від продавця:</div>
-                    <p>
+                    <p class="carad-view-right-text-ad">
                         <?= $data["ad"]["text"]?>
                     </p>
                 </div>

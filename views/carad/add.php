@@ -23,7 +23,7 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
-        <h1 class="mb-3">Додавання оголошення (todo може переробити на redirect в контролері)</h1>
+        <h1 class="mb-3">Додавання оголошення</h1>
         <form action="" method="post" enctype="multipart/form-data">
             <div class="h4 fw-bold">Додайте фото Вашого автомобіля:</div>
             <div class="input-group input-file mb-3">
