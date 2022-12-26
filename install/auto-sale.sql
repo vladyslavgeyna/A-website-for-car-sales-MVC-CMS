@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 15 2022 г., 00:03
+-- Время создания: Дек 26 2022 г., 22:59
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.4.30
 
@@ -40,11 +40,22 @@ CREATE TABLE `car` (
   `district` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Район, де знаходиться автомобіль',
   `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Місто, селище, село, де знаходиться автомобіль',
   `price` float NOT NULL COMMENT 'Ціна',
+  `type_of_currency_id` int NOT NULL COMMENT 'ID виду валюти',
   `wheel_drive_id` int NOT NULL COMMENT 'ID приводу автомобіля',
   `number_of_seats` int NOT NULL COMMENT 'Кількість місць для сидіння',
   `mileage` int NOT NULL COMMENT 'Пробіг (тисяч кілометрів)',
   `additional_options` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Додаткові опції автомобіля'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Інформація про автомобіль';
+
+--
+-- Дамп данных таблицы `car`
+--
+
+INSERT INTO `car` (`id`, `car_brand_id`, `car_model_id`, `year_of_production`, `engine_capacity`, `fuel_id`, `transmission_id`, `color`, `region_id`, `district`, `city`, `price`, `type_of_currency_id`, `wheel_drive_id`, `number_of_seats`, `mileage`, `additional_options`) VALUES
+(1, 2, 2, 2020, 3, 1, 1, 'Сірий', 2, 'Бердичівський', 'Бердичів', 16000, 1, 1, 5, 50, 'Бортовий комп\'ютер, клімат, підігрів керма'),
+(4, 3, 4, 2020, 2.2, 1, 1, 'Червоний', 4, 'Рівненський', 'Рівне', 13500, 1, 3, 5, 120, 'Carplay, бортовий комп\'ютер, панорамний дах'),
+(7, 2, 1, 2021, 2.5, 1, 1, 'Сірий', 2, 'Житомирський', 'Житомир', 21000, 1, 1, 5, 20, NULL),
+(8, 2, 3, 2022, 3.2, 1, 1, 'Чорний', 1, 'Київський', 'Київ', 25000, 2, 1, 5, 12, 'Бортовий комп\'ютер, carplay, підігрів сидінь, підігрів керма, панорамний дах');
 
 -- --------------------------------------------------------
 
@@ -62,6 +73,16 @@ CREATE TABLE `car_ad` (
   `user_id` int NOT NULL COMMENT 'ID користувача, що створив оголошення'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Оголошення про продаж автомобіля';
 
+--
+-- Дамп данных таблицы `car_ad`
+--
+
+INSERT INTO `car_ad` (`id`, `car_id`, `title`, `text`, `date_of_creating`, `is_active`, `user_id`) VALUES
+(1, 1, 'Audi A5 2020 Sportback', 'Продам Audi A5 2020 року в модифікації SportBack.', '2022-12-20 18:44:18', 1, 6),
+(4, 4, 'Volkswagen Jetta 2021 SEL', 'Всіх вітаю!<br />\r\nПродам Volkswagen Jetta 2021 року випуску в комплекції SEL.<br />\r\nВ ДТП авто не був. Торг можливий<br />\r\nДзвоніть, пишіть!', '2022-12-23 23:48:00', 1, 6),
+(7, 7, 'Audi A4 2021 Avant', 'Продам Audi A4 2021 Avant', '2022-12-26 19:08:12', 1, 6),
+(8, 8, 'Audi A6 2022 Avant Quatro С8', 'Продам Audi A6 2022 Avant Quatro С8.<br />\r\nСтан чудовий, купувався в Німеччина для себе.', '2022-12-26 20:27:08', 1, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +94,15 @@ CREATE TABLE `car_brand` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Назва марки'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Марки автомобілів';
 
+--
+-- Дамп данных таблицы `car_brand`
+--
+
+INSERT INTO `car_brand` (`id`, `name`) VALUES
+(1, 'BMW'),
+(2, 'Audi'),
+(3, 'Volkswagen');
+
 -- --------------------------------------------------------
 
 --
@@ -82,8 +112,17 @@ CREATE TABLE `car_brand` (
 CREATE TABLE `car_comparison` (
   `id` int NOT NULL,
   `user_id` int NOT NULL COMMENT 'ID користувача, що додав автомобіль до порівняння',
-  `car_id` int NOT NULL COMMENT 'ID автомобіля, доданого до порівняння'
+  `car_ad_id` int NOT NULL COMMENT 'ID оголошення, доданого до порівняння'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Порівняння автомобілів';
+
+--
+-- Дамп данных таблицы `car_comparison`
+--
+
+INSERT INTO `car_comparison` (`id`, `user_id`, `car_ad_id`) VALUES
+(13, 2, 4),
+(14, 2, 7),
+(15, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -94,8 +133,22 @@ CREATE TABLE `car_comparison` (
 CREATE TABLE `car_image` (
   `id` int NOT NULL,
   `image_id` int NOT NULL COMMENT 'ID зображення',
-  `car_id` int NOT NULL COMMENT 'ID автомобіля'
+  `car_id` int NOT NULL COMMENT 'ID автомобіля',
+  `is_main` int NOT NULL DEFAULT '0' COMMENT 'Чи є головною'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Зображення автомобілів';
+
+--
+-- Дамп данных таблицы `car_image`
+--
+
+INSERT INTO `car_image` (`id`, `image_id`, `car_id`, `is_main`) VALUES
+(1, 2, 1, 1),
+(2, 3, 1, 0),
+(8, 9, 4, 1),
+(9, 10, 4, 0),
+(14, 15, 7, 1),
+(15, 16, 8, 1),
+(16, 17, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -109,6 +162,16 @@ CREATE TABLE `car_model` (
   `car_brand_id` int NOT NULL COMMENT 'ID марки до якої належить модель'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Моделі автомобілів за марками';
 
+--
+-- Дамп данных таблицы `car_model`
+--
+
+INSERT INTO `car_model` (`id`, `name`, `car_brand_id`) VALUES
+(1, 'A4', 2),
+(2, 'A5', 2),
+(3, 'A6', 2),
+(4, 'Jetta', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +184,14 @@ CREATE TABLE `favorite_ad` (
   `car_ad_id` int NOT NULL COMMENT 'ID оголошення, доданого до обраного'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Обрані оголошення';
 
+--
+-- Дамп данных таблицы `favorite_ad`
+--
+
+INSERT INTO `favorite_ad` (`id`, `user_id`, `car_ad_id`) VALUES
+(27, 2, 4),
+(28, 6, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -131,6 +202,16 @@ CREATE TABLE `fuel` (
   `id` int NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Назва'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Вид пального';
+
+--
+-- Дамп данных таблицы `fuel`
+--
+
+INSERT INTO `fuel` (`id`, `name`) VALUES
+(1, 'Бензин'),
+(2, 'Газ'),
+(3, 'Дизель'),
+(4, 'Електро');
 
 -- --------------------------------------------------------
 
@@ -143,6 +224,20 @@ CREATE TABLE `image` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Назва файлу'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Таблиця для збереження зображень';
 
+--
+-- Дамп данных таблицы `image`
+--
+
+INSERT INTO `image` (`id`, `name`) VALUES
+(1, '639b9ab78b6ff.jpg'),
+(2, '63a1d8523d133.jpg'),
+(3, '63a1d8523de84.jpg'),
+(9, '63a61400b8a98.jpg'),
+(10, '63a61400b961b.jpg'),
+(15, '63a9c6ec9d2dd.jpg'),
+(16, '63a9d96c026a2.jpeg'),
+(17, '63a9d96c02e50.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +249,16 @@ CREATE TABLE `region` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Назва'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Область України';
 
+--
+-- Дамп данных таблицы `region`
+--
+
+INSERT INTO `region` (`id`, `name`) VALUES
+(1, 'Київська'),
+(2, 'Житомирська'),
+(3, 'Вінницька'),
+(4, 'Рівненська');
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +269,37 @@ CREATE TABLE `transmission` (
   `id` int NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Назва'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Вид коробки передач';
+
+--
+-- Дамп данных таблицы `transmission`
+--
+
+INSERT INTO `transmission` (`id`, `name`) VALUES
+(1, 'Автомат'),
+(2, 'Варіатор'),
+(3, 'Робот');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `type_of_currency`
+--
+
+CREATE TABLE `type_of_currency` (
+  `id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Назва валюти',
+  `abbreviation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Абревіатура валюти',
+  `sign` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Знак валюти'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Назва валюти';
+
+--
+-- Дамп данных таблицы `type_of_currency`
+--
+
+INSERT INTO `type_of_currency` (`id`, `name`, `abbreviation`, `sign`) VALUES
+(1, 'Долар США', 'USD', '$'),
+(2, 'Євро', 'EUR', '€'),
+(3, 'Гривня', 'UAH', '₴');
 
 -- --------------------------------------------------------
 
@@ -182,6 +318,18 @@ CREATE TABLE `user` (
   `is_admin` int NOT NULL DEFAULT '0' COMMENT 'Чи адміністратор',
   `image_id` int DEFAULT NULL COMMENT 'ID зображення (аватар)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Користувачі';
+
+--
+-- Дамп данных таблицы `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `surname`, `lastname`, `login`, `password`, `phone`, `is_admin`, `image_id`) VALUES
+(1, 'Владислав', 'Гейна', 'Сергійович', 'vladgeina@gmail.com', 'c97fccc51332acbcc3a323c216d2a96a', '0937660691', 1, 1),
+(2, 'Денис', 'Богайчук', 'Володимирович', 'den123@gmail.com', '4297f44b13955235245b2497399d7a93', '0930375363', 0, NULL),
+(3, 'HEINA', 'VLADYSLAV', 'Сергійович', 'vladgeina2@gmail.com', '4297f44b13955235245b2497399d7a93', '0997660691', 0, NULL),
+(4, 'HEINA', 'VLADYSLAV', 'Сергійович', 'vladgeina3@gmail.com', '4297f44b13955235245b2497399d7a93', '0977660691', 0, NULL),
+(5, 'HEINA', 'VLADYSLAV', 'Сергійович', 'vladgeina4@gmail.com', '4297f44b13955235245b2497399d7a93', '0967660691', 0, NULL),
+(6, 'Руслан', 'Пархомчук', 'Вікторович', 'ruslan@gmail.com', '4297f44b13955235245b2497399d7a93', '0930930912', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,6 +357,15 @@ CREATE TABLE `wheel_drive` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Вид приводу автомобіля';
 
 --
+-- Дамп данных таблицы `wheel_drive`
+--
+
+INSERT INTO `wheel_drive` (`id`, `name`) VALUES
+(1, 'Повний'),
+(2, 'Передній'),
+(3, 'Задній');
+
+--
 -- Индексы сохранённых таблиц
 --
 
@@ -222,7 +379,8 @@ ALTER TABLE `car`
   ADD KEY `wheel_drive_id` (`wheel_drive_id`),
   ADD KEY `transmission_id` (`transmission_id`),
   ADD KEY `region_id` (`region_id`),
-  ADD KEY `fuel_id` (`fuel_id`);
+  ADD KEY `fuel_id` (`fuel_id`),
+  ADD KEY `type_of_currency_id` (`type_of_currency_id`);
 
 --
 -- Индексы таблицы `car_ad`
@@ -243,8 +401,8 @@ ALTER TABLE `car_brand`
 --
 ALTER TABLE `car_comparison`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `car_id` (`car_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `car_comparison_ibfk_1` (`car_ad_id`);
 
 --
 -- Индексы таблицы `car_image`
@@ -294,6 +452,12 @@ ALTER TABLE `transmission`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `type_of_currency`
+--
+ALTER TABLE `type_of_currency`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `user`
 --
 ALTER TABLE `user`
@@ -322,85 +486,91 @@ ALTER TABLE `wheel_drive`
 -- AUTO_INCREMENT для таблицы `car`
 --
 ALTER TABLE `car`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `car_ad`
 --
 ALTER TABLE `car_ad`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `car_brand`
 --
 ALTER TABLE `car_brand`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `car_comparison`
 --
 ALTER TABLE `car_comparison`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `car_image`
 --
 ALTER TABLE `car_image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `car_model`
 --
 ALTER TABLE `car_model`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `favorite_ad`
 --
 ALTER TABLE `favorite_ad`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT для таблицы `fuel`
 --
 ALTER TABLE `fuel`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `region`
 --
 ALTER TABLE `region`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `transmission`
 --
 ALTER TABLE `transmission`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT для таблицы `type_of_currency`
+--
+ALTER TABLE `type_of_currency`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `user_review`
 --
 ALTER TABLE `user_review`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `wheel_drive`
 --
 ALTER TABLE `wheel_drive`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -415,7 +585,8 @@ ALTER TABLE `car`
   ADD CONSTRAINT `car_ibfk_3` FOREIGN KEY (`wheel_drive_id`) REFERENCES `wheel_drive` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `car_ibfk_4` FOREIGN KEY (`transmission_id`) REFERENCES `transmission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `car_ibfk_5` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `car_ibfk_6` FOREIGN KEY (`fuel_id`) REFERENCES `fuel` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `car_ibfk_6` FOREIGN KEY (`fuel_id`) REFERENCES `fuel` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `car_ibfk_7` FOREIGN KEY (`type_of_currency_id`) REFERENCES `type_of_currency` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `car_ad`
@@ -428,7 +599,7 @@ ALTER TABLE `car_ad`
 -- Ограничения внешнего ключа таблицы `car_comparison`
 --
 ALTER TABLE `car_comparison`
-  ADD CONSTRAINT `car_comparison_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `car_comparison_ibfk_1` FOREIGN KEY (`car_ad_id`) REFERENCES `car_ad` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `car_comparison_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
