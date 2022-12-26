@@ -92,4 +92,21 @@ class DB
         $stmt = $this->pdo->prepare("DELETE FROM {$tableName} {$wherePartString}");
         $stmt->execute($conditionList);
     }
+
+    public function count($tableName, $conditionList = null)
+    {
+        $whereParts = [];
+        $wherePartString = "";
+        if(is_array($conditionList) && count($conditionList) > 0)
+        {
+            foreach ($conditionList as $key => $value)
+            {
+                $whereParts []= "{$key} = :{$key}";
+            }
+            $wherePartString = "WHERE ".implode(" AND ", $whereParts);
+        }
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM {$tableName} {$wherePartString}");
+        $stmt->execute($conditionList);
+        return $stmt->fetchColumn();
+    }
 }

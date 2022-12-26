@@ -37,8 +37,8 @@ use models\User;
                     </ul>
                     <div class="d-flex align-items-start align-items-md-stretch navbar-buttons flex-column gap-2 flex-md-row">
                         <?php if(User::isUserAuthenticated()):?>
-                            <a href="#" class="btn btn-icon primary-color-bg-hover primary-color"><span>Порівняння</span><i class="fa-solid fa-scale-balanced"></i></a>
-                            <a href="#" class="btn btn-icon primary-color-bg-hover primary-color"><span>Обране</span><i class="fa-solid fa-heart"></i></a>
+                            <a href="/carcomparison" class="btn btn-icon primary-color-bg-hover primary-color"><span>Порівняння</span><i class="fa-solid fa-scale-balanced"></i></a>
+                            <a href="/favoritead" class="btn btn-icon primary-color-bg-hover primary-color"><span>Обране</span><i class="fa-solid fa-heart"></i></a>
                             <a href="/carad/add" class="btn btn-icon primary-color-bg-hover primary-color"><span>Додати оголошення</span><i class="bi bi-plus-circle-fill"></i></a>
                             <div class="dropdown text-end">
                                 <a href="#" class="d-block link-triangle link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

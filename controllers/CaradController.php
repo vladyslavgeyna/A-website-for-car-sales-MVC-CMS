@@ -239,9 +239,9 @@ class CaradController extends Controller
                 $this->redirect("/");
             }
             $data = [];
-            $current_user = User::getCurrentAuthenticatedUser();
-            $data["user_ads"] = Carad::getAllCarAdsByUserIdInnered($current_user["id"]);
-            $data["user_ads_count"] = Carad::getCountOfCarAdsByUserId($current_user["id"]);
+            $current_user_id = User::getCurrentUserId();
+            $data["user_ads"] = Carad::getAllCarAdsByUserIdInnered($current_user_id);
+            $data["user_ads_count"] = Carad::getCountOfCarAdsByUserId($current_user_id);
             return $this->render(null, [
                 "data" => $data
             ]);

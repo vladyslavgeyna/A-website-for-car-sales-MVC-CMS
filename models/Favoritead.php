@@ -27,10 +27,9 @@ class Favoritead
 
     public static function getCountOfFavoriteAdByCarAdId($car_ad_id): int
     {
-        $favorite_ads = Core::getInstance()->db->select(self::$tableName, "*", [
-           "car_ad_id" => $car_ad_id
+        return Core::getInstance()->db->count(self::$tableName, [
+            "car_ad_id" => $car_ad_id
         ]);
-        return count($favorite_ads);
     }
 
     public static function addFavoriteAd($user_id, $car_ad_id)
@@ -89,6 +88,38 @@ class Favoritead
             return null;
         }
     }
+
+    public static function getCountOfFavoriteAdByUserId($user_id)
+    {
+        return Core::getInstance()->db->count(self::$tableName, [
+            "user_id" => $user_id
+        ]);
+    }
+
+    public static function getAllFavoriteAdsByUserIdInnered($user_id): ?array
+    {
+        $fav_ads = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id" => $user_id
+        ]);
+        if(!empty($fav_ads))
+        {
+            $result = [];
+            for ($i = 0; $i < count($fav_ads); $i++)
+            {
+                $tmp_car_ad = Carad::getActiveCarAdById($fav_ads[$i]["car_ad_id"]);
+                if (!empty($tmp_car_ad))
+                {
+                    $result []= $tmp_car_ad;
+                    $result[$i]["car"] = Car::getCarByIdInnered($result[$i]["car_id"]);
+                    $result[$i]["user"] = User::getUserByIdInnered($result[$i]["user_id"]);
+                }
+            }
+            return $result;
+        }
+        return null;
+    }
+
+
 
 
 }

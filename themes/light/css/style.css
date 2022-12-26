@@ -549,6 +549,12 @@ footer ul {
     position: relative;
     padding: 0 0 50% 0;
 }
+.container-fav-add .card .image-wrapper {
+    overflow: hidden;
+    border-radius: 25px;
+    position: relative;
+    padding: 0 0 60% 0;
+}
 .container-carad-myads .modal-confirm-delete-car-ad .modal-title {
     font-size: 22px;
     font-weight: 700;
@@ -614,6 +620,11 @@ footer ul {
     font-size: 24px;
     font-weight: 600;
 }
+.container-fav-add .card  .card-body .card-title+div {
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 25px;
+}
 .container-carad-myads .card .card-body .card-title a:hover {
     color: black;
 }
@@ -637,6 +648,13 @@ footer ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.container-carad-myads .card .card-body .card-body-inner .card-body-inner-bottom > div p a  {
+    color: inherit;
+    text-decoration: none;
+}
+.container-carad-myads .card .card-body .card-body-inner .card-body-inner-bottom > div p a:hover  {
+    text-decoration: underline;
 }
 @media (max-width: 991px) {
     .container-carad-myads .card .card-body .card-body-inner .card-body-inner-bottom  {
@@ -800,4 +818,45 @@ footer ul {
     }
 }
 
+/*Сторінка порівняння */
 
+.main-comparison h1 {
+    font-size: 40px;
+    font-weight: 900;
+}
+.container-comparison-body table tr th, .container-comparison-body table tr td {
+    width: 100%;
+    font-size: 17px;
+}
+.container-comparison-body table .car-title{
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 700;
+}
+.container-comparison-body table .car-title:hover{
+    color: black;
+}
+.container-comparison-body table .car-title+a{
+    font-size: 28px;
+    text-decoration: none;
+    font-weight: 700;
+    color: red;
+}
+.container-comparison-body table .car-title+a:hover{
+    color: darkred;
+}
+
+
+.container-comparison-body table .image-wrapper {
+    overflow: hidden;
+    border-radius: 25px;
+}
+.container-comparison-body table .image-wrapper img{
+    max-height: 200px;
+
+    border-radius: 25px;
+    transition: all 0.5s ease;
+}
+.container-comparison-body table .image-wrapper img:hover {
+    transform: scale(1.05);
+}

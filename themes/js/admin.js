@@ -8,11 +8,4 @@ $(document).ready(function () {
 
         }
     });
-
-    $('.delete-btn').click(function () {
-        const res = confirm('Підтвердіть дію');
-        if(!res){
-            return false;
-        }
-    });
 })

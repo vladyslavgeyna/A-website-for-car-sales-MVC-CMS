@@ -2,6 +2,7 @@
 /** @var array $errors */
 /** @var array $data */
 use core\Core;
+use models\Carcomparison;
 use models\Favoritead;
 use models\User;
 
@@ -15,9 +16,9 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
             <?php if (User::isUserAuthenticated()): ?>
                 <?php if (User::getCurrentUserId() != $data["ad"]["user_id"]): ?>
                     <?php if (Favoritead::hasCurrentUserFavoriteAdByCarAdId($data["ad"]["id"])): ?>
-                        <a id="heart-favorite-ad-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Видалити оголошення з обраного" href="/favoritead/delete/<?=$data["ad"]["id"]?>"><i id="heart-favorite-ad" class="fa-solid fa-heart h1 m-0"></i></a>
+                        <a id="heart-favorite-ad-link" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Видалити оголошення з обраного" href="/favoritead/delete/<?=$data["ad"]["id"]?>"><i style="font-size: 40px" id="heart-favorite-ad" class="fa-solid fa-heart h1 m-0"></i></a>
                     <?php else: ?>
-                        <a id="heart-favorite-ad-link"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Додати оголошення до обраного" href="/favoritead/add/<?=$data["ad"]["id"]?>"><i id="heart-favorite-ad" class="fa-regular fa-heart h1 m-0"></i></a>
+                        <a id="heart-favorite-ad-link"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Додати оголошення до обраного" href="/favoritead/add/<?=$data["ad"]["id"]?>"><i style="font-size: 40px" id="heart-favorite-ad" class="fa-regular fa-heart h1 m-0"></i></a>
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endif; ?>
@@ -60,9 +61,15 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                     </div>
                     <?php if (User::isUserAuthenticated()): ?>
                         <?php if (User::getCurrentUserId() != $data["ad"]["user_id"]): ?>
-                            <div class="carad-view-add-to-compare mb-4">
-                                <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="#" class="btn btn-success w-100 py-2"><i class="fa-solid fa-scale-balanced pe-2"></i>Додати авто до порівняння</a></p>
-                            </div>
+                            <?php if (Carcomparison::hasCurrentUserCarComparisonByCarAdId($data["ad"]["id"])): ?>
+                                <div class="carad-view-add-to-compare mb-4">
+                                    <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="/carcomparison/delete/<?=$data["ad"]["id"]?>" class="btn btn-success w-100 py-2"><i class="fa-solid fa-scale-balanced pe-2"></i>Видалити авто з порівняння</a></p>
+                                </div>
+                            <?php else: ?>
+                                <div class="carad-view-add-to-compare mb-4">
+                                    <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="/carcomparison/add/<?=$data["ad"]["id"]?>" class="btn btn-success w-100 py-2"><i class="fa-solid fa-scale-balanced pe-2"></i>Додати авто до порівняння</a></p>
+                                </div>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>
                     <div class="carad-view-info ps-2 ">

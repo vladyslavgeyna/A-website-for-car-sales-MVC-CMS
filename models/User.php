@@ -194,8 +194,7 @@ class User
 
     public static function getCountOfUsers(): int
     {
-        $users = Core::getInstance()->db->select(self::$tableName);
-        return count($users);
+        return Core::getInstance()->db->count(self::$tableName);
     }
 
     public static function getCurrentUserFullName(): ?string

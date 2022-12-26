@@ -99,7 +99,7 @@ class Car
         return null;
     }
 
-    public static function getAverageUSDCarsPrice()
+    public static function getAverageUSDCarsPrice(): ?float
     {
         $cars = Core::getInstance()->db->select(self::$tableName);
         if (!empty($cars))

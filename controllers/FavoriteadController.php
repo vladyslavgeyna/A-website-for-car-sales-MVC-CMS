@@ -14,6 +14,30 @@ class FavoriteadController extends Controller
         parent::__construct();
     }
 
+    public function indexAction()
+    {
+        if (!User::isUserAuthenticated())
+        {
+            $this->redirect("/");
+        }
+        if (!User::isUserAdmin())
+        {
+            $data = [];
+            $current_user_id = User::getCurrentUserId();
+            $data["user_fav_ads"] = Favoritead::getAllFavoriteAdsByUserIdInnered($current_user_id);
+            $data["user_fav_ads_count"] = Favoritead::getCountOfFavoriteAdByUserId($current_user_id);
+            return $this->render(null, [
+                "data" => $data
+            ]);
+        }
+
+        else
+        {
+            // тут для адміна
+        }
+
+    }
+
     public function addAction($params)
     {
         if (!User::isUserAuthenticated())
@@ -70,7 +94,7 @@ class FavoriteadController extends Controller
         Favoritead::deleteFavoriteAdByUserIdAndCarAdId(User::getCurrentUserId(), $id);
         if (!User::isUserAdmin())
         {
-            $this->redirect("/carad/view/{$id}");
+            $this->redirect($_SERVER["HTTP_REFERER"]);
         }
 
         else

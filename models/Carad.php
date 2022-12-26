@@ -82,6 +82,19 @@ class Carad
         return null;
     }
 
+    public static function getActiveCarAdById($car_ad_id)
+    {
+        $car_ad = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $car_ad_id,
+            "is_active" => 1
+        ]);
+        if(!empty($car_ad))
+        {
+            return $car_ad[0];
+        }
+        return null;
+    }
+
     public static function isCarAdByIdExist($car_ad_id): bool
     {
         $car_ad = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -108,14 +121,9 @@ class Carad
 
     public static function getCountOfCarAdsByUserId($user_id): ?int
     {
-        $car_ads = Core::getInstance()->db->select(self::$tableName, "*", [
+        return Core::getInstance()->db->count(self::$tableName, [
             "user_id" => $user_id
         ]);
-        if(!empty($car_ads))
-        {
-            return count($car_ads);
-        }
-        return null;
     }
 
     public static function getAllCarAdsByUserIdInnered($user_id): ?array
@@ -154,8 +162,7 @@ class Carad
 
     public static function getCountOfCarAds(): int
     {
-        $car_ads = Core::getInstance()->db->select(self::$tableName);
-        return count($car_ads);
+        return Core::getInstance()->db->count(self::$tableName);
     }
 
     public static function deactivateCarAdById($id)
@@ -182,9 +189,14 @@ class Carad
         if (!empty($car_ad))
         {
             $fav_ads = Favoritead::getAllFavoriteAdsByCarAdId($id);
+            $car_comp = Carcomparison::getAllCarComparisonsByCarAdId($id);
             if (!empty($fav_ads))
             {
                 Favoritead::deleteAllFavoriteAdsByCarAdId($id);
+            }
+            if (!empty($car_comp))
+            {
+                Carcomparison::deleteAllCarComparisonsByCarAdId($id);
             }
             Core::getInstance()->db->delete(self::$tableName, [
                 "id" => $id
