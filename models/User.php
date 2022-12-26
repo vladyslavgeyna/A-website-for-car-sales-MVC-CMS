@@ -47,6 +47,14 @@ class User
         return !empty($user);
     }
 
+    public static function isUserByIdExist($id): bool
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        return !empty($user);
+    }
+
     public static function hasCurrentUserImage(): ?bool
     {
         if(self::isUserAuthenticated())
@@ -106,6 +114,21 @@ class User
             $result["phone"] = $user[0]["phone"];
             $result["login"] = $user[0]["login"];
             return $result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getUserById($user_id)
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $user_id
+        ]);
+        if (!empty($user))
+        {
+            return $user[0];
         }
         else
         {

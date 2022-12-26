@@ -82,9 +82,6 @@ class Carcomparison
         }
     }
 
-
-
-
     public static function getAllCarComparisonsByUserIdInnered($user_id): ?array
     {
         $car_comp = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -100,7 +97,6 @@ class Carcomparison
                 {
                     $result []= $tmp_car_ad;
                     $result[$i]["car"] = Car::getCarByIdInnered($result[$i]["car_id"]);
-                  //  $result[$i]["user"] = User::getUserByIdInnered($result[$i]["user_id"]);
                 }
             }
             return $result;

@@ -860,3 +860,87 @@ footer ul {
 .container-comparison-body table .image-wrapper img:hover {
     transform: scale(1.05);
 }
+
+/*Сторінка залишення відгуку про продавця */
+.main-userreview-add h1 {
+    font-size: 40px;
+    font-weight: 900;
+}
+.main-userreview-add form button {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    border-radius: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.main-userreview-add form button:hover {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.container-userreview-add form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+
+.container-userreview-add form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.main-userreview-add form input, .main-userreview-add form textarea {
+    border-radius: 25px;
+}
+.container-userreview-add .error-form-validation {
+     padding-top: 3px;
+     margin-bottom: -7px;
+     color: red;
+     font-weight: 700;
+     font-size: 16px;
+ }
+/*Сторінка перегляду відгуків про продавця */
+
+.container-userreview-view h1 {
+    font-size: 40px;
+    font-weight: 900;
+}
+.container-userreview-view .card button {
+    border-radius: 25px;
+}
+
+.container-userreview-view .modal-confirm-delete-review button.btn-no-action, .container-userreview-view .modal-confirm-delete-review a {
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.container-userreview-view .modal-confirm-delete-review a {
+    border: 3px solid #dc3545;
+}
+.container-userreview-view .modal-confirm-delete-review a:hover {
+    border: 3px solid #bb2d3b;
+}
+.container-userreview-view .modal-confirm-delete-review button.btn-no-action {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+}
+.container-userreview-view .modal-confirm-delete-review button.btn-no-action:hover {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.container-userreview-view .modal-confirm-delete-review button.btn-no-action:active {
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.container-userreview-view .card .card-title {
+    font-size: 22px;
+}
+.container-userreview-view .card button {
+    font-size: 17px;
+    font-weight: 600;
+}
+.container-userreview-view .card .card-text {
+    font-size: 17px;
+}
+.container-userreview-view .alert button[type="button"] {
+    top: 50%;
+    transform: translate(0, -50%);
+}

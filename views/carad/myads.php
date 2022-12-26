@@ -6,7 +6,6 @@ use core\Core;
 Core::getInstance()->pageParams['title'] = 'Мої оголошення';
 
 ?>
-<!--todo Додати відображення про успішну операції-->
 <main class="main main-carad-myads">
     <div class="container container-carad-myads">
         <?php if (!empty($_SESSION["success_car_ad_deactivated"])): ?>

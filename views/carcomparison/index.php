@@ -5,11 +5,9 @@ use core\Core;
 Core::getInstance()->pageParams['title'] = 'Порівняння';
 
 ?>
-<!--todo Додати відображення про успішну операції-->
 <main class="main main-comparison">
     <div class="container container-comparison-top">
         <h1 class="mb-3">Порівняння</h1>
-
     </div>
     <div style="overflow-x: auto" class="container container-comparison-body">
         <?php if (empty($data["user_comp_ads"])):?>
@@ -23,14 +21,13 @@ Core::getInstance()->pageParams['title'] = 'Порівняння';
                     <td ></td>
                     <?php foreach ($data["user_comp_ads"] as $ad) : ?>
                         <td class="p-4" >
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
                                 <a class="car-title primary-color" href="/carad/view/<?=$ad["id"]?>"><?=$ad["title"]?></a>
                                 <a href="/carcomparison/delete/<?=$ad["id"]?>"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="image-wrapper mt-3">
                                 <a href="/carad/view/<?=$ad["id"]?>"><img src="/files/car/<?=$ad["car"]["main_image"]["name"]?>" alt="Зображення автомобіля"></a>
                             </div>
-                            
                         </td>
                     <?php endforeach; ?>
                 </tr>
@@ -120,7 +117,6 @@ Core::getInstance()->pageParams['title'] = 'Порівняння';
                     </tr>
                 </tbody>
             </table>
-
         <?php endif; ?>
     </div>
 </main>

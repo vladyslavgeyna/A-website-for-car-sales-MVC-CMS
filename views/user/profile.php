@@ -56,7 +56,8 @@ Core::getInstance()->pageParams['title'] = 'Профіль';
                 <div class="user-data-links d-flex flex-column gap-2 ms-xl-5 mt-lg-0 mt-4">
                     <a href="/carad/myads" class="btn primary-color-bg primary-color-hover px-4 "><i class="fa-solid fa-pager pe-2 "></i>Мої оголошення</a>
                     <a href="/favoritead" class="btn primary-color-bg primary-color-hover px-4 "><i class="fa-solid fa-heart pe-2 "></i>Моє обране</a>
-                    <a href="#" class="btn primary-color-bg primary-color-hover px-4"><i class="fa-solid fa-scale-balanced pe-2 "></i>Мої порівняння</a>
+                    <a href="/carcomparison" class="btn primary-color-bg primary-color-hover px-4"><i class="fa-solid fa-scale-balanced pe-2 "></i>Мої порівняння</a>
+                    <a href="/userreview/view/<?=$data["user"]["id"]?>" class="btn primary-color-bg primary-color-hover px-4"><i class="fa-regular fa-comments pe-2"></i>Відгуки про мене</a>
                 </div>
             </div>
         </div>

@@ -35,7 +35,7 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                             <p class="h2 m-0 fw-bold"><?=$data["ad"]["car"]["price"]." ".$data["ad"]["car"]["type_of_currency"]["sign"]?></p>
                         </div>
                     </div>
-                    <div class="carad-view-owner p-2 mb-4">
+                    <div class="carad-view-owner p-2 mb-3">
                         <div class="carad-view-owner-content d-flex gap-3">
                             <div style="width: 100px;" class="carad-view-owner-image-wrapper">
                                 <?php if (User::hasUserByIdImage($data["ad"]["user_id"])): ?>
@@ -59,14 +59,20 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                             </div>
                         </div>
                     </div>
+                    <div class="carad-view-add-to-compare mb-3">
+                        <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="/userreview/view/<?=$data["ad"]["user"]["id"]?>" class="btn btn-warning w-100 py-2"><i class="fa-regular fa-comments pe-2"></i>Всі відгуки</a></p>
+                    </div>
                     <?php if (User::isUserAuthenticated()): ?>
                         <?php if (User::getCurrentUserId() != $data["ad"]["user_id"]): ?>
+                            <div class="carad-view-add-to-compare mb-3">
+                                <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="/userreview/add/<?=$data["ad"]["user"]["id"]?>" class="btn btn-primary w-100 py-2"><i style="transform: rotateY(180deg);" class="fa-regular fa-comment ps-2"></i>Залишити відгук</a></p>
+                            </div>
                             <?php if (Carcomparison::hasCurrentUserCarComparisonByCarAdId($data["ad"]["id"])): ?>
-                                <div class="carad-view-add-to-compare mb-4">
+                                <div class="carad-view-add-to-compare mb-3">
                                     <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="/carcomparison/delete/<?=$data["ad"]["id"]?>" class="btn btn-success w-100 py-2"><i class="fa-solid fa-scale-balanced pe-2"></i>Видалити авто з порівняння</a></p>
                                 </div>
                             <?php else: ?>
-                                <div class="carad-view-add-to-compare mb-4">
+                                <div class="carad-view-add-to-compare mb-3">
                                     <p style="border-radius: 25px;" class="mb-2"><a style="border-radius: 25px;" href="/carcomparison/add/<?=$data["ad"]["id"]?>" class="btn btn-success w-100 py-2"><i class="fa-solid fa-scale-balanced pe-2"></i>Додати авто до порівняння</a></p>
                                 </div>
                             <?php endif; ?>
