@@ -18,7 +18,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Додавання ма
                     </div>
                 </div>
                 <?php if (!empty($_SESSION["success_car_brand_added"])): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_car_brand_added"]; ?></h4>
                     </div>

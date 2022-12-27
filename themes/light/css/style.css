@@ -947,13 +947,13 @@ footer ul {
 
 /*Сторінка додавання марки авто */
 
-.section-form-admin form label, .section-form-admin form input, .section-form-admin form button {
+.section-form-admin form label, .section-form-admin form input, .section-form-admin form button, .section-form-admin form select {
     font-size: 18px;
 }
 .section-form-admin .card {
     overflow: hidden;
 }
-.section-form-admin form input, .section-form-admin form button, .section-form-admin .card {
+.section-form-admin form input, .section-form-admin form button, .section-form-admin .card, .section-form-admin form select {
     border-radius: 25px;
 }
 .section-form-admin .error-form-validation {
@@ -1001,6 +1001,8 @@ footer ul {
 .section-table-admin .modal .modal-body p {
     font-size: 17px;
 }
-
+.alert-admin {
+    border-radius: 25px;
+}
 
 

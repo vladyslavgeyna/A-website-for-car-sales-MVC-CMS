@@ -89,4 +89,19 @@ class Carbrand
         }
     }
 
+    public static function getCarBrandNameById($id)
+    {
+        $car_brand = Core::getInstance()->db->select(self::$tableName, "name", [
+            "id" => $id
+        ]);
+        if (!empty($car_brand))
+        {
+            return $car_brand[0]["name"];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 }

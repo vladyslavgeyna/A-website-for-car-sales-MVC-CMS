@@ -16,14 +16,14 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі марки';
                     </div>
                 </div>
                 <?php if (!empty($_SESSION["success_car_brand_deleted"])): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_car_brand_deleted"]; ?></h4>
                     </div>
                     <?php unset($_SESSION["success_car_brand_deleted"]); ?>
                 <?php endif; ?>
                 <?php if (!empty($_SESSION["success_car_brand_edited"])): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_car_brand_edited"]; ?></h4>
                     </div>
