@@ -87,7 +87,7 @@ class CaradController extends Controller
                         }
                     }
                 }
-                if (empty($_POST["main_photo"]))
+                if (empty($_POST["main_photo"]) || !in_array($_POST["main_photo"], $_FILES["car_photos"]["name"]))
                 {
                     $errors["main_photo"] = "Ви не обрали головне фото";
                 }
