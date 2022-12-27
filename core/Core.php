@@ -79,6 +79,10 @@ class Core
         {
             $statusCode = 404;
         }
+        if (http_response_code() == 403)
+        {
+            $statusCode = 403;
+        }
         $statusCodeType = intval($statusCode / 100);
         if($statusCodeType == 4 || $statusCodeType == 5)
         {

@@ -6,9 +6,11 @@ Core::getInstance()->pageParams['title'] = 'Порівняння';
 
 ?>
 <main class="main main-comparison">
-    <div class="container container-comparison-top">
-        <h1 class="mb-3">Порівняння</h1>
-    </div>
+    <?php if (!empty($data["user_comp_ads"])):?>
+        <div class="container container-comparison-top">
+            <h1 class="mb-3">Порівняння</h1>
+        </div>
+    <?php endif; ?>
     <div style="overflow-x: auto" class="container container-comparison-body">
         <?php if (empty($data["user_comp_ads"])):?>
             <div style="border-radius: 25px" class="alert alert-primary py-4" role="alert">
