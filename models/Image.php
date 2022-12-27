@@ -66,7 +66,7 @@ class Image
         }
     }
 
-    public static function compressImage($input_image, $output_image, $quality)
+    protected static function compressImage($input_image, $output_image, $quality)
     {
         $info = getimagesize($input_image);
         if ($info["mime"] == "image/jpeg")

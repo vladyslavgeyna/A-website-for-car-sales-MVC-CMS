@@ -92,8 +92,8 @@ class UserController extends Controller
                     $extension = Utils::getFileExtension($_FILES["avatar"]["name"]);
                     $image_id = Image::addImage($_FILES["avatar"]["tmp_name"], $extension);
                 }
-                $password = Utils::getHashedString($_POST["password"]);
-                User::addUser($_POST["name"], $_POST["surname"], $_POST["lastname"], $_POST["login"], $password, $_POST["phone"], $image_id);
+                $password = Utils::getHashedString(trim($_POST["password"]));
+                User::addUser(trim($_POST["name"]), trim($_POST["surname"]), trim($_POST["lastname"]), trim($_POST["login"]), $password, trim($_POST["phone"]), $image_id);
                 $_SESSION["success_register"] = "Вітаємо, Ви успішно зареєструвалися";
                 $this->redirect("/user/login");
             }
@@ -114,8 +114,8 @@ class UserController extends Controller
         $error = null;
         if(Core::getInstance()->requestMethod === "POST")
         {
-            $password = Utils::getHashedString($_POST["password"]);
-            $user = User::getUserByLoginAndPassword($_POST["login"], $password);
+            $password = Utils::getHashedString(trim($_POST["password"]));
+            $user = User::getUserByLoginAndPassword(trim($_POST["login"]), $password);
             if(empty($user))
             {
                 $error = "Неправильний логін або пароль";

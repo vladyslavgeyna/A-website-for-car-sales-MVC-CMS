@@ -153,7 +153,7 @@ class CaradController extends Controller
                 }
                 if (strlen($_POST["car_additional_options"]) > 6)
                 {
-                    $additional_options = $_POST["car_additional_options"];
+                    $additional_options = trim($_POST["car_additional_options"]);
                 }
                 if (strlen($_POST["car_ad_title"]) < 6)
                 {
@@ -189,14 +189,14 @@ class CaradController extends Controller
                     }
                     else
                     {
-                        $engine_capacity = $_POST["car_engine_capacity"];
+                        $engine_capacity = trim($_POST["car_engine_capacity"]);
                     }
                     $car_id = Car::addCar($_POST["car_brand"], $_POST["car_model"], $_POST["car_year_of_production"], $engine_capacity,
-                        $_POST["car_fuel"], $_POST["car_transmission"], $_POST["car_color"], $_POST["car_region"], $_POST["car_district"],
-                        $_POST["car_city"], $_POST["car_price"], $_POST["car_type_of_currency"], $_POST["car_wheel_drive"], $_POST["car_number_of_seats"],
+                        $_POST["car_fuel"], $_POST["car_transmission"], trim($_POST["car_color"]), $_POST["car_region"], trim($_POST["car_district"]),
+                        trim($_POST["car_city"]), trim($_POST["car_price"]), $_POST["car_type_of_currency"], $_POST["car_wheel_drive"], $_POST["car_number_of_seats"],
                         $_POST["car_mileage"], $additional_options);
 
-                    Carad::addCarAd($car_id, $_POST["car_ad_title"], nl2br($_POST["car_ad_text"]), date("Y-m-d H:i:s"), User::getCurrentUserId());
+                    Carad::addCarAd($car_id, trim($_POST["car_ad_title"]), nl2br($_POST["car_ad_text"]), date("Y-m-d H:i:s"), User::getCurrentUserId());
                     for ($i = 0; $i < count($_FILES["car_photos"]["name"]); $i++)
                     {
                         $extension = Utils::getFileExtension($_FILES["car_photos"]["name"][$i]);

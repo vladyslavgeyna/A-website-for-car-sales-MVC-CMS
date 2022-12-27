@@ -51,7 +51,7 @@ class UserreviewController extends \core\Controller
                 }
                 else
                 {
-                    Userreview::addUserReview($_POST["title"], nl2br($_POST["text"]), $id, User::getCurrentUserId());
+                    Userreview::addUserReview(trim($_POST["title"]), nl2br($_POST["text"]), $id, User::getCurrentUserId());
                     $_SESSION["success_review_added"] = "Відгук успішно додано";
                     $this->redirect("/userreview/view/{$id}");
                 }
