@@ -106,6 +106,8 @@ class Car
         {
             $cars_count = count($cars);
             $total_price = 0;
+            $eur_to_usd = Utils::getCurrentEURToUSD();
+            $usd_to_uah = Utils::getCurrentUSDToUAH();
             foreach ($cars as $car)
             {
                 if ($car["type_of_currency_id"] == 1)
@@ -114,11 +116,11 @@ class Car
                 }
                 else if ($car["type_of_currency_id"] == 2)
                 {
-                    $total_price += $car["price"] / Utils::getCurrentEURToUSD();
+                    $total_price += $car["price"] / $eur_to_usd;
                 }
                 else if ($car["type_of_currency_id"] == 3)
                 {
-                    $total_price += $car["price"] / Utils::getCurrentUSDToUAH();
+                    $total_price += $car["price"] / $usd_to_uah;
                 }
             }
             return round($total_price / $cars_count);
