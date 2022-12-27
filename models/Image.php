@@ -27,7 +27,8 @@ class Image
             $fileName = $name.".".$imageExtension;
             $fullPath = "files/{$module}/".$fileName;
         } while(file_exists($fullPath));
-        move_uploaded_file($path, $fullPath);
+        self::compressImage($path, $fullPath, 40);
+        //move_uploaded_file($path, $fullPath);
         return Core::getInstance()->db->insert(self::$tableName, [
             "name" => $fileName
         ]);
@@ -65,6 +66,20 @@ class Image
         }
     }
 
+    public static function compressImage($input_image, $output_image, $quality)
+    {
+        $info = getimagesize($input_image);
+        if ($info["mime"] == "image/jpeg")
+        {
+            $img = imagecreatefromjpeg($input_image);
+            imagejpeg($img, $output_image, $quality);
+        }
+        else if ($info["mime"] == "image/png")
+        {
+            $img = imagecreatefrompng($input_image);
+            imagepng($img, $output_image, $quality);
+        }
+    }
 
 
 }
