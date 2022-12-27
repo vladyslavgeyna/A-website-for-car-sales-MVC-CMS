@@ -944,3 +944,63 @@ footer ul {
     top: 50%;
     transform: translate(0, -50%);
 }
+
+/*Сторінка додавання марки авто */
+
+.section-form-admin form label, .section-form-admin form input, .section-form-admin form button {
+    font-size: 18px;
+}
+.section-form-admin .card {
+    overflow: hidden;
+}
+.section-form-admin form input, .section-form-admin form button, .section-form-admin .card {
+    border-radius: 25px;
+}
+.section-form-admin .error-form-validation {
+    color: red;
+    font-weight: 700;
+}
+/*Сторінка перегляду марок */
+
+.section-table-admin table tbody td.project-actions a, .section-table-admin table tbody td.project-actions button {
+    font-size: 16px;
+    border-radius: 25px;
+}
+.section-table-admin table th, .section-table-admin table td {
+    font-size: 18px;
+}
+.section-table-admin .card {
+    overflow: hidden;
+    border-radius: 25px;
+}
+.section-table-admin .modal button.btn-no-action, .section-table-admin .modal a {
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.section-table-admin .modal a {
+    border: 3px solid #dc3545;
+}
+.section-table-admin .modal a:hover {
+    border: 3px solid #bb2d3b;
+}
+.section-table-admin .modal button.btn-no-action {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+}
+.section-table-admin .modal button.btn-no-action:hover {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+    background-color: white;
+}
+.section-table-admin .modal button.btn-no-action:active {
+    background-color: white;
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.section-table-admin .modal .modal-body p {
+    font-size: 17px;
+}
+
+
+

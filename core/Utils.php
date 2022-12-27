@@ -6,6 +6,7 @@ class Utils
 {
     private static string $UrlExchangeRateApi = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
 
+
     public static function filterArray($array, $fieldsList): array
     {
         $filteredArray = [];
@@ -58,17 +59,29 @@ class Utils
         }
     }
 
-    public static function getCurrentUSDToUAH()
+    private static function curl_get_contents($url)
     {
-        $stringContent = file_get_contents(self::$UrlExchangeRateApi);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
+
+
+    public static function getCurrentUSDToUAH(): float
+    {
+        $stringContent = self::curl_get_contents(self::$UrlExchangeRateApi);
         $stringJSON = json_decode($stringContent, true);
         return floatval($stringJSON[25]["rate"]);
 
     }
 
-    public static function getCurrentEURToUAH()
+    public static function getCurrentEURToUAH(): float
     {
-        $stringContent = file_get_contents(self::$UrlExchangeRateApi);
+        $stringContent = self::curl_get_contents(self::$UrlExchangeRateApi);
         $stringJSON = json_decode($stringContent, true);
         return floatval($stringJSON[32]["rate"]);
     }

@@ -118,66 +118,76 @@ use models\User;
                             </li>
                         </ul>
                     </li>
+
+
+
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i style="width: 30px"  class="fa-solid fa-car px-1"></i>
                             <p>
-                                Автомобілі
+                                Марки авто
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview" style="display: none;">
-<!--                            <li class="nav-item">-->
-<!--                                <a href="#" class="nav-link">-->
-<!--                                    <i class="far fa-circle nav-icon"></i>-->
-<!--                                    <p>Всі автомобілі</p>-->
-<!--                                </a>-->
-<!--                            </li>-->
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/carbrand" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Марки
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                    <p>Всі марки</p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Всі марки</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Додати марку</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/carbrand/add" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Додати марку</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-solid fa-car-side px-1"></i>
+                            <p>
+                                Моделі авто
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі моделі</p>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Моделі
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                    <p>Додати модель</p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Всі моделі</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Додати модель</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-solid fa-gas-pump px-1"></i>
+                            <p>
+                                Види палива
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі види палива</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Додати вид палива</p>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -185,79 +195,45 @@ use models\User;
                         <a href="#" class="nav-link">
                             <i style="width: 30px" class="fa-solid fa-screwdriver-wrench px-1"></i>
                             <p>
-                                Характеристики авто
+                                Коробки передач
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview" style="display: none;">
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Види палива
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                    <p>Всі коробки передач</p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Всі види палива</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Додати вид палива</p>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Трансмісії
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                    <p>Додати коробку передач</p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Всі трансмісії</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Додати трансмісію</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-solid fa-circle-dot px-1"></i>
+                            <p>
+                                Приводи
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі приводи</p>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Приводи
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                    <p>Додати привід</p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Всі приводи</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Додати привід</p>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </li>

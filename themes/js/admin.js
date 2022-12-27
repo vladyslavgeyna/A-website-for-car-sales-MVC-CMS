@@ -5,7 +5,6 @@ $(document).ready(function () {
         if(link == location2){
             $(this).addClass('active');
             $(this).parent().parent().parent().addClass('menu-is-opening menu-open');
-
         }
     });
 })
