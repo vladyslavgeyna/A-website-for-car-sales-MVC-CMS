@@ -187,4 +187,12 @@ class Car
         ]);
         return !empty($car);
     }
+
+    public static function isCarByRegionIdExist($region_id): bool
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, "*", [
+            "region_id" => $region_id
+        ]);
+        return !empty($car);
+    }
 }

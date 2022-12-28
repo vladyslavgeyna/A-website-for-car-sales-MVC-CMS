@@ -3,7 +3,7 @@
 
 use core\Core;
 
-Core::getInstance()->pageParams['title'] = 'Адмін | Всі коробки передач';
+Core::getInstance()->pageParams['title'] = 'Адмін | Всі області';
 
 ?>
 <main>
@@ -12,35 +12,35 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі коробки �
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 style="font-weight: bold; font-size: 40px" class="m-0">Всі коробки передач</h1>
+                        <h1 style="font-weight: bold; font-size: 40px" class="m-0">Всі області</h1>
                     </div>
                 </div>
-                <?php if (!empty($_SESSION["success_transmission_deleted"])): ?>
+                <?php if (!empty($_SESSION["success_region_deleted"])): ?>
                     <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_transmission_deleted"]; ?></h4>
+                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_region_deleted"]; ?></h4>
                     </div>
-                    <?php unset($_SESSION["success_transmission_deleted"]); ?>
+                    <?php unset($_SESSION["success_region_deleted"]); ?>
                 <?php endif; ?>
-                <?php if (!empty($_SESSION["success_transmission_edited"])): ?>
+                <?php if (!empty($_SESSION["success_region_edited"])): ?>
                     <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_transmission_edited"]; ?></h4>
+                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_region_edited"]; ?></h4>
                     </div>
-                    <?php unset($_SESSION["success_transmission_edited"]); ?>
+                    <?php unset($_SESSION["success_region_edited"]); ?>
                 <?php endif; ?>
-                <?php if (!empty($_SESSION["error_transmission_deleted"])): ?>
+                <?php if (!empty($_SESSION["error_region_deleted"])): ?>
                     <div class="alert alert-admin alert-danger alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4 class="m-0"><i class="icon fa fa-solid fa-xmark"></i><?= $_SESSION["error_transmission_deleted"]; ?></h4>
+                        <h4 class="m-0"><i class="icon fa fa-solid fa-xmark"></i><?= $_SESSION["error_region_deleted"]; ?></h4>
                     </div>
-                    <?php unset($_SESSION["error_transmission_deleted"]); ?>
+                    <?php unset($_SESSION["error_region_deleted"]); ?>
                 <?php endif; ?>
             </div>
         </div>
-        <section class="content section-transmission-index-admin section-table-admin">
+        <section class="content section-region-index-admin section-table-admin">
             <div class="container-fluid">
-                <?php if(!empty($data["transmissions"])): ?>
+                <?php if(!empty($data["regions"])): ?>
                     <div class="card">
                         <div class="card-body p-0">
                             <table class="table table-striped projects">
@@ -52,21 +52,21 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі коробки �
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($data["transmissions"] as $transmission) : ?>
+                                <?php foreach ($data["regions"] as $region) : ?>
                                     <tr>
-                                        <td><?=$transmission["id"]?></td>
-                                        <td><?=$transmission["name"]?></td>
+                                        <td><?=$region["id"]?></td>
+                                        <td><?=$region["name"]?></td>
                                         <td class="project-actions text-right d-flex flex-column flex-sm-row justify-content-end" style="gap: 0.5rem">
-                                            <a class="btn btn-info " href="/transmission/edit/<?=$transmission["id"]?>">
+                                            <a class="btn btn-info " href="/region/edit/<?=$region["id"]?>">
                                                 <i class="fas fa-pencil-alt pr-1"></i>
                                                 Редагувати
                                             </a>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-transmission-<?=$transmission["id"]?>" type="button" >
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-region-<?=$region["id"]?>" type="button" >
                                                 <i class="fas fa-trash pr-1"></i>
                                                 Видалити
                                             </button>
                                         </td>
-                                        <div class="modal modal-confirm-delete-transmission fade" id="confirm-delete-transmission-<?=$transmission["id"]?>" tabindex="-1" aria-hidden="false">
+                                        <div class="modal modal-confirm-delete-region fade" id="confirm-delete-region-<?=$region["id"]?>" tabindex="-1" aria-hidden="false">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div style="border-radius: 25px;" class="modal-content">
                                                     <div class="modal-header">
@@ -76,11 +76,11 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі коробки �
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p >Ви дійсно бажаєте видалити цю коробку передач?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує дану коробку передач</p>
+                                                        <p >Ви дійсно бажаєте видалити цю область?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує дану область</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-dismiss="modal">Відмінити</button>
-                                                        <a href="/transmission/delete/<?=$transmission["id"]?>" class="btn btn-danger">Видалити</a>
+                                                        <a href="/region/delete/<?=$region["id"]?>" class="btn btn-danger">Видалити</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,7 +92,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі коробки �
                         </div>
                     </div>
                 <?php else: ?>
-                    <div class="h1">Коробок передач не знайдено</div>
+                    <div class="h1">Областей не знайдено</div>
                 <?php endif; ?>
             </div>
         </section>

@@ -29,4 +29,63 @@ class Region
         }
         return null;
     }
+
+    public static function isRegionByNameExist($name): bool
+    {
+        $region = Core::getInstance()->db->select(self::$tableName, "*", [
+            "name" => $name,
+        ]);
+        return !empty($region);
+    }
+
+    public static function addRegion($name)
+    {
+        Core::getInstance()->db->insert(self::$tableName, [
+            "name" => $name,
+        ]);
+    }
+
+    public static function isRegionByIdExist($id): bool
+    {
+        $region = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id,
+        ]);
+        return !empty($region);
+    }
+
+    public static function updateRegionById($id, $newName)
+    {
+        $region = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        if(!empty($region))
+        {
+            Core::getInstance()->db->update(self::$tableName, [
+                "name" => $newName
+            ], [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function deleteRegionById($id)
+    {
+        $region = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        if(!empty($region))
+        {
+            Core::getInstance()->db->delete(self::$tableName, [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
