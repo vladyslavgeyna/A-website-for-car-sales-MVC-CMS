@@ -37,7 +37,7 @@ use models\User;
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/admin/messages" >
+                <a class="nav-link" href="/adminmessage" >
                     Повідомлення
                     <i class="far fa-comments"></i>
                 </a>

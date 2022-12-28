@@ -9,6 +9,18 @@ class User
 {
     protected static string $tableName = "user";
 
+    public static function getAllAdminUsers(): ?array
+    {
+        $admins = Core::getInstance()->db->select(self::$tableName, "*", [
+           "is_admin" => 1
+        ]);
+        if (!empty($admins))
+        {
+            return $admins;
+        }
+        return null;
+    }
+
     public static function setUserByIdAsAdmin($id)
     {
         $user = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -16,6 +28,14 @@ class User
         ]);
         if (!empty($user))
         {
+            $messages = Message::getMessagesByUserId($id);
+            if (!empty($messages))
+            {
+                foreach ($messages as $message)
+                {
+                    Message::deleteMessageById($message["id"]);
+                }
+            }
             Core::getInstance()->db->update(self::$tableName, [
                 "is_admin" => 1
             ], [
@@ -35,6 +55,14 @@ class User
         ]);
         if (!empty($user))
         {
+            $admin_messages = Adminmessage::getAdminMessagesByUserAdminId($id);
+            if (!empty($admin_messages))
+            {
+                foreach ($admin_messages as $admin_message)
+                {
+                    Adminmessage::deleteAdminMessageById($admin_message["id"]);
+                }
+            }
             Core::getInstance()->db->update(self::$tableName, [
                 "is_admin" => 0
             ], [
@@ -93,6 +121,28 @@ class User
                 foreach ($car_ads as $ad)
                 {
                     Carad::deleteCarAdById($ad["id"]);
+                }
+            }
+            if ($user[0]["is_admin"] == 0)
+            {
+                $messages = Message::getMessagesByUserId($id);
+                if (!empty($messages))
+                {
+                    foreach ($messages as $message)
+                    {
+                        Message::deleteMessageById($message["id"]);
+                    }
+                }
+            }
+            if ($user[0]["is_admin"] == 1)
+            {
+                $admin_messages = Adminmessage::getAdminMessagesByUserAdminId($id);
+                if (!empty($admin_messages))
+                {
+                    foreach ($admin_messages as $admin_message)
+                    {
+                        Adminmessage::deleteAdminMessageById($admin_message["id"]);
+                    }
                 }
             }
             Core::getInstance()->db->delete(self::$tableName, [

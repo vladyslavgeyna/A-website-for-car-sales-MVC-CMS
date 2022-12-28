@@ -3,7 +3,7 @@
 /** @var array $data */
 use core\Core;
 
-Core::getInstance()->pageParams['title'] = 'Додавання користувача';
+Core::getInstance()->pageParams['title'] = 'Адмін | Додавання користувача';
 
 ?>
 <main>

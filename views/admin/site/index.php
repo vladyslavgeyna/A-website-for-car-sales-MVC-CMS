@@ -53,7 +53,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Головна стор
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="#" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/user" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>

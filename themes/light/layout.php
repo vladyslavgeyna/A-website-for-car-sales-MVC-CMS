@@ -51,7 +51,7 @@ use models\User;
                                 <ul class="dropdown-menu text-small" >
                                     <li><a class="dropdown-item " href="/user/profile">Профіль</a></li>
                                     <li><a class="dropdown-item " href="/carad/myads">Мої оголошення</a></li>
-                                    <li><a class="dropdown-item " href="#">Повідомлення адміну</a></li>
+                                    <li><a class="dropdown-item " href="/adminmessage/send">Повідомлення адміну</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item dropdown-item-flex d-flex align-items-center" href="/user/logout"><span>Вийти</span><i style="font-size: 24px" class="bi bi-box-arrow-right"></i></a></li>
                                 </ul>

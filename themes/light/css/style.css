@@ -1037,3 +1037,108 @@ footer ul {
     margin-bottom: -7px;
 
 }
+/*Сторінка відправки повідомлення адміну */
+
+
+.main-adminmessage-send{
+    display: flex;
+    align-items: center;
+}
+
+.container-adminmessage-send h1 {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.container-adminmessage-send label,  .container-adminmessage-send input {
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 25px;
+}
+.container-adminmessage-send textarea {
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 25px;
+    height: 125px;
+}
+.container-adminmessage-send form {
+    margin: 0 auto;
+    max-width: 500px;
+    row-gap: 15px;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 0 50px -10px rgba(0,0,0,0.7);
+}
+.main-adminmessage-send form button {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    border-radius: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.main-adminmessage-send form button:hover {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+
+
+.container-register form, form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+
+.container-register button[type="button"] {
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.container-adminmessage-send .error-form-validation {
+    color: red;
+    font-weight: bold;
+    padding-left: 0.5rem;
+    margin-bottom: -10px;
+    margin-top: 3px;
+}
+
+.section-admin-messages .card {
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.section-admin-messages .card .card-body .card-text{
+    font-size: 18px;
+}
+.section-admin-messages .card button{
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.section-admin-messages .modal button.btn-no-action, .section-admin-messages .modal a {
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.section-admin-messages .modal a.btn-danger {
+    border: 3px solid #dc3545;
+}
+.section-admin-messages .modal a.btn-danger:hover {
+    border: 3px solid #bb2d3b;
+}
+
+.section-admin-messages .modal button.btn-no-action {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+}
+.section-admin-messages .modal button.btn-no-action:hover {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+    background-color: white;
+}
+.section-admin-messages .modal button.btn-no-action:active {
+    background-color: white;
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.section-admin-messages .modal .modal-body p {
+    font-size: 17px;
+}
