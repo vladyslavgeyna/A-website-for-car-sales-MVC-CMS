@@ -52,8 +52,8 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Додавання мо
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
-                                        <label for="InputCarBrand">Назва моделі:</label>
-                                        <input value="<?=$auto_complete["car_model_name"]?>" type="text" name="car_model_name" class="form-control" id="InputCarBrand" required placeholder="Введіть назву моделі">
+                                        <label for="InputCarModel">Назва моделі:</label>
+                                        <input value="<?=$auto_complete["car_model_name"]?>" type="text" name="car_model_name" class="form-control" id="InputCarModel" required placeholder="Введіть назву моделі">
                                         <?php if (!empty($errors['car_model_name'])): ?>
                                             <div class="error-form-validation mt-2" >
                                                 <span><?= $errors['car_model_name']; ?></span>

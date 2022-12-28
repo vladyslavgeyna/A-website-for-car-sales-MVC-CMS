@@ -178,13 +178,13 @@ use models\User;
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
+                                <a href="/fuel" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Всі види палива</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/fuel/add" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Додати вид палива</p>
                                 </a>

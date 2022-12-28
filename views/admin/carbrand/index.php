@@ -31,7 +31,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі марки';
                 <?php endif; ?>
             </div>
         </div>
-        <section class="content section-carbrand-index-admin section-table-admin">
+        <section class="content section-fuel-index-admin section-table-admin">
             <div class="container-fluid">
                 <?php if(!empty($data["car_brands"])): ?>
                     <div class="card">
