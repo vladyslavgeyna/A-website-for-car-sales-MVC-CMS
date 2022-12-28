@@ -37,7 +37,13 @@ use models\User;
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link"  href="/user/logout" >
+                <a class="nav-link" href="/admin/messages" >
+                    Повідомлення
+                    <i class="far fa-comments"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/logout" >
                     Вийти
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </a>
@@ -82,13 +88,13 @@ use models\User;
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link ">
+                                <a href="/user" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Всі користувачі</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index2.html" class="nav-link">
+                                <a href="/user/register" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Додати користувача</p>
                                 </a>

@@ -9,9 +9,57 @@ class User
 {
     protected static string $tableName = "user";
 
+    public static function setUserByIdAsAdmin($id)
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        if (!empty($user))
+        {
+            Core::getInstance()->db->update(self::$tableName, [
+                "is_admin" => 1
+            ], [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function unsetUserByIdAsAdmin($id)
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        if (!empty($user))
+        {
+            Core::getInstance()->db->update(self::$tableName, [
+                "is_admin" => 0
+            ], [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getAllUsers(): ?array
+    {
+        $users = Core::getInstance()->db->select(self::$tableName);
+        if (!empty($users))
+        {
+            return $users;
+        }
+        return null;
+    }
+
     public static function addUser($name, $surname, $lastname, $login, $password, $phone, $image_id = null)
     {
-        Core::getInstance()->db->insert(self::$tableName, [
+        return Core::getInstance()->db->insert(self::$tableName, [
             "name" => $name,
             "surname" => $surname,
             "lastname" => $lastname,
@@ -32,11 +80,34 @@ class User
         ]);
     }
 
-    public static function deleteUser($id)
+    public static function deleteUserById($id)
     {
-        Core::getInstance()->db->delete(self::$tableName, [
+        $user = Core::getInstance()->db->select(self::$tableName, "*", [
             "id" => $id
         ]);
+        if (!empty($user))
+        {
+            $car_ads = Carad::getAllCarAdsByUserId($id);
+            if (!empty($car_ads))
+            {
+                foreach ($car_ads as $ad)
+                {
+                    Carad::deleteCarAdById($ad["id"]);
+                }
+            }
+            Core::getInstance()->db->delete(self::$tableName, [
+                "id" => $id
+            ]);
+            $image_id = $user[0]["image_id"];
+            if (!empty($image_id))
+            {
+                Image::deleteImageById($image_id, "user");
+            }
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public static function isLoginExists($login): bool

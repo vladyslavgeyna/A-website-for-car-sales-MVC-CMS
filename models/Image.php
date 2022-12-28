@@ -46,12 +46,20 @@ class Image
         return null;
     }
 
-    public static function deleteImageById($id)
+    public static function deleteImageById($id, $moduleName = null)
     {
+        if(empty($moduleName))
+        {
+            $module = Core::getInstance()->app["moduleName"];
+        }
+        else
+        {
+            $module = $moduleName;
+        }
         $image = self::getImageById($id);
         if (!empty($image))
         {
-            $image_path = "files/car/".$image["name"];
+            $image_path = "files/{$module}/".$image["name"];
             if (is_file($image_path))
             {
                 unlink($image_path);
@@ -77,7 +85,22 @@ class Image
         else if ($info["mime"] == "image/png")
         {
             $img = imagecreatefrompng($input_image);
-            imagepng($img, $output_image, $quality);
+            imagejpeg($img, $output_image, $quality);
+        }
+    }
+
+    public static function getImageNameById($id)
+    {
+        $image = Core::getInstance()->db->select(self::$tableName, "name", [
+            "id" => $id
+        ]);
+        if (!empty($image))
+        {
+            return $image[0]["name"];
+        }
+        else
+        {
+            return null;
         }
     }
 

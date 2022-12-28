@@ -143,6 +143,18 @@ class Carad
         return null;
     }
 
+    public static function getAllCarAdsByUserId($user_id): ?array
+    {
+        $car_ads = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id" => $user_id
+        ]);
+        if(!empty($car_ads))
+        {
+            return $car_ads;
+        }
+        return null;
+    }
+
     public static function getAllActiveCarAdsInnered(): ?array
     {
         $active_car_ads = Core::getInstance()->db->select(self::$tableName, "*",  [

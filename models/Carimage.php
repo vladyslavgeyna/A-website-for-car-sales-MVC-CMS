@@ -86,7 +86,7 @@ class Carimage
             ]);
             foreach ($car_images as $car_image)
             {
-                Image::deleteImageById($car_image["image_id"]);
+                Image::deleteImageById($car_image["image_id"], "car");
             }
         }
         else

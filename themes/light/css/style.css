@@ -978,11 +978,17 @@ footer ul {
     font-size: 17px;
     font-weight: 700;
 }
-.section-table-admin .modal a {
+.section-table-admin .modal a.btn-danger {
     border: 3px solid #dc3545;
 }
-.section-table-admin .modal a:hover {
+.section-table-admin .modal a.btn-danger:hover {
     border: 3px solid #bb2d3b;
+}
+.section-table-admin .modal a.btn-warning {
+    border: 3px solid #ffc107;
+}
+.section-table-admin .modal a.btn-warning:hover {
+    border: 3px solid #e0a800;
 }
 .section-table-admin .modal button.btn-no-action {
     border: 3px solid rgb(112.520718,44.062154,249.437846);
@@ -1004,5 +1010,30 @@ footer ul {
 .alert-admin {
     border-radius: 25px;
 }
+.section-user-register-admin label {
+    padding-left: 0.75rem;
+}
+.section-user-register-admin form button[type="submit"] {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    border-radius: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.section-user-register-admin form button:hover {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+    background-color: white;
+}
+.section-user-register-admin form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+    background-color: white;
+}
+.section-user-register-admin .error-form-validation {
+    padding-left: 0.75rem;
+    margin-top: 3px;
+    margin-bottom: -7px;
 
-
+}
