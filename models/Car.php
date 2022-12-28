@@ -179,4 +179,12 @@ class Car
         ]);
         return !empty($car);
     }
+
+    public static function isCarByWheelDriveIdExist($wheel_drive_id): bool
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, "*", [
+            "wheel_drive_id" => $wheel_drive_id
+        ]);
+        return !empty($car);
+    }
 }

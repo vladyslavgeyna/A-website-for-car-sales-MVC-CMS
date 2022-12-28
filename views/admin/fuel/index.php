@@ -61,12 +61,12 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі види пал�
                                                 <i class="fas fa-pencil-alt pr-1"></i>
                                                 Редагувати
                                             </a>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-car-brand-<?=$fuel["id"]?>" type="button" >
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-fuel-<?=$fuel["id"]?>" type="button" >
                                                 <i class="fas fa-trash pr-1"></i>
                                                 Видалити
                                             </button>
                                         </td>
-                                        <div class="modal modal-confirm-delete-car-brand fade" id="confirm-delete-car-brand-<?=$fuel["id"]?>" tabindex="-1" aria-hidden="false">
+                                        <div class="modal modal-confirm-delete-fuel fade" id="confirm-delete-fuel-<?=$fuel["id"]?>" tabindex="-1" aria-hidden="false">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div style="border-radius: 25px;" class="modal-content">
                                                     <div class="modal-header">

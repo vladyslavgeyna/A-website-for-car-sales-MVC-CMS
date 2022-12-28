@@ -224,13 +224,13 @@ use models\User;
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
+                                <a href="/wheeldrive" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Всі приводи</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/wheeldrive/add" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Додати привід</p>
                                 </a>
