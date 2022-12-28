@@ -195,4 +195,12 @@ class Car
         ]);
         return !empty($car);
     }
+
+    public static function isCarByTypeOfCurrencyIdExist($type_of_currency_id): bool
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, "*", [
+            "type_of_currency_id" => $type_of_currency_id
+        ]);
+        return !empty($car);
+    }
 }

@@ -271,13 +271,13 @@ use models\User;
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link ">
+                                <a href="/typeofcurrency" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Всі валюти</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index2.html" class="nav-link">
+                                <a href="/typeofcurrency/add" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Додати валюту</p>
                                 </a>
@@ -292,7 +292,6 @@ use models\User;
     <aside class="control-sidebar control-sidebar-dark">
     </aside>
 </div>
-
 <script src="/themes/admin-lte/plugins/jquery/jquery.min.js"></script>
 <script src="/themes/admin-lte/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
