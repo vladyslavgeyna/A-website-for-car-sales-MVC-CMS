@@ -4,7 +4,9 @@ namespace controllers;
 
 use core\Controller;
 use core\Core;
+use models\Car;
 use models\Carbrand;
+use models\Carmodel;
 use models\User;
 
 class CarbrandController extends Controller
@@ -74,6 +76,21 @@ class CarbrandController extends Controller
         if (!Carbrand::isCarBrandByIdExist($id))
         {
             $this->redirect("/");
+        }
+        if (Car::isCarByCarBrandIdExist($id) && Carmodel::isCarModelByCarBrandIdExist($id))
+        {
+            $_SESSION["error_car_brand_deleted"] = "Модель та автомобіль, що використовує дану марку існують";
+            $this->redirect("/carbrand");
+        }
+        if (Carmodel::isCarModelByCarBrandIdExist($id))
+        {
+            $_SESSION["error_car_brand_deleted"] = "Модель, що використовує дану марку існує";
+            $this->redirect("/carbrand");
+        }
+        if (Car::isCarByCarBrandIdExist($id))
+        {
+            $_SESSION["error_car_brand_deleted"] = "Автомобіль, що використовує дану марку існує";
+            $this->redirect("/carbrand");
         }
         Carbrand::deleteCarBrandById($id);
         $_SESSION["success_car_brand_deleted"] = "Марку успішно видалено";

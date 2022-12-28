@@ -30,6 +30,13 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі моделі';
                     </div>
                     <?php unset($_SESSION["success_car_model_edited"]); ?>
                 <?php endif; ?>
+                <?php if (!empty($_SESSION["error_car_model_deleted"])): ?>
+                    <div class="alert alert-admin alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4 class="m-0"><i class="icon fa fa-solid fa-xmark"></i><?= $_SESSION["error_car_model_deleted"]; ?></h4>
+                    </div>
+                    <?php unset($_SESSION["error_car_model_deleted"]); ?>
+                <?php endif; ?>
             </div>
         </div>
         <section class="content section-carmodel-index-admin section-table-admin">
@@ -42,7 +49,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі моделі';
                                 <tr>
                                     <th style="width: 7%">ID</th>
                                     <th style="width: 10%">Назва</th>
-                                    <th style="width: 7%">ID марки</th>
+                                    <th style="width: 2%">ID марки</th>
                                     <th style="width: 30%"></th>
                                 </tr>
                                 </thead>
@@ -51,7 +58,8 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі моделі';
                                     <tr>
                                         <td><?=$car_model["id"]?></td>
                                         <td><?=$car_model["name"]?></td>
-                                        <td style="cursor: help" data-toggle="tooltip" data-placement="right" title="<?=Carbrand::getCarBrandNameById($car_model["car_brand_id"])?>"><?=$car_model["car_brand_id"]?></td>
+<!--                                        <td style="cursor: help" data-toggle="tooltip" data-placement="right" title="--><?//=Carbrand::getCarBrandNameById($car_model["car_brand_id"])?><!--">--><?//=$car_model["car_brand_id"]?><!--</td>-->
+                                        <td style="cursor: help;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="<?=Carbrand::getCarBrandNameById($car_model["car_brand_id"])?>" ><?=$car_model["car_brand_id"]?></td>
                                         <td class="project-actions text-right d-flex flex-column flex-sm-row justify-content-end" style="gap: 0.5rem">
                                             <a class="btn btn-info " href="/carmodel/edit/<?=$car_model["id"]?>">
                                                 <i class="fas fa-pencil-alt pr-1"></i>
@@ -72,7 +80,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі моделі';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p >Ви дійсно бажаєте видалити цю модель?<br>Ця дія є безповоротною!</p>
+                                                        <p >Ви дійсно бажаєте видалити цю модель?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує дану модель</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-dismiss="modal">Відмінити</button>
@@ -94,10 +102,10 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі моделі';
         </section>
     </div>
 </main>
-<script defer >
-    $(document).ready(function () {
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    };
-</script>
+<!--<script defer >-->
+<!--    $(document).ready(function () {-->
+<!--        $(function () {-->
+<!--            $('[data-toggle="tooltip"]').tooltip();-->
+<!--        });-->
+<!--    };-->
+<!--</script>-->

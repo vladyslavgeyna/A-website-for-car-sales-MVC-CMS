@@ -29,6 +29,13 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі марки';
                     </div>
                     <?php unset($_SESSION["success_car_brand_edited"]); ?>
                 <?php endif; ?>
+                <?php if (!empty($_SESSION["error_car_brand_deleted"])): ?>
+                    <div class="alert alert-admin alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4 class="m-0"><i class="icon fa fa-solid fa-xmark"></i><?= $_SESSION["error_car_brand_deleted"]; ?></h4>
+                    </div>
+                    <?php unset($_SESSION["error_car_brand_deleted"]); ?>
+                <?php endif; ?>
             </div>
         </div>
         <section class="content section-fuel-index-admin section-table-admin">
@@ -69,7 +76,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі марки';
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p >Ви дійсно бажаєте видалити цю марку?<br>Ця дія є безповоротною!</p>
+                                                            <p >Ви дійсно бажаєте видалити цю марку?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто або модель, що використовує дану марку</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-dismiss="modal">Відмінити</button>

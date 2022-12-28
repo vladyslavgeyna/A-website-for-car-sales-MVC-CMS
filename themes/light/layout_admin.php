@@ -201,13 +201,13 @@ use models\User;
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
+                                <a href="/transmission" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Всі коробки передач</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/transmission/add" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Додати коробку передач</p>
                                 </a>
@@ -315,5 +315,10 @@ use models\User;
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/themes/admin-lte/dist/js/pages/dashboard.js"></script>
 <script src="/themes/js/admin.js"></script>
+<script src="/themes/bootstrap/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script defer>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 </body>
 </html>

@@ -19,7 +19,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Редагування 
                 </div>
             </div>
         </div>
-        <section class="content section-carbrand-edit-admin section-form-admin">
+        <section class="content section-carmodel-edit-admin section-form-admin">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -45,8 +45,8 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Редагування 
                                         <?php endif; ?>
                                     </div>
                                     <div class="form-group">
-                                        <label for="InputCarBrand">Назва моделі:</label>
-                                        <input value="<?=$auto_complete["name"]?>" type="text" name="name" class="form-control" id="InputCarBrand" required placeholder="Введіть нову назву моделі">
+                                        <label for="InputCarModel">Назва моделі:</label>
+                                        <input value="<?=$auto_complete["name"]?>" type="text" name="name" class="form-control" id="InputCarModel" required placeholder="Введіть нову назву моделі">
                                         <?php if (!empty($errors['name'])): ?>
                                             <div class="error-form-validation mt-2" >
                                                 <span><?= $errors['name']; ?></span>

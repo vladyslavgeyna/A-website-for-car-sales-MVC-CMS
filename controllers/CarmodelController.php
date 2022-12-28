@@ -4,6 +4,7 @@ namespace controllers;
 
 use core\Controller;
 use core\Core;
+use models\Car;
 use models\Carbrand;
 use models\Carmodel;
 use models\User;
@@ -84,6 +85,11 @@ class CarmodelController extends Controller
         if (!Carmodel::isCarModelByIdExist($id))
         {
             $this->redirect("/");
+        }
+        if (Car::isCarByCarModelIdExist($id))
+        {
+            $_SESSION["error_car_model_deleted"] = "Автомобіль, що використовує дану модель існує";
+            $this->redirect("/carmodel");
         }
         Carmodel::deleteCarModelById($id);
         $_SESSION["success_car_model_deleted"] = "Модель успішно видалено";

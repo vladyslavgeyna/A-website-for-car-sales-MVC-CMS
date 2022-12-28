@@ -3,7 +3,7 @@
 
 use core\Core;
 
-Core::getInstance()->pageParams['title'] = 'Адмін | Всі види палива';
+Core::getInstance()->pageParams['title'] = 'Адмін | Всі коробки передач';
 
 ?>
 <main>
@@ -12,35 +12,35 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі види пал�
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 style="font-weight: bold; font-size: 40px" class="m-0">Всі види палива</h1>
+                        <h1 style="font-weight: bold; font-size: 40px" class="m-0">Всі коробки передач</h1>
                     </div>
                 </div>
-                <?php if (!empty($_SESSION["success_fuel_deleted"])): ?>
+                <?php if (!empty($_SESSION["success_transmission_deleted"])): ?>
                     <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_fuel_deleted"]; ?></h4>
+                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_transmission_deleted"]; ?></h4>
                     </div>
-                    <?php unset($_SESSION["success_fuel_deleted"]); ?>
+                    <?php unset($_SESSION["success_transmission_deleted"]); ?>
                 <?php endif; ?>
-                <?php if (!empty($_SESSION["success_fuel_edited"])): ?>
+                <?php if (!empty($_SESSION["success_transmission_edited"])): ?>
                     <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_fuel_edited"]; ?></h4>
+                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_transmission_edited"]; ?></h4>
                     </div>
-                    <?php unset($_SESSION["success_fuel_edited"]); ?>
+                    <?php unset($_SESSION["success_transmission_edited"]); ?>
                 <?php endif; ?>
-                <?php if (!empty($_SESSION["error_fuel_deleted"])): ?>
+                <?php if (!empty($_SESSION["error_transmission_deleted"])): ?>
                     <div class="alert alert-admin alert-danger alert-dismissible fade show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4 class="m-0"><i class="icon fa fa-solid fa-xmark"></i><?= $_SESSION["error_fuel_deleted"]; ?></h4>
+                        <h4 class="m-0"><i class="icon fa fa-solid fa-xmark"></i><?= $_SESSION["error_transmission_deleted"]; ?></h4>
                     </div>
-                    <?php unset($_SESSION["error_fuel_deleted"]); ?>
+                    <?php unset($_SESSION["error_transmission_deleted"]); ?>
                 <?php endif; ?>
             </div>
         </div>
-        <section class="content section-fuel-index-admin section-table-admin">
+        <section class="content section-transmission_-index-admin section-table-admin">
             <div class="container-fluid">
-                <?php if(!empty($data["fuels"])): ?>
+                <?php if(!empty($data["transmissions"])): ?>
                     <div class="card">
                         <div class="card-body p-0">
                             <table class="table table-striped projects">
@@ -52,21 +52,21 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі види пал�
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach ($data["fuels"] as $fuel) : ?>
+                                <?php foreach ($data["transmissions"] as $transmission) : ?>
                                     <tr>
-                                        <td><?=$fuel["id"]?></td>
-                                        <td><?=$fuel["name"]?></td>
+                                        <td><?=$transmission["id"]?></td>
+                                        <td><?=$transmission["name"]?></td>
                                         <td class="project-actions text-right d-flex flex-column flex-sm-row justify-content-end" style="gap: 0.5rem">
-                                            <a class="btn btn-info " href="/fuel/edit/<?=$fuel["id"]?>">
+                                            <a class="btn btn-info " href="/transmission/edit/<?=$transmission["id"]?>">
                                                 <i class="fas fa-pencil-alt pr-1"></i>
                                                 Редагувати
                                             </a>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-car-brand-<?=$fuel["id"]?>" type="button" >
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete-car-brand-<?=$transmission["id"]?>" type="button" >
                                                 <i class="fas fa-trash pr-1"></i>
                                                 Видалити
                                             </button>
                                         </td>
-                                        <div class="modal modal-confirm-delete-car-brand fade" id="confirm-delete-car-brand-<?=$fuel["id"]?>" tabindex="-1" aria-hidden="false">
+                                        <div class="modal modal-confirm-delete-car-brand fade" id="confirm-delete-car-brand-<?=$transmission["id"]?>" tabindex="-1" aria-hidden="false">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div style="border-radius: 25px;" class="modal-content">
                                                     <div class="modal-header">
@@ -76,11 +76,11 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі види пал�
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p >Ви дійсно бажаєте видалити цей вид палива?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує даний вид палива</p>
+                                                        <p >Ви дійсно бажаєте видалити цей вид палива?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує дану коробку передач</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-dismiss="modal">Відмінити</button>
-                                                        <a href="/fuel/delete/<?=$fuel["id"]?>" class="btn btn-danger">Видалити</a>
+                                                        <a href="/transmission/delete/<?=$transmission["id"]?>" class="btn btn-danger">Видалити</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,7 +92,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі види пал�
                         </div>
                     </div>
                 <?php else: ?>
-                    <div class="h1">Видів палива не знайдено</div>
+                    <div class="h1">Коробок передач не знайдено</div>
                 <?php endif; ?>
             </div>
         </section>

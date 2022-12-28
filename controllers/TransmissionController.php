@@ -4,11 +4,11 @@ namespace controllers;
 
 use core\Core;
 use models\Car;
-use models\Carbrand;
 use models\Fuel;
+use models\Transmission;
 use models\User;
 
-class FuelController extends \core\Controller
+class TransmissionController extends \core\Controller
 {
     public function addAction()
     {
@@ -19,13 +19,13 @@ class FuelController extends \core\Controller
         if(Core::getInstance()->requestMethod === "POST")
         {
             $errors = [];
-            if (empty($_POST["fuel_name"]))
+            if (empty($_POST["transmission_name"]))
             {
-                $errors["fuel_name"] = "Ви не ввели вид палива";
+                $errors["transmission_name"] = "Ви не ввели коробку передачі";
             }
-            if (Fuel::isFuelByNameExist($_POST["fuel_name"]))
+            if (Transmission::isTransmissionByNameExist($_POST["transmission_name"]))
             {
-                $errors["fuel_name"] = "Вид палива з такою назвою вже існує";
+                $errors["transmission_name"] = "Коробка передач з такою назвою вже існує";
             }
             if (count($errors) > 0)
             {
@@ -37,9 +37,9 @@ class FuelController extends \core\Controller
             }
             else
             {
-                Fuel::addFuel(trim($_POST["fuel_name"]));
-                $_SESSION["success_fuel_added"] = "Вид палива успішно додано";
-                $this->redirect("/fuel/add");
+                Transmission::addTransmission(trim($_POST["transmission_name"]));
+                $_SESSION["success_transmission_added"] = "Коробку передач успішно додано";
+                $this->redirect("/transmission/add");
             }
         }
         else
@@ -53,7 +53,7 @@ class FuelController extends \core\Controller
         if (User::isUserAdmin())
         {
             $data = [];
-            $data["fuels"] = Fuel::getAllFuels();
+            $data["transmissions"] = Transmission::getAllTransmissions();
             return $this->renderAdmin(null, [
                 "data" => $data
             ]);
@@ -72,18 +72,18 @@ class FuelController extends \core\Controller
             $this->redirect("/");
         }
         $id = intval($params[0]);
-        if (!Fuel::isFuelByIdExist($id))
+        if (!Transmission::isTransmissionByIdExist($id))
         {
             $this->redirect("/");
         }
-        if (Car::isCarByFuelIdExist($id))
+        if (Car::isCarByTransmissionIdExist($id))
         {
-            $_SESSION["error_fuel_deleted"] = "Автомобіль, що використовує даний вид палива існує";
-            $this->redirect("/fuel");
+            $_SESSION["error_transmission_deleted"] = "Автомобіль, що використовує дану коробку передач існує";
+            $this->redirect("/transmission");
         }
-        Fuel::deleteFuelById($id);
-        $_SESSION["success_fuel_deleted"] = "Вид палива успішно видалено";
-        $this->redirect("/fuel");
+        Transmission::deleteTransmissionById($id);
+        $_SESSION["success_transmission_deleted"] = "Коробку передач успішно видалено";
+        $this->redirect("/transmission");
     }
 
     public function editAction($params)
@@ -93,21 +93,21 @@ class FuelController extends \core\Controller
             return $this->error(403);
         }
         $id = intval($params[0]);
-        if (!Fuel::isFuelByIdExist($id))
+        if (!Transmission::isTransmissionByIdExist($id))
         {
             $this->redirect("/");
         }
-        $auto_complete = Fuel::getFuelById($id);
+        $auto_complete = Transmission::getTransmissionById($id);
         if(Core::getInstance()->requestMethod === "POST")
         {
             $errors = [];
             if (empty($_POST["name"]))
             {
-                $errors["name"] = "Ви не ввели вид палива";
+                $errors["name"] = "Ви не ввели назву коробки передач";
             }
-            if (Fuel::isFuelByNameExist($_POST["name"]))
+            if (Transmission::isTransmissionByNameExist($_POST["name"]))
             {
-                $errors["name"] = "Вид палива з такою назвою вже існує, ви ввели ту ж саму назву";
+                $errors["name"] = "Коробка передачі з такою назвою вже існує, ви ввели ту ж саму назву";
             }
             if (count($errors) > 0)
             {
@@ -119,9 +119,9 @@ class FuelController extends \core\Controller
             }
             else
             {
-                Fuel::updateFuelById($id, trim($_POST["name"]));
-                $_SESSION["success_fuel_edited"] = "Вид палива успішно відредаговано";
-                $this->redirect("/fuel");
+                Transmission::updateTransmissionById($id, trim($_POST["name"]));
+                $_SESSION["success_transmission_edited"] = "Коробку передачі успішно відредаговано";
+                $this->redirect("/transmission");
             }
         }
         else

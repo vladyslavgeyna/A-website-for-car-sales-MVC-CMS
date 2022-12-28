@@ -147,4 +147,36 @@ class Car
         }
 
     }
+
+    public static function isCarByCarBrandIdExist($car_brand_id): bool
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, "*", [
+            "car_brand_id" => $car_brand_id
+        ]);
+        return !empty($car);
+    }
+
+    public static function isCarByCarModelIdExist($car_model_id): bool
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, "*", [
+            "car_model_id" => $car_model_id
+        ]);
+        return !empty($car);
+    }
+
+    public static function isCarByFuelIdExist($fuel_id): bool
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, "*", [
+            "fuel_id" => $fuel_id
+        ]);
+        return !empty($car);
+    }
+
+    public static function isCarByTransmissionIdExist($transmission_id): bool
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, "*", [
+            "transmission_id" => $transmission_id
+        ]);
+        return !empty($car);
+    }
 }

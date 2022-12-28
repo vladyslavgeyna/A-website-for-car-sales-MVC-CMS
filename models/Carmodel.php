@@ -67,6 +67,14 @@ class Carmodel
         return !empty($car_model);
     }
 
+    public static function isCarModelByCarBrandIdExist($car_brand_id): bool
+    {
+        $car_model = Core::getInstance()->db->select(self::$tableName, "*", [
+            "car_brand_id" => $car_brand_id
+        ]);
+        return !empty($car_model);
+    }
+
     public static function deleteCarModelById($id) //todo тут мабуть треба щось буде з оголошеннями придумати якщо буде модель видалятись
     {
         $car_model = Core::getInstance()->db->select(self::$tableName, "*", [

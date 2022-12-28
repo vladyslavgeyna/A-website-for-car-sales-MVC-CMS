@@ -5,7 +5,7 @@
 
 use core\Core;
 
-Core::getInstance()->pageParams['title'] = 'Адмін | Редагування виду палива';
+Core::getInstance()->pageParams['title'] = 'Адмін | Редагування коробки передач';
 
 ?>
 <main>
@@ -14,12 +14,12 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Редагування 
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 style="font-weight: bold; font-size: 40px" class="m-0">Редагування виду палива</h1>
+                        <h1 style="font-weight: bold; font-size: 40px" class="m-0">Редагування коробки передач</h1>
                     </div>
                 </div>
             </div>
         </div>
-        <section class="content section-fuel-edit-admin section-form-admin">
+        <section class="content section-transmission-edit-admin section-form-admin">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -27,8 +27,8 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Редагування 
                             <form method="post" action="">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="InputCarFuel">Назва виду палива:</label>
-                                        <input value="<?=$auto_complete["name"]?>" type="text" name="name" class="form-control" id="InputCarFuel" required placeholder="Введіть нову назву виду палива">
+                                        <label for="InputTransmission">Назва коробки передач:</label>
+                                        <input value="<?=$auto_complete["name"]?>" type="text" name="name" class="form-control" id="InputTransmission" required placeholder="Введіть нову назву коробки передач">
                                         <?php if (!empty($errors['name'])): ?>
                                             <div class="error-form-validation mt-2" >
                                                 <span><?= $errors['name']; ?></span>
