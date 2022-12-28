@@ -76,7 +76,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі області';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p >Ви дійсно бажаєте видалити цю область?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує дану область</p>
+                                                        <p >Ви дійсно бажаєте видалити цю область?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто, що використовує дану область</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-dismiss="modal">Відмінити</button>

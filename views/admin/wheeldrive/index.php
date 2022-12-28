@@ -76,7 +76,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі приводи';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p >Ви дійсно бажаєте видалити цей привід?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує даний привід</p>
+                                                        <p >Ви дійсно бажаєте видалити цей привід?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто, що використовує даний привід</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-dismiss="modal">Відмінити</button>

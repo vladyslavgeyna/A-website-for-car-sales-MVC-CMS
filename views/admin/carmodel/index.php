@@ -80,7 +80,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі моделі';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p >Ви дійсно бажаєте видалити цю модель?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто що використовує дану модель</p>
+                                                        <p >Ви дійсно бажаєте видалити цю модель?<br>Ця дія є безповоротною!<br><br>Увага! Видалення не відбудеться, якщо існує авто, що використовує дану модель</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-dismiss="modal">Відмінити</button>
