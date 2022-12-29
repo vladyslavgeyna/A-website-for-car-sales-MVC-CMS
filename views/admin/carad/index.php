@@ -62,8 +62,8 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі оголошен
                                         <td><?=$ad["id"]?></td>
                                         <td><?=$ad["car_id"]?></td>
                                         <td><?=$ad["title"]?></td>
-                                        <?php if (mb_strlen($ad["text"]) >= 20): ?>
-                                            <td><?=mb_substr($ad["text"], 0, 40)?>...</td>
+                                        <?php if (mb_strlen($ad["text"]) > 20): ?>
+                                            <td><?=mb_substr($ad["text"], 0, 20, 'UTF-8')?>...</td>
                                         <?php else: ?>
                                             <td><?=$ad["text"]?></td>
                                         <?php endif; ?>

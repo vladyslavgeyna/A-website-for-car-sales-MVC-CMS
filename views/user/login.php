@@ -15,6 +15,13 @@ Core::getInstance()->pageParams['title'] = 'Авторизація';
             </div>
         <?php unset($_SESSION["success_register"]); ?>
         <?php endif; ?>
+        <?php if (!empty($_SESSION["success_edit"])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_edit"]; ?></span></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION["success_edit"]); ?>
+        <?php endif; ?>
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-xmark"></i><span style="margin-left: 10px" ><?= $error; ?></span></span>

@@ -392,7 +392,6 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
         }
     });
     inputFiles.addEventListener("change", () => {
-        console.log(inputFiles.files);
         imagesBlock.innerHTML = "";
         if(inputFiles.files.length > MAX_ALLOWED_IMAGE_COUNT) {
             buttonAddAd.setAttribute("disabled", "disabled");

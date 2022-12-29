@@ -1083,15 +1083,6 @@ footer ul {
 }
 
 
-.container-register form, form button:active{
-    border-color: rgb(112.520718,44.062154,249.437846) !important;
-    color: rgb(112.520718,44.062154,249.437846) !important;
-}
-
-.container-register button[type="button"] {
-    top: 50%;
-    transform: translate(0, -50%);
-}
 .container-adminmessage-send .error-form-validation {
     color: red;
     font-weight: bold;
@@ -1141,4 +1132,128 @@ footer ul {
 }
 .section-admin-messages .modal .modal-body p {
     font-size: 17px;
+}
+
+
+
+
+
+/*adadasdasasd*/
+
+
+.main-edit{
+    display: flex;
+    align-items: center;
+}
+
+.container-edit h1 {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.container-edit input[type="password"], .container-edit input[type="text"], .container-edit input[type="email"], .container-edit label {
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 25px;
+}
+.container-edit input[type="file"] {
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 25px;
+    width: 100%;
+}
+
+.container-edit form {
+    margin: 0 auto;
+    max-width: 500px;
+    row-gap: 15px;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 0 50px -10px rgba(0,0,0,0.7);
+}
+.main-edit form a.btn-warning {
+    border: 4px solid #ffc107;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.main-edit form a.btn-danger {
+    border: 4px solid #dc3545;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.main-edit button {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    border-radius: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.main-edit button:hover {
+    border: 4px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+
+.container-edit form button:active{
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+
+.container-edit .error-form-validation {
+    cursor: help;
+    padding-top: 3px;
+    padding-left: 1rem;
+    margin-bottom: -10px;
+    color: red;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.container-edit .input-file label {
+    padding-left: 1rem;
+    padding-top: 0;
+}
+.container-edit form .image-wrapper {
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.container-edit form .image-wrapper img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+.container-edit form .image-wrapper input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+}
+.container-edit form .image-wrapper .choose-image-wrapper {
+    position: absolute;
+    padding: 7px;
+    bottom: -10%;
+    left: 50%;
+    width: 30%;
+    height: 30%;
+    background-color: white;
+    transform: translate(-50%);
+    border-radius: 50%;
+}
+
+.container-edit form .image-wrapper .choose-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: unset;
+}
+
+.container-edit div.hidden {
+    display: none;
 }

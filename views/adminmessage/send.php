@@ -33,7 +33,7 @@ Core::getInstance()->pageParams['title'] = 'Повідомлення адмін�
                     </div>
                 <?php endif; ?>
             </div>
-            <button class="btn btn-submit primary-color-bg primary-color-hover" type="submit">Відправити</button>
+            <button class="btn btn-submit primary-color-bg primary-color-hover" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Це одностороннє повідомлення. Ви не отримаєте на нього відповіді">Відправити</button>
         </form>
     </div>
 </main>

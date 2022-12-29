@@ -96,4 +96,9 @@ Core::getInstance()->pageParams['title'] = 'Реєстрація';
         </form>
     </div>
 </main>
-
+<script defer>
+    const inputPhone = document.getElementById("floatingPhone");
+    inputPhone.addEventListener("input", () => {
+        inputPhone.value = inputPhone.value.replace(/[^\d]/g, '');
+    });
+</script>

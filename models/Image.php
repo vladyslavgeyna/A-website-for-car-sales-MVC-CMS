@@ -34,6 +34,20 @@ class Image
         ]);
     }
 
+    public static function updateImageById($id, $path, $imageExtension, $moduleName = null)
+    {
+        $image = self::getImageById($id);
+        if (!empty($image))
+        {
+            self::deleteImageById($id);
+            return self::addImage($path, $imageExtension, $moduleName);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function getImageById($id)
     {
         $image = Core::getInstance()->db->select(self::$tableName, "*", [

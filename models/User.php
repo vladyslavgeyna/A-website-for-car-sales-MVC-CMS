@@ -9,6 +9,28 @@ class User
 {
     protected static string $tableName = "user";
 
+    public static function deleteUserByIdImage($id)
+    {
+        if (!self::hasUserByIdImage($id))
+        {
+            return null;
+        }
+        else
+        {
+            $user = self::getUserById($id);
+            $image_id = $user["image_id"];
+            Core::getInstance()->db->update(self::$tableName, [
+                "image_id" => null
+            ], [
+                "id" => $id
+            ]);
+            if (!empty($image_id))
+            {
+                Image::deleteImageById($image_id, "user");
+            }
+        }
+    }
+
     public static function getAllAdminUsers(): ?array
     {
         $admins = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -101,7 +123,7 @@ class User
     public static function updateUser($id, $updateArray)
     {
         $updateArray = Utils::filterArray($updateArray, [
-            "name", "surname", "lastname", "phone", "image_id"
+            "name", "surname", "lastname", "login", "phone", "image_id"
         ]);
         Core::getInstance()->db->update(self::$tableName, $updateArray, [
             "id" => $id
@@ -166,6 +188,21 @@ class User
            "login" => $login
         ]);
         return !empty($user);
+    }
+
+    public static function isLoginExceptCurrentUserExists($login): ?bool
+    {
+        if (!self::isUserAuthenticated())
+        {
+            return null;
+        }
+        else
+        {
+            $user = Core::getInstance()->db->select(self::$tableName, "*", [
+                "login" => $login
+            ]);
+            return !empty($user) && $user[0]["id"] != self::getCurrentUserId();
+        }
     }
 
     public static function isUserByIdExist($id): bool
@@ -279,6 +316,23 @@ class User
         ]);
         return !empty($user);
     }
+
+    public static function isPhoneExceptCurrentUserExists($phone): ?bool
+    {
+        if (!self::isUserAuthenticated())
+        {
+            return null;
+        }
+        else
+        {
+            $current_user = self::getCurrentAuthenticatedUser();
+            $user = Core::getInstance()->db->select(self::$tableName, "*", [
+                "phone" => $phone
+            ]);
+            return !empty($user) && $current_user["phone"] != $user[0]["phone"];
+        }
+    }
+
 
     public static function verifyUser($login, $password): bool
     {
