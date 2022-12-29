@@ -22,7 +22,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Повідомленн�
         <section class="content section-admin-messages">
             <div class="container-fluid">
                 <?php if (!empty($_SESSION["success_message_deleted"])): ?>
-                    <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-admin alert-success alert-dismissible fade show mt-3" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_message_deleted"]; ?></h4>
                     </div>

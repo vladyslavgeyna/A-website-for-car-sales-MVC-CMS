@@ -10,7 +10,7 @@ Core::getInstance()->pageParams['title'] = 'Повідомлення адмін�
 <main class="main main-adminmessage-send">
     <div class="container container-adminmessage-send">
         <?php if (!empty($_SESSION["success_send_message"])): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" style="border-radius: 25px;" role="alert">
                 <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_send_message"]; ?></span></span>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

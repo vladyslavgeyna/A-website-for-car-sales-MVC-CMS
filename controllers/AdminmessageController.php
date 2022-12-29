@@ -72,6 +72,42 @@ class AdminmessageController extends \core\Controller
         return $this->renderAdmin(null, [
             "data" => $data
         ]);
+    }
 
+    public function deleteformeAction($params)
+    {
+        if (!User::isUserAdmin())
+        {
+            $this->redirect("/");
+        }
+        $id = intval($params[0]);
+        if (!Adminmessage::isAdminMessageByIdExist($id))
+        {
+            $this->redirect("/");
+        }
+        Adminmessage::deleteAdminMessageById($id);
+        $_SESSION["success_message_deleted"] = "Повідомлення успішно видалено для вас";
+        $this->redirect("/adminmessage");
+    }
+
+    public function deleteforallAction($params)
+    {
+        if (!User::isUserAdmin())
+        {
+            $this->redirect("/");
+        }
+        $id = intval($params[0]);
+        if (!Adminmessage::isAdminMessageByIdExist($id))
+        {
+            $this->redirect("/");
+        }
+        $admin_message = Adminmessage::getAdminMessageById($id);
+        $admin_messages = Adminmessage::getAdminMessagesByMessageId($admin_message["message_id"]);
+        foreach ($admin_messages as $admin_message)
+        {
+            Adminmessage::deleteAdminMessageById($admin_message["id"]);
+        }
+        $_SESSION["success_message_deleted"] = "Повідомлення успішно видалено для всіх";
+        $this->redirect("/adminmessage");
     }
 }

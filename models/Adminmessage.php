@@ -46,6 +46,21 @@ class Adminmessage
         }
     }
 
+    public static function getAdminMessageById($id)
+    {
+        $a_m = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id
+        ]);
+        if (!empty($a_m))
+        {
+            return $a_m[0];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function getAdminMessagesByUserAdminIdInnered($user_admin_id)
     {
         $a_m = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -92,6 +107,14 @@ class Adminmessage
         {
             return null;
         }
+    }
+
+    public static function isAdminMessageByIdExist($id): bool
+    {
+        $a_m = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id
+        ]);
+        return !empty($a_m);
     }
 
 
