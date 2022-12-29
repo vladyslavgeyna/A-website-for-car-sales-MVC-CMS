@@ -252,8 +252,7 @@ class CaradController extends Controller
         }
         else
         {
-            //тут якщо користувач адмін...
-
+            return $this->error(404);
         }
     }
 
@@ -343,11 +342,9 @@ class CaradController extends Controller
                 ]);
             }
         }
-
-
         else
         {
-            //тут якщо користувач адмін...
+            return $this->error(404);
         }
     }
 

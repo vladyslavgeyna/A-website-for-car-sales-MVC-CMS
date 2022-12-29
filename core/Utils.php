@@ -4,7 +4,7 @@ namespace core;
 
 class Utils
 {
-    private static string $UrlExchangeRateApi = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+    private static string $UrlExchangeRateApi = "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11";
 
 
     public static function filterArray($array, $fieldsList): array
@@ -75,7 +75,7 @@ class Utils
     {
         $stringContent = self::curl_get_contents(self::$UrlExchangeRateApi);
         $stringJSON = json_decode($stringContent, true);
-        return floatval($stringJSON[25]["rate"]);
+        return floatval($stringJSON[1]["buy"]);
 
     }
 
@@ -83,7 +83,7 @@ class Utils
     {
         $stringContent = self::curl_get_contents(self::$UrlExchangeRateApi);
         $stringJSON = json_decode($stringContent, true);
-        return floatval($stringJSON[32]["rate"]);
+        return floatval($stringJSON[0]["buy"]);
     }
 
     public static function getCurrentEURToUSD()

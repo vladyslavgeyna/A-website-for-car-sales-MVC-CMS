@@ -29,7 +29,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Головна стор
                             <div class="icon">
                                 <i class="fa-solid fa-pager px-1"></i>
                             </div>
-                            <a href="#" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/carad" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-6  h-100">
@@ -41,7 +41,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Головна стор
                             <div class="icon">
                                 <i style="font-size: 80px;" class="fa-solid fa-dollar-sign"></i>
                             </div>
-                            <a href="#" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/car" class="small-box-footer py-1">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-6 h-100">
