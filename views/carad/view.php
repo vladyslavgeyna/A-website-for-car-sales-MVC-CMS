@@ -129,7 +129,9 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                         </div>
                     <?php else:?>
                         <div class="carousel-item-image-one">
-                            <img src="/files/car/<?=$data["ad"]["car"]["main_image"]["name"]?>" class="d-block w-100" alt="Зображення автомобіля">
+                            <a href="/files/car/<?=$data["ad"]["car"]["main_image"]["name"]?>" data-fancybox="gallery">
+                                <img src="/files/car/<?=$data["ad"]["car"]["main_image"]["name"]?>" class="d-block w-100" alt="Зображення автомобіля">
+                            </a>
                         </div>
                     <?php endif; ?>
                     <div class="h2 mt-5 mb-3" style="font-weight: 900">Про авто:</div>
