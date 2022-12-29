@@ -9,6 +9,22 @@ class User
 {
     protected static string $tableName = "user";
 
+    public static function changeUserByIdPassword($id, $newPassword)
+    {
+        if (!self::isUserByIdExist($id))
+        {
+            return null;
+        }
+        else
+        {
+            Core::getInstance()->db->update(self::$tableName, [
+                "password" => $newPassword
+            ], [
+                "id" => $id
+            ]);
+        }
+    }
+
     public static function deleteUserByIdImage($id)
     {
         if (!self::hasUserByIdImage($id))

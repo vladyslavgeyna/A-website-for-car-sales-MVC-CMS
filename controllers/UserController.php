@@ -331,6 +331,56 @@ class UserController extends Controller
 
     }
 
+
+    public function changepasswordAction()
+    {
+        if (!User::isUserAuthenticated())
+        {
+            $this->redirect("/");
+        }
+        if (!User::isUserAdmin())
+        {
+            if(Core::getInstance()->requestMethod === "POST")
+            {
+                $user = User::getCurrentAuthenticatedUser();
+                $errors = [];
+                if(Utils::getHashedString($_POST['old_password']) != $user["password"])
+                {
+                    $errors['old_password'] = "Невірно введений старий пароль";
+                }
+                if(($_POST["password1"] == $_POST["password2"]) && (strlen($_POST["password2"]) < 6))
+                {
+                    $errors['password2'] = "Мінімальна довжина паролю 6 символів";
+                }
+                if($_POST["password1"] != $_POST["password2"])
+                {
+                    $errors['password2'] = "Паролі не співпадають";
+                }
+                if (count($errors) > 0)
+                {
+                    return $this->render(null, [
+                        "errors" => $errors
+                    ]);
+                }
+                else
+                {
+                    $password = Utils::getHashedString(trim($_POST["password1"]));
+                    User::changeUserByIdPassword(User::getCurrentUserId(), $password);
+                    $_SESSION["success_edit"] = "Дані успішно змінено.<br>Тепер зробіть вхід в Ваш обліковий запис";
+                    $this->redirect("/user/logout");
+                }
+            }
+            else
+            {
+                return $this->render();
+            }
+        }
+        else
+        {
+            // тут для адміна
+        }
+    }
+
     public function editAction($params)
     {
         if (!User::isUserAuthenticated())
@@ -466,7 +516,7 @@ class UserController extends Controller
         }
         else
         {
-
+            // тут для адміна
         }
 
 

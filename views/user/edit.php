@@ -13,7 +13,7 @@ Core::getInstance()->pageParams['title'] = 'Редагування профіл�
         <h1  class="text-center mb-4">Редагування профілю</h1>
         <form action="" class="d-flex flex-column" method="post" enctype="multipart/form-data">
             <div class="form-floating row justify-content-center">
-                <div class="image-wrapper col-5 col-lg-4 p-0">
+                <div class="image-wrapper col-5 col-lg-4 p-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Обрати зображення">
                     <?php if (User::hasCurrentUserImage()) :?>
                         <img src="<?=$image_path?>" alt="Аватар користувача">
                     <?php else: ?>
