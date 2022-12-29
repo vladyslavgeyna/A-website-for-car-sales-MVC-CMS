@@ -111,22 +111,36 @@ use models\User;
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link ">
+                                <a href="/carad" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Всі оголошення</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index2.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Додати оголошення</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-
-
-
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i style="width: 30px"  class="fa-solid fa-car-on px-1"></i>
+                            <p>
+                                Автомобілі
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/car" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі автомобілі</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i style="width: 30px"  class="fa-solid fa-car px-1"></i>

@@ -62,7 +62,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі користув
                                 <tr>
                                     <th style="width: 3%">ID</th>
                                     <th style="width: 5%">Ім'я</th>
-                                    <th style="width: 7%">Прівзище</th>
+                                    <th style="width: 7%">Прізвище</th>
                                     <th style="width: 10%">По-батькові</th>
                                     <th style="width: 12%">Логін</th>
                                     <th style="width: 7%">Телефон</th>
