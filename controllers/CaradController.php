@@ -29,7 +29,11 @@ class CaradController extends Controller
     {
         if (User::isUserAdmin())
         {
-
+            $data = [];
+            $data["ads"] = Carad::getAllCarAds();
+            return $this->renderAdmin(null, [
+                "data" => $data
+            ]);
         }
         else
         {
@@ -277,7 +281,8 @@ class CaradController extends Controller
         }
         else
         {
-            // тут для адміна
+            $_SESSION["success_car_ad_activated"] = "Оголошення #{$id} успішно деактивовано";
+            $this->redirect("/carad");
         }
 
     }
@@ -306,7 +311,8 @@ class CaradController extends Controller
         }
         else
         {
-            // тут для адміна
+            $_SESSION["success_car_ad_activated"] = "Оголошення #{$id} успішно активовано";
+            $this->redirect("/carad");
         }
     }
 
@@ -369,7 +375,8 @@ class CaradController extends Controller
         }
         else
         {
-            // тут для адміна
+            $_SESSION["success_car_ad_deleted"] = "Оголошення #{$id} успішно видалено";
+            $this->redirect("/carad");
         }
     }
 
