@@ -953,7 +953,7 @@ footer ul {
 .section-form-admin .card {
     overflow: hidden;
 }
-.section-form-admin form input, .section-form-admin form button, .section-form-admin .card, .section-form-admin form select {
+.section-form-admin form input, .section-form-admin form button, .section-form-admin .card, .section-form-admin form select, .section-form-admin form textarea  {
     border-radius: 25px;
 }
 .section-form-admin .error-form-validation {

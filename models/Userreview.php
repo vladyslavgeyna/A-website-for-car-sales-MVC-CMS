@@ -126,4 +126,24 @@ class Userreview
         }
         return null;
     }
+
+    public static function updateUserReviewById($id, $newTitle, $newText)
+    {
+        $review = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" =>  $id
+        ]);
+        if (!empty($review))
+        {
+            Core::getInstance()->db->update(self::$tableName, [
+                "title" => $newTitle,
+                "text" => $newText
+            ], [
+                "id" =>  $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

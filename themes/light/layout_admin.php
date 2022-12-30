@@ -103,7 +103,7 @@ use models\User;
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i style="width: 30px" class="fa-regular fa-thumbs-up px-1"></i>
+                            <i style="width: 30px" class="fa-solid fa-thumbs-up px-1"></i>
                             <p>
                                 Відгуки
                                 <i class="right fas fa-angle-left"></i>
