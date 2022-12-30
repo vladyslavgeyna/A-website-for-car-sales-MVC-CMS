@@ -46,7 +46,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Редагування 
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Змінити</button>
+                                    <button type="submit" class="btn btn-primary">Зберегти</button>
                                 </div>
                             </form>
                         </div>

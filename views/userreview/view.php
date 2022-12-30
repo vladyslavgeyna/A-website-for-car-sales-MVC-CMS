@@ -22,6 +22,13 @@ Core::getInstance()->pageParams['title'] = 'Відгуки про продавц
             </div>
             <?php unset($_SESSION["success_review_deleted"]); ?>
         <?php endif; ?>
+        <?php if (!empty($_SESSION["success_review_edited"])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_review_edited"]; ?></span></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION["success_review_edited"]); ?>
+        <?php endif; ?>
         <?php if (empty($data["reviews"]) || count($data["reviews"]) == 1) : ?>
             <div style="border-radius: 25px" class="alert alert-primary py-4" role="alert">
                 <?php if (User::isUserAuthenticated() && User::getCurrentUserId() == $data["reviews"]["user"]["id"]) : ?>
@@ -52,6 +59,7 @@ Core::getInstance()->pageParams['title'] = 'Відгуки про продавц
                         <p class="card-text"><?=$data["reviews"][$i]["text"]?></p>
                         <?php if($data["reviews"][$i]["user_from"]["id"] == User::getCurrentUserId()): ?>
                             <button data-bs-toggle="modal" data-bs-target="#confirm-delete-review-<?=$data["reviews"][$i]["id"]?>" type="button" class="btn btn-danger delete-btn">Видалити відгук</button>
+                            <a href="/userreview/edit/<?=$data["reviews"][$i]["id"]?>" class="btn btn-primary">Редагувати</a>
                         <?php endif; ?>
                     </div>
                 </div>

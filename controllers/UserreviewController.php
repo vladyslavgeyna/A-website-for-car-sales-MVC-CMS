@@ -23,76 +23,86 @@ class UserreviewController extends \core\Controller
             $this->redirect("/");
         }
         $data = Userreview::getUserReviewById($id);
-        if ($data["review"]["user_id_from"] != User::getCurrentUserId() && !User::isUserAdmin())
+        if ($data["user_id_from"] != User::getCurrentUserId() && !User::isUserAdmin())
         {
             $this->redirect("/");
         }
-        if ($data["review"]["user_id"] == User::getCurrentUserId() && !User::isUserAdmin())
+        if ($data["user_id"] == User::getCurrentUserId() && !User::isUserAdmin())
         {
             $this->redirect("/");
         }
-            if(Core::getInstance()->requestMethod === "POST")
+        if(Core::getInstance()->requestMethod === "POST")
+        {
+            $errors = [];
+            $is_anything_changed = false;
+            if (empty($_POST["title"]) || mb_strlen($_POST["title"]) <= 5)
             {
-                $errors = [];
-                $is_anything_changed = false;
-                if (empty($_POST["title"]) || mb_strlen($_POST["title"]) <= 5)
+                $errors["title"] = "Занадто короткий заголовок";
+            }
+            if (empty($_POST["text"]) || mb_strlen($_POST["text"]) <= 10)
+            {
+                $errors["text"] = "Занадто короткий текст";
+            }
+            $keys = array_keys($_POST);
+            foreach ($keys as $key)
+            {
+                if ($data[$key] != $_POST[$key])
                 {
-                    $errors["title"] = "Занадто короткий заголовок";
+                    $is_anything_changed = true;
+                    break;
                 }
-                if (empty($_POST["text"]) || mb_strlen($_POST["text"]) <= 10)
+            }
+            if (count($errors) > 0)
+            {
+                $data = $_POST;
+                if (!User::isUserAdmin())
                 {
-                    $errors["text"] = "Занадто короткий текст";
+                    return $this->render(null, [
+                        "data" => $data,
+                        "errors" => $errors
+                    ]);
                 }
-                $keys = array_keys($_POST);
-                foreach ($keys as $key)
+                else
                 {
-                    if ($data[$key] != $_POST[$key])
-                    {
-                        $is_anything_changed = true;
-                        break;
-                    }
-                }
-                if (count($errors) > 0)
-                {
-                    $data = $_POST;
                     return $this->renderAdmin(null, [
                         "data" => $data,
                         "errors" => $errors
                     ]);
                 }
-                else if (!$is_anything_changed)
-                {
-                    $this->redirect("/userreview/edit/{$id}");
-                }
-                else
-                {
-                    Userreview::updateUserReviewById($id, trim($_POST["title"]), trim(nl2br($_POST["text"])));
-                    $_SESSION["success_review_edited"] = "Відгук успішно відредаговано";
-                    if (!User::isUserAdmin())
-                    {
-                        $this->redirect("/userreview/view/{$data["user_id"]}");
-                    }
-                    else
-                    {
-                        $this->redirect("/userreview");
-                    }
-                }
+            }
+            else if (!$is_anything_changed)
+            {
+                $this->redirect("/userreview/edit/{$id}");
             }
             else
             {
+                Userreview::updateUserReviewById($id, trim($_POST["title"]), trim(nl2br($_POST["text"])));
+                $_SESSION["success_review_edited"] = "Відгук успішно відредаговано";
                 if (!User::isUserAdmin())
                 {
-                    return $this->render(null, [
-                        "data" => $data
-                    ]);
+                    $this->redirect("/userreview/view/{$data["user_id"]}");
                 }
                 else
                 {
-                    return $this->renderAdmin(null, [
-                        "data" => $data
-                    ]);
+                    $this->redirect("/userreview");
                 }
             }
+        }
+        else
+        {
+            if (!User::isUserAdmin())
+            {
+                return $this->render(null, [
+                    "data" => $data
+                ]);
+            }
+            else
+            {
+                return $this->renderAdmin(null, [
+                    "data" => $data
+                ]);
+            }
+        }
     }
 
     public function indexAction()
