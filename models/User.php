@@ -153,6 +153,38 @@ class User
         ]);
         if (!empty($user))
         {
+            $car_comparisons = Carcomparison::getAllCarComparisonsByUserId($id);
+            if (!empty($car_comparisons))
+            {
+                foreach ($car_comparisons as $car_comparison)
+                {
+                    Carcomparison::deleteCarComparisonById($car_comparison["id"]);
+                }
+            }
+            $fav_ads = Favoritead::getAllFavoriteAdsByUserId($id);
+            if (!empty($fav_ads))
+            {
+                foreach ($fav_ads as $fav_ad)
+                {
+                    Favoritead::deleteFavoriteAdById($fav_ad["id"]);
+                }
+            }
+            $reviews_to_this_user = Userreview::getAllUserReviewsByUserId($id);
+            if (!empty($reviews_to_this_user))
+            {
+                foreach ($reviews_to_this_user as $review_to_this_user)
+                {
+                    Userreview::deleteUserReviewById($review_to_this_user["id"]);
+                }
+            }
+            $reviews_from_this_user = Userreview::getAllUserReviewsByUserIdFrom($id);
+            if (!empty($reviews_from_this_user))
+            {
+                foreach ($reviews_from_this_user as $review_from_this_user)
+                {
+                    Userreview::deleteUserReviewById($review_from_this_user["id"]);
+                }
+            }
             $car_ads = Carad::getAllCarAdsByUserId($id);
             if (!empty($car_ads))
             {

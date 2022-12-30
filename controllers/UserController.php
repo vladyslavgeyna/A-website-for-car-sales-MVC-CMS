@@ -37,7 +37,7 @@ class UserController extends Controller
                 {
                     $errors['login_exist'] = "Даний логін вже зайнятий";
                 }
-                if(($_POST["password"] == $_POST["password2"]) && (strlen($_POST["password2"]) < 6))
+                if(($_POST["password"] == $_POST["password2"]) && (mb_strlen($_POST["password2"]) < 6))
                 {
                     $errors['password2'] = "Мінімальна довжина паролю 6 символів";
                 }
@@ -94,15 +94,15 @@ class UserController extends Controller
                 $errors = [];
                 $image_id = null;
                 $isAvatarExist = false;
-                if(strlen($_POST["name"]) <= 2)
+                if(mb_strlen($_POST["name"]) <= 2)
                 {
                     $errors['name'] = "Помилка при введенні імені";
                 }
-                if(strlen($_POST["surname"]) <= 2)
+                if(mb_strlen($_POST["surname"]) <= 2)
                 {
                     $errors['surname'] = "Помилка при введенні прізвища";
                 }
-                if(strlen($_POST["lastname"]) <= 2)
+                if(mb_strlen($_POST["lastname"]) <= 2)
                 {
                     $errors['lastname'] = "Помилка при введенні по-батькові";
                 }
@@ -114,7 +114,7 @@ class UserController extends Controller
                 {
                     $errors['login_exist'] = "Даний логін вже зайнятий";
                 }
-                if(($_POST["password"] == $_POST["password2"]) && (strlen($_POST["password2"]) < 6))
+                if(($_POST["password"] == $_POST["password2"]) && (mb_strlen($_POST["password2"]) < 6))
                 {
                     $errors['password2'] = "Мінімальна довжина паролю 6 символів";
                 }
@@ -122,7 +122,7 @@ class UserController extends Controller
                 {
                     $errors['password2'] = "Паролі не співпадають";
                 }
-                if(strlen($_POST["phone"]) < 10)
+                if(mb_strlen($_POST["phone"]) < 10)
                 {
                     $errors['phone_error'] = "Номер телефону повинен містити принаймні 10 символів";
                 }
@@ -280,7 +280,7 @@ class UserController extends Controller
         }
     }
 
-    public function deleteAction($params) // todo з цим методом ще треба погратися буде
+    public function deleteAction($params)
     {
         $id = intval($params[0]);
         if (!User::isUserAuthenticated())
@@ -291,19 +291,44 @@ class UserController extends Controller
         {
             $this->redirect("/");
         }
-        if (!User::isUserAdmin() && User::getCurrentUserId() != $id)
+        if (!User::isUserAdmin() && !empty($id))
         {
             $this->redirect("/");
         }
-        User::deleteUserById($id);
-        if (User::isUserAdmin() && User::getCurrentUserId() != $id)
+        if (User::isUserAdmin() && !empty($id))
         {
+            User::deleteUserById($id);
             $_SESSION["success_deleted_user"] = "Користувача успішно видалено";
             $this->redirect("/user");
         }
         else
         {
-            $this->redirect("/user/logout");
+            if (!User::isUserAdmin())
+            {
+                if(Core::getInstance()->requestMethod === "POST")
+                {
+                    $current_user = User::getCurrentAuthenticatedUser();
+                    if ($current_user["password"] != Utils::getHashedString($_POST["delete_profile_password"]))
+                    {
+                        $_SESSION['delete_profile_error'] = "Невірно введений пароль";
+                        $this->redirect("/user/edit");
+                    }
+                    else
+                    {
+                        User::deleteUserById(User::getCurrentUserId());
+                        $_SESSION['delete_profile_success'] = "Ваш профіль успішно видалено";
+                        $this->redirect("/user/logout");
+                    }
+                }
+                else
+                {
+                    $this->redirect("/");
+                }
+            }
+            else
+            {
+                // тут якщо адмін свій профіль видаляє
+            }
         }
     }
 
@@ -348,7 +373,7 @@ class UserController extends Controller
                 {
                     $errors['old_password'] = "Невірно введений старий пароль";
                 }
-                if(($_POST["password1"] == $_POST["password2"]) && (strlen($_POST["password2"]) < 6))
+                if(($_POST["password1"] == $_POST["password2"]) && (mb_strlen($_POST["password2"]) < 6))
                 {
                     $errors['password2'] = "Мінімальна довжина паролю 6 символів";
                 }
@@ -406,15 +431,15 @@ class UserController extends Controller
                 $new_image_id = null;
                 $isAvatarExist = false;
                 $is_anything_changed = false;
-                if(strlen($_POST["name"]) <= 2)
+                if(mb_strlen($_POST["name"]) <= 2)
                 {
                     $errors['name'] = "Помилка при введенні імені";
                 }
-                if(strlen($_POST["surname"]) <= 2)
+                if(mb_strlen($_POST["surname"]) <= 2)
                 {
                     $errors['surname'] = "Помилка при введенні прізвища";
                 }
-                if(strlen($_POST["lastname"]) <= 2)
+                if(mb_strlen($_POST["lastname"]) <= 2)
                 {
                     $errors['lastname'] = "Помилка при введенні по-батькові";
                 }
@@ -426,7 +451,7 @@ class UserController extends Controller
                 {
                     $errors['login_exist'] = "Даний логін вже зайнятий";
                 }
-                if(strlen($_POST["phone"]) < 10)
+                if(mb_strlen($_POST["phone"]) < 10)
                 {
                     $errors['phone_error'] = "Номер телефону повинен містити принаймні 10 символів";
                 }

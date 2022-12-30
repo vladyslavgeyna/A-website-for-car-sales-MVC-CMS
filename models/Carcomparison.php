@@ -67,6 +67,23 @@ class Carcomparison
         }
     }
 
+    public static function deleteCarComparisonById($id)
+    {
+        $car_comp = Core::getInstance()->db->select(self::$tableName, "*", [
+           "id" => $id
+        ]);
+        if (!empty($car_comp))
+        {
+            Core::getInstance()->db->delete(self::$tableName, [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function getAllCarComparisonsByCarAdId($car_ad_id): ?array
     {
         $car_comp = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -100,6 +117,18 @@ class Carcomparison
                 }
             }
             return $result;
+        }
+        return null;
+    }
+
+    public static function getAllCarComparisonsByUserId($user_id): ?array
+    {
+        $car_comp = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id" => $user_id
+        ]);
+        if(!empty($car_comp))
+        {
+            return $car_comp;
         }
         return null;
     }

@@ -39,9 +39,9 @@ Core::getInstance()->pageParams['title'] = 'Оголошення ' . $data["ad"]
                         <div class="carad-view-owner-content d-flex gap-3">
                             <div style="width: 100px;" class="carad-view-owner-image-wrapper">
                                 <?php if (User::hasUserByIdImage($data["ad"]["user_id"])): ?>
-                                    <img class="w-100"  src="<?=User::getUserByIdImagePath($data["ad"]["user_id"])?>" alt="Аватар продавця">
+                                    <img class="w-100" style="border-radius: 50%"  src="<?=User::getUserByIdImagePath($data["ad"]["user_id"])?>" alt="Аватар продавця">
                                 <?php else: ?>
-                                    <img class="w-100" src="/themes/images/default_avatar_2.svg" alt="Аватар продавця">
+                                    <img class="w-100" style="border-radius: 50%" src="/themes/images/default_avatar_2.svg" alt="Аватар продавця">
                                 <?php endif; ?>
                             </div>
                             <div class="carad-view-owner-data">

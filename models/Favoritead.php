@@ -74,6 +74,23 @@ class Favoritead
         }
     }
 
+    public static function deleteFavoriteAdById($id)
+    {
+        $fav_ad = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        if (!empty($fav_ad))
+        {
+            Core::getInstance()->db->delete(self::$tableName, [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function getAllFavoriteAdsByCarAdId($car_ad_id): ?array
     {
         $fav_ads = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -115,6 +132,18 @@ class Favoritead
                 }
             }
             return $result;
+        }
+        return null;
+    }
+
+    public static function getAllFavoriteAdsByUserId($user_id): ?array
+    {
+        $fav_ads = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id" => $user_id
+        ]);
+        if(!empty($fav_ads))
+        {
+            return $fav_ads;
         }
         return null;
     }

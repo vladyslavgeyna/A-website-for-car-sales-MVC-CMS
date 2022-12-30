@@ -1163,7 +1163,7 @@ footer ul {
     width: 100%;
 }
 
-.container-edit form {
+.container-edit form.form-main {
     margin: 0 auto;
     max-width: 500px;
     row-gap: 15px;
@@ -1177,7 +1177,7 @@ footer ul {
     font-size: 18px;
     font-weight: 700;
 }
-.main-edit form a.btn-danger {
+.main-edit form a.btn-danger, .danger-zone button {
     border: 4px solid #dc3545;
     border-radius: 25px;
     font-size: 18px;
@@ -1196,7 +1196,7 @@ footer ul {
     color: rgb(112.520718,44.062154,249.437846);
 }
 
-.container-edit form button:active{
+.container-edit form button.save:active{
     border-color: rgb(112.520718,44.062154,249.437846) !important;
     color: rgb(112.520718,44.062154,249.437846) !important;
 }
@@ -1256,8 +1256,6 @@ footer ul {
     display: none;
 }
 
-
-
 .main-change-password{
     display: flex;
     align-items: center;
@@ -1294,7 +1292,7 @@ footer ul {
     font-size: 18px;
     font-weight: 700;
 }
-.main-change-password form a.btn-danger {
+.main-change-password form a.btn-danger, .danger-zone button {
     border: 4px solid #dc3545;
     border-radius: 25px;
     font-size: 18px;
@@ -1326,4 +1324,76 @@ footer ul {
     color: red;
     font-weight: 700;
     font-size: 16px;
+}
+
+.container-edit .danger-zone {
+    position: relative;
+    border: 5px solid #dc3545;
+    padding: 25px;
+    border-radius: 25px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 0 50px -10px rgb(0 0 0 / 70%);
+}
+.container-edit .danger-zone .danger-zone-title {
+    border: 5px solid #dc3545;
+    font-weight: 900;
+    color: #dc3545;
+    text-align: center;
+    position: absolute;
+    top: -20%;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 25px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 65%;
+
+}
+.danger-zone button:hover {
+    background-color: #bb2d3b;
+    border: 4px solid #dc3545;
+    color:white;
+}
+
+
+.container-edit .modal-confirm-delete-car-ad .modal-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.container-carad-myads .modal button.btn-no-action, .container-edit .modal button.btn-yes {
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.container-edit .modal button.btn-yes {
+    border: 3px solid #dc3545;
+}
+.container-edit .modal button.btn-yes:hover {
+    border: 3px solid #bb2d3b;
+    color: white;
+}
+.container-edit .modal button.btn-no-action {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+}
+.container-edit .modal button.btn-no-action:hover {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.container-edit .modal button.btn-no-action:active {
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.container-edit .modal button.btn-yes:active {
+    border: 3px solid #bb2d3b;
+    color: white;
+}
+.container-edit .modal .modal-body p {
+    font-size: 17px;
+    font-weight: 600;
+}
+.container-edit .modal button.btn-close {
+    border: none;
 }

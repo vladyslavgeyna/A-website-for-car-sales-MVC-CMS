@@ -115,11 +115,11 @@ class CaradController extends Controller
                 {
                     $errors['car_region'] = "Ви не обрали одну із запропонованих область";
                 }
-                if (strlen($_POST["car_district"]) <= 2)
+                if (mb_strlen($_POST["car_district"]) <= 2)
                 {
                     $errors['car_district'] = "Некоректно введений район";
                 }
-                if (strlen($_POST["car_city"]) <= 2)
+                if (mb_strlen($_POST["car_city"]) <= 2)
                 {
                     $errors['car_city'] = "Некоректно введене місто (село, селище)";
                 }
@@ -143,7 +143,7 @@ class CaradController extends Controller
                 {
                     $errors['car_wheel_drive'] = "Ви не обрали один із запропонованих вид трансмісії";
                 }
-                if (strlen($_POST["car_color"]) <= 2)
+                if (mb_strlen($_POST["car_color"]) <= 2)
                 {
                     $errors['car_color'] = "Некоректно введений колір";
                 }
@@ -151,19 +151,19 @@ class CaradController extends Controller
                 {
                     $errors['car_number_of_seats'] = "Ви не обрали одну із запропонованих кількість місць";
                 }
-                if (strlen($_POST["car_additional_options"]) != 0 && strlen($_POST["car_additional_options"]) <= 6)
+                if (mb_strlen($_POST["car_additional_options"]) != 0 && mb_strlen($_POST["car_additional_options"]) <= 6)
                 {
                     $errors['car_additional_options'] = "Некоректно введено додаткові опції. Залиште поле порожнім, якщо воно не потрібне або вкажіть більше інформації";
                 }
-                if (strlen($_POST["car_additional_options"]) > 6)
+                if (mb_strlen($_POST["car_additional_options"]) > 6)
                 {
                     $additional_options = trim($_POST["car_additional_options"]);
                 }
-                if (strlen($_POST["car_ad_title"]) < 6)
+                if (mb_strlen($_POST["car_ad_title"]) < 6)
                 {
                     $errors['car_ad_title'] = "Помилка при введенні заголовку. Введіть більше інформації";
                 }
-                if (strlen($_POST["car_ad_text"]) < 10)
+                if (mb_strlen($_POST["car_ad_text"]) < 10)
                 {
                     $errors['car_ad_text'] = "Помилка при введенні тексту. Введіть більше інформації";
                 }

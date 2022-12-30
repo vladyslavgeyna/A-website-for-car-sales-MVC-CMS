@@ -11,7 +11,7 @@ Core::getInstance()->pageParams['title'] = 'Редагування профіл�
 <main class="main main main-edit">
     <div class="container container container-edit">
         <h1  class="text-center mb-4">Редагування профілю</h1>
-        <form action="" class="d-flex flex-column" method="post" enctype="multipart/form-data">
+        <form action="" class="d-flex flex-column form-main" method="post" enctype="multipart/form-data">
             <div class="form-floating row justify-content-center">
                 <div class="image-wrapper col-5 col-lg-4 p-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Обрати зображення">
                     <?php if (User::hasCurrentUserImage()) :?>
@@ -94,10 +94,64 @@ Core::getInstance()->pageParams['title'] = 'Редагування профіл�
                     <span ><?= $errors['general']; ?></span>
                 </div>
             <?php endif; ?>
-            <button class="btn primary-color-bg primary-color-hover" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Увага! Після будь-яких змін буде зроблений вихід з Вашого облікового запису">Зберегти зміни</button>
+            <button class="btn primary-color-bg primary-color-hover save" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Увага! Після будь-яких змін буде зроблений вихід з Вашого облікового запису">Зберегти зміни</button>
             <hr class="p-0 m-0 mx-4">
             <a class="btn btn-warning" href="/user/changepassword">Змінити пароль</a>
         </form>
+        <div style="max-width: 500px; margin: 0 auto" class="mt-4 mb-5 pt-3 pb-3">
+            <hr >
+        </div>
+        <div class="danger-zone">
+            <div class="danger-zone-title h2 ">
+                Небезпечна зона
+            </div>
+            <div class="danger-zone-body mt-4 text-center">
+                <button data-bs-toggle="modal" data-bs-target="#confirm-delete-profile-confirm" class="btn btn-danger mt-3">Видалити профіль</button>
+            </div>
+            <?php if (!empty($_SESSION['delete_profile_error'])): ?>
+                <div class="error-form-validation mt-3 text-center p-0" style="margin-top: -10px; cursor:unset;">
+                    <span ><?= $_SESSION['delete_profile_error']; ?></span>
+                </div>
+            <?php unset($_SESSION['delete_profile_error']) ?>
+            <?php endif; ?>
+        </div>
+        <div class="modal modal-confirm-delete-profile-confirm fade" id="confirm-delete-profile-confirm" tabindex="-1" aria-hidden="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div style="border-radius: 25px;" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Підтверження</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ви дійсно бажаєте видалити свій профіль?<br>Ця дія є безповоротною!<br><br>Увага! В разі видалення профілю будуть видалені всі оголошення та інші дані, пов'язані з ним!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-bs-dismiss="modal">Відмінити</button>
+                        <button data-bs-toggle="modal" data-bs-target="#confirm-delete-profile" class="btn btn-danger btn-yes">Видалити профіль</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-confirm-delete-profile fade" id="confirm-delete-profile" tabindex="-1" aria-hidden="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div style="border-radius: 25px;" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Підтвердження</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/user/delete" method="post" class="modal-footer flex-column">
+                        <div style="flex: 1 1 auto; align-self: stretch; font-size: 16px" class="form-floating">
+                            <input required type="password" class="form-control" name="delete_profile_password" id="floatingPasswordDelete" placeholder="Password">
+                            <label for="floatingPasswordDelete">Введіть ваш пароль</label>
+                        </div>
+                        <div class="mt-2" style="align-self: flex-end">
+                            <button type="button" class="btn btn-no-action primary-color-bg primary-color-hover" data-bs-dismiss="modal">Відмінити</button>
+                            <button type="submit" class="btn btn-danger btn-yes">Видалити профіль</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 <script defer>

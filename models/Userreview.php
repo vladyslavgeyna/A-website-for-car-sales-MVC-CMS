@@ -56,6 +56,36 @@ class Userreview
         }
     }
 
+    public static function getAllUserReviewsByUserId($user_id): ?array
+    {
+        $reviews = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id" =>  $user_id
+        ]);
+        if (!empty($reviews))
+        {
+            return $reviews;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getAllUserReviewsByUserIdFrom($user_id_from): ?array
+    {
+        $reviews = Core::getInstance()->db->select(self::$tableName, "*", [
+            "user_id_from" =>  $user_id_from
+        ]);
+        if (!empty($reviews))
+        {
+            return $reviews;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function isUserReviewsByUserIdExist($user_id): bool
     {
         $reviews = Core::getInstance()->db->select(self::$tableName, "*", [
