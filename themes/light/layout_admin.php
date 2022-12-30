@@ -103,6 +103,23 @@ use models\User;
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
+                            <i style="width: 30px" class="fa-regular fa-thumbs-up px-1"></i>
+                            <p>
+                                Відгуки
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/userreview" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Всі відгуки</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
                             <i style="width: 30px" class="fa-solid fa-pager px-1"></i>
                             <p>
                                 Оголошення

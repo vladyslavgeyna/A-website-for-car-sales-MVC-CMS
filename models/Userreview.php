@@ -116,4 +116,14 @@ class Userreview
         ]);
         return !empty($reviews);
     }
+
+    public static function getAllUserReviews(): ?array
+    {
+        $reviews = Core::getInstance()->db->select(self::$tableName);
+        if (!empty($reviews))
+        {
+            return $reviews;
+        }
+        return null;
+    }
 }

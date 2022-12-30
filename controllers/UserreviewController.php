@@ -10,23 +10,43 @@ use models\Userreview;
 
 class UserreviewController extends \core\Controller
 {
-    public function addAction($params)
+
+    public function indexAction()
     {
-        if (!User::isUserAuthenticated())
-        {
-            $this->redirect("/");
-        }
-        $id = intval($params[0]);
-        if (!User::isUserByIdExist($id))
-        {
-            $this->redirect("/");
-        }
-        if (User::getCurrentUserId() == $id)
-        {
-            $this->redirect("/");
-        }
         if (!User::isUserAdmin())
         {
+            return $this->error(404);
+        }
+        else
+        {
+            $data["reviews"] = Userreview::getAllUserReviews();
+            return $this->renderAdmin(null, [
+                "data" => $data
+            ]);
+        }
+    }
+
+    public function addAction($params)
+    {
+        if (User::isUserAdmin())
+        {
+            return $this->error(404);
+        }
+        else
+        {
+            if (!User::isUserAuthenticated())
+            {
+                $this->redirect("/");
+            }
+            $id = intval($params[0]);
+            if (!User::isUserByIdExist($id))
+            {
+                $this->redirect("/");
+            }
+            if (User::getCurrentUserId() == $id)
+            {
+                $this->redirect("/");
+            }
             $data = [];
             $data["user"] = User::getUserById($id);
             if(Core::getInstance()->requestMethod === "POST")
@@ -63,21 +83,17 @@ class UserreviewController extends \core\Controller
                 ]);
             }
         }
-        else
-        {
-            // тут для адміна
-        }
     }
 
     public function viewAction($params)
     {
-        $id = intval($params[0]);
-        if (!User::isUserByIdExist($id))
-        {
-            $this->redirect("/");
-        }
         if (!User::isUserAdmin())
         {
+            $id = intval($params[0]);
+            if (!User::isUserByIdExist($id))
+            {
+                $this->redirect("/");
+            }
             $data = [];
             $data["reviews"] = Userreview::getAllUserReviewsByUserIdInnered($id);
             if (empty($data["reviews"]))
@@ -88,10 +104,9 @@ class UserreviewController extends \core\Controller
                 "data" => $data
             ]);
         }
-
         else
         {
-            // тут для адміна
+            return $this->error(404);
         }
     }
 
@@ -109,23 +124,23 @@ class UserreviewController extends \core\Controller
             $this->redirect("/");
         }
         $review = Userreview::getUserReviewById($id);
-        if (User::getCurrentUserId() == $review["user_id"])
+        if (User::getCurrentUserId() == $review["user_id"] && !User::isUserAdmin())
         {
             $this->redirect("/");
         }
-        if (User::getCurrentUserId() != $review["user_id_from"])
+        if (User::getCurrentUserId() != $review["user_id_from"] && !User::isUserAdmin())
         {
             $this->redirect("/");
         }
+        Userreview::deleteUserReviewById($id);
+        $_SESSION["success_review_deleted"] = "Відгук успішно видалено";
         if (!User::isUserAdmin())
         {
-            Userreview::deleteUserReviewById($id);
-            $_SESSION["success_review_deleted"] = "Відгук успішно видалено";
             $this->redirect("/userreview/view/{$review["user_id"]}");
         }
         else
         {
-            // тут для адміна
+            $this->redirect("/userreview");
         }
     }
 
