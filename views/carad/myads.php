@@ -29,6 +29,13 @@ Core::getInstance()->pageParams['title'] = 'Мої оголошення';
             </div>
             <?php unset($_SESSION["success_car_ad_deleted"]); ?>
         <?php endif; ?>
+        <?php if (!empty($_SESSION["success_car_ad_edited"])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_car_ad_edited"]; ?></span></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION["success_car_ad_edited"]); ?>
+        <?php endif; ?>
         <?php if (empty($data["user_ads"])):?>
             <div style="border-radius: 25px" class="alert alert-primary py-4" role="alert">
                 <div class="h1 text-center fw-bold mb-0">Наразі у вас не розміщено жодного оголошення</div>

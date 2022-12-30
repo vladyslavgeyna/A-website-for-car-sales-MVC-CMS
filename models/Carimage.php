@@ -74,6 +74,88 @@ class Carimage
         }
     }
 
+    public static function setAsNotMainCarImageById($id)
+    {
+        $car_image = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id,
+        ]);
+        if (!empty($car_image))
+        {
+            Core::getInstance()->db->update(self::$tableName, [
+                "is_main" => 0
+            ], [
+                "id" => $id,
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function setAsMainCarImageByImageId($image_id)
+    {
+        $car_image = Core::getInstance()->db->select(self::$tableName, "*", [
+            "image_id" => $image_id,
+        ]);
+        if (!empty($car_image))
+        {
+            Core::getInstance()->db->update(self::$tableName, [
+                "is_main" => 1
+            ], [
+                "image_id" => $image_id,
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getMainImageByCarId($car_id)
+    {
+        $main_image = Core::getInstance()->db->select(self::$tableName, "*", [
+            "car_id" => $car_id,
+            "is_main" => 1
+        ]);
+        if (!empty($main_image))
+        {
+            return $main_image[0];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getAllCarImagesByCarId($car_id): ?array
+    {
+        $car_images = Core::getInstance()->db->select(self::$tableName, "*", [
+            "car_id" => $car_id
+        ]);
+        if (!empty($car_images))
+        {
+            return $car_images;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public static function getAllCarImages(): ?array
+    {
+        $car_images = Core::getInstance()->db->select(self::$tableName);
+        if (!empty($car_images))
+        {
+            return $car_images;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function deleteAllCarImagesByCarId($car_id)
     {
         $car_images = Core::getInstance()->db->select(self::$tableName, "*", [

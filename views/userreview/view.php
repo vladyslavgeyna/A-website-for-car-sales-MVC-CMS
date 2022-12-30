@@ -47,7 +47,7 @@ Core::getInstance()->pageParams['title'] = 'Відгуки про продавц
                 <h1 class="mb-3">Відгуки про продавця:<br><?=$data["reviews"]["user"]["surname"]." ".$data["reviews"]["user"]["name"]." ".$data["reviews"]["user"]["lastname"]?></h1>
             <?php endif; ?>
             <?php for ($i = 0; $i < count($data["reviews"]) - 1; $i++) :?>
-                <div class="card mb-4">
+                <div class="card mb-4" style="border-radius: 25px">
                     <h5 class="card-header py-2 fw-bold">
                         <?=$data["reviews"][$i]["user_from"]["surname"]." ".$data["reviews"][$i]["user_from"]["name"]." ".$data["reviews"][$i]["user_from"]["lastname"]?>
                         <?php if($data["reviews"][$i]["user_from"]["id"] == User::getCurrentUserId()): ?>

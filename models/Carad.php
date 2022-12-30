@@ -19,6 +19,23 @@ class Carad
         ]);
     }
 
+    public static function updateCarAdById($id, $updateArray)
+    {
+        $car_ad = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        if(!empty($car_ad))
+        {
+            Core::getInstance()->db->update(self::$tableName, $updateArray, [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function getAllCarAds(): ?array
     {
         $car_ads = Core::getInstance()->db->select(self::$tableName);
@@ -69,6 +86,8 @@ class Carad
         }
         return null;
     }
+
+
 
     public static function getCarAdById($car_ad_id)
     {

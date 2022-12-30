@@ -9,6 +9,23 @@ class Car
 {
     protected static string $tableName = "car";
 
+    public static function updateCarById($id, $updateArray)
+    {
+        $car = Core::getInstance()->db->select(self::$tableName, [
+           "id" => $id
+        ]);
+        if (!empty($car))
+        {
+            Core::getInstance()->db->update(self::$tableName, $updateArray, [
+                "id" => $id
+            ]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public static function addCar($car_brand_id, $car_model_id, $year_of_production, $engine_capacity, $fuel_id, $transmission_id, $color,
                                   $region_id, $district, $city, $price, $type_of_currency_id, $wheel_drive_id, $number_of_seats, $mileage, $additional_options)
     {
