@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 26 2022 г., 22:59
+-- Время создания: Дек 31 2022 г., 13:10
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.4.30
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- База данных: `auto-sale`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `admin_message`
+--
+
+CREATE TABLE `admin_message` (
+  `id` int NOT NULL,
+  `message_id` int NOT NULL COMMENT 'ID повідомлення',
+  `user_admin_id` int NOT NULL COMMENT 'ID адміна, якому призначене повідомлення'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -52,10 +64,10 @@ CREATE TABLE `car` (
 --
 
 INSERT INTO `car` (`id`, `car_brand_id`, `car_model_id`, `year_of_production`, `engine_capacity`, `fuel_id`, `transmission_id`, `color`, `region_id`, `district`, `city`, `price`, `type_of_currency_id`, `wheel_drive_id`, `number_of_seats`, `mileage`, `additional_options`) VALUES
-(1, 2, 2, 2020, 3, 1, 1, 'Сірий', 2, 'Бердичівський', 'Бердичів', 16000, 1, 1, 5, 50, 'Бортовий комп\'ютер, клімат, підігрів керма'),
-(4, 3, 4, 2020, 2.2, 1, 1, 'Червоний', 4, 'Рівненський', 'Рівне', 13500, 1, 3, 5, 120, 'Carplay, бортовий комп\'ютер, панорамний дах'),
+(1, 2, 2, 2020, 3, 1, 1, 'Сірий', 2, 'Бердичівський', 'Бердичів', 16000, 1, 1, 5, 59, 'Бортовий комп\'ютер, клімат, підігрів керма'),
+(4, 3, 4, 2020, 2.5, 1, 1, 'Сірий', 4, 'Рівненський', 'Рівне', 100000, 1, 1, 5, 120, 'Carplay, бортовий комп\'ютер, панорамний дах'),
 (7, 2, 1, 2021, 2.5, 1, 1, 'Сірий', 2, 'Житомирський', 'Житомир', 21000, 1, 1, 5, 20, NULL),
-(8, 2, 3, 2022, 3.2, 1, 1, 'Чорний', 1, 'Київський', 'Київ', 25000, 2, 1, 5, 12, 'Бортовий комп\'ютер, carplay, підігрів сидінь, підігрів керма, панорамний дах');
+(9, 2, 3, 2022, 2.5, 1, 1, 'Чорний', 1, 'Київський', 'Київ', 25000, 2, 1, 5, 12, 'Бортовий комп\'ютер, carplay, підігрів сидінь, підігрів керма, панорамний дах');
 
 -- --------------------------------------------------------
 
@@ -78,10 +90,10 @@ CREATE TABLE `car_ad` (
 --
 
 INSERT INTO `car_ad` (`id`, `car_id`, `title`, `text`, `date_of_creating`, `is_active`, `user_id`) VALUES
-(1, 1, 'Audi A5 2020 Sportback', 'Продам Audi A5 2020 року в модифікації SportBack.', '2022-12-20 18:44:18', 1, 6),
-(4, 4, 'Volkswagen Jetta 2021 SEL', 'Всіх вітаю!<br />\r\nПродам Volkswagen Jetta 2021 року випуску в комплекції SEL.<br />\r\nВ ДТП авто не був. Торг можливий<br />\r\nДзвоніть, пишіть!', '2022-12-23 23:48:00', 1, 6),
+(1, 1, 'Audi A5 2020 Sportback', 'Продам Audi A5 2020 року в модифікації SportBack', '2022-12-20 18:44:18', 1, 6),
+(4, 4, 'Volkswagen Jetta 2021 SE', 'Всіх вітаю!<br />\r\nПродам Volkswagen Jetta 2021 року випуску в комплекції SEL.<br />\r\nВ ДТП авто не був.<br />\r\nДзвоніть, пишіть!<br />\r\nТоргу нема!!!!!!!', '2022-12-23 23:48:00', 1, 6),
 (7, 7, 'Audi A4 2021 Avant', 'Продам Audi A4 2021 Avant', '2022-12-26 19:08:12', 1, 6),
-(8, 8, 'Audi A6 2022 Avant Quatro С8', 'Продам Audi A6 2022 Avant Quatro С8.<br />\r\nСтан чудовий, купувався в Німеччина для себе.', '2022-12-26 20:27:08', 1, 6);
+(9, 9, 'Audi A6 2022 Avant Quatro С8', 'Продам Audi A6 2022 Avant Quatro С8.<br />\r\nСтан чудовий, купувався в Німеччина для себе.', '2022-12-27 16:01:19', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -99,7 +111,6 @@ CREATE TABLE `car_brand` (
 --
 
 INSERT INTO `car_brand` (`id`, `name`) VALUES
-(1, 'BMW'),
 (2, 'Audi'),
 (3, 'Volkswagen');
 
@@ -114,15 +125,6 @@ CREATE TABLE `car_comparison` (
   `user_id` int NOT NULL COMMENT 'ID користувача, що додав автомобіль до порівняння',
   `car_ad_id` int NOT NULL COMMENT 'ID оголошення, доданого до порівняння'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Порівняння автомобілів';
-
---
--- Дамп данных таблицы `car_comparison`
---
-
-INSERT INTO `car_comparison` (`id`, `user_id`, `car_ad_id`) VALUES
-(13, 2, 4),
-(14, 2, 7),
-(15, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -142,13 +144,13 @@ CREATE TABLE `car_image` (
 --
 
 INSERT INTO `car_image` (`id`, `image_id`, `car_id`, `is_main`) VALUES
-(1, 2, 1, 1),
-(2, 3, 1, 0),
-(8, 9, 4, 1),
-(9, 10, 4, 0),
 (14, 15, 7, 1),
-(15, 16, 8, 1),
-(16, 17, 8, 0);
+(17, 18, 9, 0),
+(18, 19, 9, 1),
+(19, 53, 4, 1),
+(20, 54, 4, 0),
+(21, 55, 1, 1),
+(22, 56, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -183,14 +185,6 @@ CREATE TABLE `favorite_ad` (
   `user_id` int NOT NULL COMMENT 'ID користувача, який додав оголошення до обраного',
   `car_ad_id` int NOT NULL COMMENT 'ID оголошення, доданого до обраного'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Обрані оголошення';
-
---
--- Дамп данных таблицы `favorite_ad`
---
-
-INSERT INTO `favorite_ad` (`id`, `user_id`, `car_ad_id`) VALUES
-(27, 2, 4),
-(28, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -230,13 +224,27 @@ CREATE TABLE `image` (
 
 INSERT INTO `image` (`id`, `name`) VALUES
 (1, '639b9ab78b6ff.jpg'),
-(2, '63a1d8523d133.jpg'),
-(3, '63a1d8523de84.jpg'),
-(9, '63a61400b8a98.jpg'),
-(10, '63a61400b961b.jpg'),
 (15, '63a9c6ec9d2dd.jpg'),
-(16, '63a9d96c026a2.jpeg'),
-(17, '63a9d96c02e50.jpg');
+(18, '63aaec9fb416b.jpeg'),
+(19, '63aaec9fb9567.jpg'),
+(53, '63af1dd07386e.jpg'),
+(54, '63af1dd0b52f2.jpg'),
+(55, '63af23315f44b.jpg'),
+(56, '63af23316f480.jpg'),
+(57, '63af31f23d5be.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `message`
+--
+
+CREATE TABLE `message` (
+  `id` int NOT NULL,
+  `text` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Текст повідомлення',
+  `user_id` int NOT NULL COMMENT 'ID користувача, що написав повідомлення',
+  `date_of_creating` datetime NOT NULL COMMENT 'Дата та час написання повідомлення'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Таблиця з повідомленнями';
 
 -- --------------------------------------------------------
 
@@ -325,11 +333,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `surname`, `lastname`, `login`, `password`, `phone`, `is_admin`, `image_id`) VALUES
 (1, 'Владислав', 'Гейна', 'Сергійович', 'vladgeina@gmail.com', 'c97fccc51332acbcc3a323c216d2a96a', '0937660691', 1, 1),
-(2, 'Денис', 'Богайчук', 'Володимирович', 'den123@gmail.com', '4297f44b13955235245b2497399d7a93', '0930375363', 0, NULL),
-(3, 'HEINA', 'VLADYSLAV', 'Сергійович', 'vladgeina2@gmail.com', '4297f44b13955235245b2497399d7a93', '0997660691', 0, NULL),
-(4, 'HEINA', 'VLADYSLAV', 'Сергійович', 'vladgeina3@gmail.com', '4297f44b13955235245b2497399d7a93', '0977660691', 0, NULL),
-(5, 'HEINA', 'VLADYSLAV', 'Сергійович', 'vladgeina4@gmail.com', '4297f44b13955235245b2497399d7a93', '0967660691', 0, NULL),
-(6, 'Руслан', 'Пархомчук', 'Вікторович', 'ruslan@gmail.com', '4297f44b13955235245b2497399d7a93', '0930930912', 0, NULL);
+(6, 'Руслан', 'Пархомчук', 'Вікторович', 'ruslan@gmail.com', '1bbd886460827015e5d605ed44252251', '0930930912', 0, 57),
+(7, 'Денис', 'Богайчук', 'Володимирович', 'den123@gmail.com', '4297f44b13955235245b2497399d7a93', '0937000691', 0, NULL),
+(22, 'HEINA2', 'VLADYSLAV2', 'Сергійович2', 'vladgeina444@gmail.com', 'c8837b23ff8aaa8a2dde915473ce0991', '0932321232', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -368,6 +374,14 @@ INSERT INTO `wheel_drive` (`id`, `name`) VALUES
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `admin_message`
+--
+ALTER TABLE `admin_message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `message_id` (`message_id`),
+  ADD KEY `user_admin_id` (`user_admin_id`);
 
 --
 -- Индексы таблицы `car`
@@ -440,6 +454,13 @@ ALTER TABLE `image`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Индексы таблицы `region`
 --
 ALTER TABLE `region`
@@ -483,98 +504,117 @@ ALTER TABLE `wheel_drive`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `admin_message`
+--
+ALTER TABLE `admin_message`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT для таблицы `car`
 --
 ALTER TABLE `car`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `car_ad`
 --
 ALTER TABLE `car_ad`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `car_brand`
 --
 ALTER TABLE `car_brand`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `car_comparison`
 --
 ALTER TABLE `car_comparison`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT для таблицы `car_image`
 --
 ALTER TABLE `car_image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблицы `car_model`
 --
 ALTER TABLE `car_model`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `favorite_ad`
 --
 ALTER TABLE `favorite_ad`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT для таблицы `fuel`
 --
 ALTER TABLE `fuel`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT для таблицы `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `region`
 --
 ALTER TABLE `region`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `transmission`
 --
 ALTER TABLE `transmission`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `type_of_currency`
 --
 ALTER TABLE `type_of_currency`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблицы `user_review`
 --
 ALTER TABLE `user_review`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `wheel_drive`
 --
 ALTER TABLE `wheel_drive`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `admin_message`
+--
+ALTER TABLE `admin_message`
+  ADD CONSTRAINT `admin_message_ibfk_1` FOREIGN KEY (`message_id`) REFERENCES `message` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `admin_message_ibfk_2` FOREIGN KEY (`user_admin_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `car`
@@ -621,6 +661,12 @@ ALTER TABLE `car_model`
 ALTER TABLE `favorite_ad`
   ADD CONSTRAINT `favorite_ad_ibfk_1` FOREIGN KEY (`car_ad_id`) REFERENCES `car_ad` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `favorite_ad_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Ограничения внешнего ключа таблицы `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `user`
