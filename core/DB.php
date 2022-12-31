@@ -11,10 +11,12 @@ class DB
         $this->pdo = new \PDO("mysql: host={$hostname};dbname={$database}", $login, $password);
     }
 
-    public function select($tableName, $fieldsList = "*", $conditionList = null)
+    public function select($tableName, $fieldsList = "*", $conditionList = null, $orderBy = null ,$limit = null, $offset = null)
     {
         $fieldsPartString = "";
         $wherePartString = "";
+        $orderByPartString = "";
+        $limitAndOffsetPartString = "";
         if (is_string($fieldsList))
         {
             $fieldsPartString = $fieldsList;
@@ -32,7 +34,27 @@ class DB
             }
             $wherePartString = "WHERE ".implode(" AND ", $parts);
         }
-        $stmt = $this->pdo->prepare("SELECT {$fieldsPartString} FROM {$tableName} {$wherePartString}");
+        if (is_array($orderBy) && count($orderBy) > 0)
+        {
+            $orderByParts = [];
+            foreach ($orderBy as $key => $value)
+            {
+                $orderByParts []= "{$key} {$value}";
+            }
+            $orderByPartString = " ORDER BY ".implode(", ", $orderByParts);
+        }
+        if (!empty($limit))
+        {
+            if (!empty($offset))
+            {
+                $limitAndOffsetPartString = " LIMIT {$offset}, {$limit}";
+            }
+            else
+            {
+                $limitAndOffsetPartString = " LIMIT {$limit}";
+            }
+        }
+        $stmt = $this->pdo->prepare("SELECT {$fieldsPartString} FROM {$tableName} {$wherePartString}{$orderByPartString}{$limitAndOffsetPartString}");
         $stmt->execute($conditionList);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
