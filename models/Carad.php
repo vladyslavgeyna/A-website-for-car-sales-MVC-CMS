@@ -174,11 +174,11 @@ class Carad
         return null;
     }
 
-    public static function getAllActiveCarAdsInnered(): ?array
+    public static function getAllActiveCarAdsInnered($offset = null, $limit = null): ?array
     {
         $active_car_ads = Core::getInstance()->db->select(self::$tableName, "*",  [
             "is_active" => 1
-        ]);
+        ], null, $limit, $offset);
         if(!empty($active_car_ads))
         {
             $result = $active_car_ads;

@@ -1,12 +1,13 @@
 <?php
 /** @var string $title */
+/** @var string $pagination */
 /** @var array $data */
 
 use core\Core;
 
 Core::getInstance()->pageParams['title'] = $title;
 ?>
-<main class="main main-car-ad-index">
+<main class="main main-car-ad-index d-flex flex-column justify-content-between" style="row-gap: 30px">
     <div class="container container-car-ad-index">
         <div class="row row-cols-xxl-3 g-xxl-5 row-cols-xl-3 g-xl-3 row-cols-lg-2 g-lg-3 row-cols-md-2 g-md-4 row-cols-1 g-5">
             <?php if (empty($data["ads"])): ?>
@@ -69,4 +70,9 @@ Core::getInstance()->pageParams['title'] = $title;
             <?php endif; ?>
         </div>
     </div>
+    <?php if (!empty($data["ads"])): ?>
+        <div class="container container-car-ad-index d-flex justify-content-center">
+            <?=$pagination?>
+        </div>
+    <?php endif; ?>
 </main>

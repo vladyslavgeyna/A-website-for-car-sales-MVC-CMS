@@ -3,7 +3,9 @@
 namespace controllers;
 
 use core\Controller;
+use core\Core;
 use core\Error;
+use core\Pagination;
 use core\Utils;
 use models\Car;
 use models\Carad;
@@ -16,7 +18,7 @@ class SiteController extends Controller
         parent::__construct();
     }
 
-    public function indexAction()
+    public function indexAction($params)
     {
         if (User::isUserAdmin())
         {
@@ -29,11 +31,23 @@ class SiteController extends Controller
         }
         else
         {
+            $id = intval($params[0]);
+            $url_prefix = "";
+            $page = $id ?? 1;
+            if ($page != 1)
+            {
+                $url_prefix = "/site/index";
+            }
+            $per_page = 2;
+            $total = Carad::getCountOfCarAds();
+            $pagination = new Pagination($page, $per_page, $total, $url_prefix);
+            $start = $pagination->getStart();
             $data = [];
-            $data["ads"] = Carad::getAllActiveCarAdsInnered();
+            $data["ads"] = Carad::getAllActiveCarAdsInnered($start, $per_page);
             return $this->render("views/carad/index.php", [
                 "title" => "Головна сторінка",
-                "data" => $data
+                "data" => $data,
+                "pagination" => $pagination
             ]);
         }
     }

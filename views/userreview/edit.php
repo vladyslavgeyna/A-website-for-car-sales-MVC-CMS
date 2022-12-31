@@ -23,7 +23,7 @@ Core::getInstance()->pageParams['title'] = 'Редагування відгук�
             </div>
             <div class="mb-3">
                 <label for="FormControlTextareaText" class="form-label">Текст відгуку:</label>
-                <textarea required name="text" class="form-control" id="FormControlTextareaText" style="height: 100px; resize: none;"><?=$data['text']?></textarea>
+                <textarea required name="text" class="form-control" id="FormControlTextareaText" style="height: 100px; resize: none;"><?=str_replace("<br />", "", $data['text'])?></textarea>
                 <?php if (!empty($errors['text'])): ?>
                     <div class="error-form-validation">
                         <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Введіть коректно текст відгуку"><?= $errors['text']; ?></span>

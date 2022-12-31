@@ -43,6 +43,7 @@ class UserreviewController extends \core\Controller
             {
                 $errors["text"] = "Занадто короткий текст";
             }
+            $_POST["text"] = nl2br($_POST["text"]);
             $keys = array_keys($_POST);
             foreach ($keys as $key)
             {
@@ -76,7 +77,7 @@ class UserreviewController extends \core\Controller
             }
             else
             {
-                Userreview::updateUserReviewById($id, trim($_POST["title"]), trim(nl2br($_POST["text"])));
+                Userreview::updateUserReviewById($id, trim($_POST["title"]), trim($_POST["text"]));
                 $_SESSION["success_review_edited"] = "Відгук успішно відредаговано";
                 if (!User::isUserAdmin())
                 {

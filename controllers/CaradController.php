@@ -591,7 +591,7 @@ class CaradController extends Controller
                 ]);
             }
             else if(!$is_anything_changed)
-            {
+            {// todo тут мабуть треба буде додати перевірку для адміна
                 $this->redirect("/carad/edit/{$id}");
             }
             else
@@ -663,7 +663,7 @@ class CaradController extends Controller
                         }
                     }
                     $_SESSION["success_car_ad_edited"] = "Оголошення успішно відредаговано";
-                    $this->redirect("/carad/myads");
+                    $this->redirect("/carad/myads");// todo тут мабуть треба буде додати перевірку для адміна
                 }
                 else
                 {

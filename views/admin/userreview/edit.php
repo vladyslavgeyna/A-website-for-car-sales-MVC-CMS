@@ -37,7 +37,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Редагування 
                                     </div>
                                     <div class="form-group">
                                         <label for="InputText">Текст оголошення:</label>
-                                        <textarea style="resize: none; height: 100px" class="form-control" name="text" id="InputText" placeholder="Введіть новий текст відгуку"><?=$data["text"]?></textarea>
+                                        <textarea style="resize: none; height: 100px" class="form-control" name="text" id="InputText" placeholder="Введіть новий текст відгуку"><?=str_replace("<br />", "", $data['text'])?></textarea>
                                         <?php if (!empty($errors['text'])): ?>
                                             <div class="error-form-validation mt-2" >
                                                 <span><?= $errors['text']; ?></span>

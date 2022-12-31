@@ -1435,3 +1435,13 @@ footer ul {
     font-weight: 700;
     font-size: 16px;
 }
+.page-item>.page-link {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.page-item.active>.page-link {
+    color: white;
+    border-color:rgb(112.520718,44.062154,249.437846);
+    background-color: rgb(112.520718,44.062154,249.437846);
+}

@@ -91,5 +91,21 @@ class Utils
         return self::getCurrentEURToUAH() / self::getCurrentUSDToUAH();
     }
 
+    public static function isStringContains($string, $needle): bool
+    {
+        if (strpos($string, $needle) !== false)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static function debug($object)
+    {
+        echo "<pre>";
+        var_dump($object);
+        echo "</pre>";
+        die();
+    }
 
 }
