@@ -472,7 +472,7 @@ Core::getInstance()->pageParams['title'] = 'Додавання оголошен�
                 method: "POST",
                 data: {
                     ajax: 1,
-                    car_brand_id: value
+                    car_brand_id: value,
                 },
                 success: function (response) {
                     createCarModelsSelect(JSON.parse(response));
