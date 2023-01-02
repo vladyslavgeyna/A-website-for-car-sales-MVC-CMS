@@ -27,7 +27,7 @@ class Car
     }
 
     public static function addCar($car_brand_id, $car_model_id, $year_of_production, $engine_capacity, $fuel_id, $transmission_id, $color,
-                                  $region_id, $district, $city, $price, $type_of_currency_id, $wheel_drive_id, $number_of_seats, $mileage, $additional_options)
+                                  $region_id, $district, $city, $price, $type_of_currency_id, $wheel_drive_id, $number_of_seats, $mileage, $additional_options, $dollar_price)
     {
         return Core::getInstance()->db->insert(self::$tableName, [
             "car_brand_id" => $car_brand_id,
@@ -45,7 +45,8 @@ class Car
             "wheel_drive_id" => $wheel_drive_id,
             "number_of_seats" => $number_of_seats,
             "mileage" => $mileage,
-            "additional_options" => $additional_options
+            "additional_options" => $additional_options,
+            "dollar_price" => $dollar_price
         ]);
     }
 
@@ -71,11 +72,10 @@ class Car
         return null;
     }
 
-    public static function getCarByIdInnered($id)
+    public static function getCarByIdInnered($id, $whereArray = null)
     {
-        $car = Core::getInstance()->db->select(self::$tableName, "*", [
-            "id" => $id
-        ]);
+        $whereArray["id"] = $id;
+        $car = Core::getInstance()->db->select(self::$tableName, "*", $whereArray);
         if (!empty($car))
         {
             $result = $car[0];

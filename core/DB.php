@@ -11,9 +11,10 @@ class DB
         $this->pdo = new \PDO("mysql: host={$hostname};dbname={$database}", $login, $password);
     }
 
-    public function select($tableName, $fieldsList = "*", $conditionList = null, $orderBy = null ,$limit = null, $offset = null)
+    public function select($tableName, $fieldsList = "*", $conditionList = null, $orderBy = null ,$limit = null, $offset = null, $innerJoin = null)
     {
         $fieldsPartString = "";
+        $innerJoinPartString = "";
         $wherePartString = "";
         $orderByPartString = "";
         $limitAndOffsetPartString = "";
@@ -25,14 +26,41 @@ class DB
         {
             $fieldsPartString = implode(", ", $fieldsList);
         }
+        if (is_string($innerJoin))
+        {
+            $innerJoinPartString = $innerJoin;
+        }
         if(is_array($conditionList) && count($conditionList) > 0)
         {
             $parts = [];
+            $i = 0;
             foreach ($conditionList as $key => $value)
             {
-                $parts []= "{$key} = :{$key}";
+                if ((Utils::isStringContains($key, ">") || Utils::isStringContains($key, "<")) && !Utils::isStringContains($key, "="))
+                {
+                    $key2 = mb_substr($key, 0, -2);
+                    $parts []= "{$key} :{$key2}{$i}";
+                    unset($conditionList[$key]);
+                    $conditionList["$key2$i"] = $value;
+                }
+                else if (Utils::isStringContains($key, ">=") || Utils::isStringContains($key, "<="))
+                {
+                    $key2 = mb_substr($key, 0, -3);
+                    $parts []= "{$key} :{$key2}{$i}";
+                    unset($conditionList[$key]);
+                    $conditionList["$key2$i"] = $value;
+                }
+                else
+                {
+                    $parts []= "{$key} = :{$key}";
+                }
+                $i++;
             }
             $wherePartString = "WHERE ".implode(" AND ", $parts);
+        }
+        if (is_string($conditionList))
+        {
+            $wherePartString = $conditionList;
         }
         if (is_array($orderBy) && count($orderBy) > 0)
         {
@@ -54,7 +82,7 @@ class DB
                 $limitAndOffsetPartString = " LIMIT {$limit}";
             }
         }
-        $stmt = $this->pdo->prepare("SELECT {$fieldsPartString} FROM {$tableName} {$wherePartString}{$orderByPartString}{$limitAndOffsetPartString}");
+        $stmt = $this->pdo->prepare("SELECT {$fieldsPartString} FROM {$tableName} {$innerJoinPartString}{$wherePartString}{$orderByPartString}{$limitAndOffsetPartString}");
         $stmt->execute($conditionList);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -115,19 +143,43 @@ class DB
         $stmt->execute($conditionList);
     }
 
-    public function count($tableName, $conditionList = null)
+    public function count($tableName, $conditionList = null, $innerJoin = null)
     {
         $whereParts = [];
         $wherePartString = "";
+        $innerJoinPartString = "";
+        if (is_string($innerJoin))
+        {
+            $innerJoinPartString = $innerJoin;
+        }
         if(is_array($conditionList) && count($conditionList) > 0)
         {
+            $i = 0;
             foreach ($conditionList as $key => $value)
             {
-                $whereParts []= "{$key} = :{$key}";
+                if ((Utils::isStringContains($key, ">") || Utils::isStringContains($key, "<")) && !Utils::isStringContains($key, "="))
+                {
+                    $key2 = mb_substr($key, 0, -2);
+                    $whereParts []= "{$key} :{$key2}{$i}";
+                    unset($conditionList[$key]);
+                    $conditionList["$key2$i"] = $value;
+                }
+                else if (Utils::isStringContains($key, ">=") || Utils::isStringContains($key, "<="))
+                {
+                    $key2 = mb_substr($key, 0, -3);
+                    $whereParts []= "{$key} :{$key2}{$i}";
+                    unset($conditionList[$key]);
+                    $conditionList["$key2$i"] = $value;
+                }
+                else
+                {
+                    $whereParts []= "{$key} = :{$key}";
+                }
+                $i++;
             }
-            $wherePartString = "WHERE ".implode(" AND ", $whereParts);
+            $wherePartString = " WHERE ".implode(" AND ", $whereParts);
         }
-        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM {$tableName} {$wherePartString}");
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM {$tableName}{$innerJoinPartString}{$wherePartString}");
         $stmt->execute($conditionList);
         return $stmt->fetchColumn();
     }

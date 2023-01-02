@@ -48,6 +48,34 @@ class Carimage
         }
     }
 
+    public static function getMainCarImageNameByCarIdInnered($car_id)
+    {
+        $car_images = Core::getInstance()->db->select(self::$tableName, "*", [
+            "car_id" => $car_id
+        ]);
+        if (!empty($car_images))
+        {
+            $main_image = Core::getInstance()->db->select(self::$tableName, "*", [
+                "car_id" => $car_id,
+                "is_main" => 1
+            ]);
+            if (!empty($main_image))
+            {
+
+                return Image::getImageNameById($main_image[0]["image_id"]);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 
     public static function getAllCarImagesByCarIdInnered($car_id): ?array
     {

@@ -16,9 +16,9 @@ Core::getInstance()->pageParams['title'] = 'Профіль';
                 <div class="user-data-wrapper-content d-flex flex-column flex-md-row gap-3">
                     <div style="width: 150px; margin: 0 auto" class="user-data-image-wrapper">
                         <?php if (User::hasUserByIdImage($data["user"]["id"])): ?>
-                            <img class="w-100" style="border-radius: 50%"  src="<?=User::getUserByIdImagePath($data["user"]["id"])?>" alt="Аватар продавця">
+                            <img class="w-100" style="border-radius: 50%"  src="<?=User::getUserByIdImagePath($data["user"]["id"])?>">
                         <?php else: ?>
-                            <img class="w-100" src="/themes/images/default_avatar.svg" alt="Аватар продавця">
+                            <img class="w-100" src="/themes/images/default_avatar.svg">
                         <?php endif; ?>
                     </div>
                     <div class="user-data">

@@ -8,7 +8,7 @@ class Pagination
     public int $currentPage = 1;
     public string $uriParams = "";
     public int $midSize = 2;
-    public int $allPages = 5;
+    public int $allPages = 3;
     public int $total = 1;
     public int $perPage = 1;
     public int $page = 1;

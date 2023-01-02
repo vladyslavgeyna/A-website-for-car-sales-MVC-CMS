@@ -1445,3 +1445,62 @@ footer ul {
     border-color:rgb(112.520718,44.062154,249.437846);
     background-color: rgb(112.520718,44.062154,249.437846);
 }
+
+.container-car-ad-index button.btn-filter {
+    font-size: 18px;
+    border-radius: 25px;
+}
+
+.container-car-ad-index  .modal-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.container-car-ad-index .modal button.btn-no-action, .container-car-ad-index .modal button.btn-yes, .container-car-ad-index .modal button.btn-reset, .container-car-ad-index .modal a {
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 700;
+}
+.container-car-ad-index .modal button.btn-yes {
+    border: 3px solid #0d6efd;
+}
+.container-car-ad-index .modal a.btn-reset {
+    border: 3px solid #ffc107;
+}
+.container-car-ad-index .modal button.btn-yes:hover {
+    border: 3px solid #0b5ed7;
+}
+.container-car-ad-index .modal a.btn-reset:hover {
+    border: 3px solid #ffca2c;
+}
+.container-car-ad-index .modal button.btn-no-action {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+}
+.container-car-ad-index .modal button.btn-no-action:hover {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+}
+.container-car-ad-index .modal button.btn-no-action:active {
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}
+.container-car-ad-index .modal button.btn-yes:active {
+    border: 3px solid #0b5ed7;
+    color: white;
+}
+.container-car-ad-index .modal a.btn-reset:active {
+    border: 3px solid #ffca2c;
+}
+.container-car-ad-index .modal .modal-body input, .container-car-ad-index .modal .modal-body select {
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: 600;
+}
+.container-car-ad-index .modal button.btn-close {
+    border: none;
+}
+.container-car-ad-index .modal .modal-body label {
+    font-size: 17px;
+    font-weight: 600;
+}

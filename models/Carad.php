@@ -174,26 +174,57 @@ class Carad
         return null;
     }
 
-    public static function getAllActiveCarAdsInnered($offset = null, $limit = null): ?array
+    public static function getAllActiveCarAdsInnered($offset = null, $limit = null, $whereArray = null): ?array
     {
-        $active_car_ads = Core::getInstance()->db->select(self::$tableName, "*",  [
-            "is_active" => 1
-        ], null, $limit, $offset);
+        $active_car_ads = Core::getInstance()->db->select(self::$tableName, "*", ["is_active" => 1], null, $limit, $offset);
         if(!empty($active_car_ads))
         {
-            $result = $active_car_ads;
+            $tmp = $active_car_ads;
             for ($i = 0; $i < count($active_car_ads); $i++)
             {
-                $result[$i]["car"] = Car::getCarByIdInnered($active_car_ads[$i]["car_id"]);
+                $car = Car::getCarByIdInnered($active_car_ads[$i]["car_id"], $whereArray);
+                if (!empty($car))
+                {
+                    $tmp[$i]["car"] = $car;
+                }
+            }
+            $result = [];
+            for ($i = 0; $i < count($tmp); $i++)
+            {
+                if (!empty($tmp[$i]["car"]))
+                {
+                    $result[$i] = $tmp[$i];
+                }
             }
             return $result;
         }
         return null;
     }
 
-    public static function getCountOfCarAds(): int
+    public static function getAllActiveCarAdsInneredByJoin($offset = null, $limit = null, $whereArray = null, $innerJoin = null, $fieldsArray = "*", $orderBy = null): ?array
     {
-        return Core::getInstance()->db->count(self::$tableName);
+        $whereArray["is_active"] = 1;
+        $active_car_ads = Core::getInstance()->db->select(self::$tableName, $fieldsArray, $whereArray, $orderBy, $limit, $offset, $innerJoin);
+        if(!empty($active_car_ads))
+        {
+            for ($i = 0; $i < count($active_car_ads); $i++)
+            {
+                $active_car_ads[$i]["main_image"] = Carimage::getMainCarImageNameByCarIdInnered($active_car_ads[$i]["car_id"]);
+            }
+            return $active_car_ads;
+        }
+        return null;
+    }
+
+    public static function getCountOfAllActiveCarAdsInnered($whereArray = null, $innerJoin = null)
+    {
+        $whereArray["is_active"] = 1;
+        return Core::getInstance()->db->count(self::$tableName, $whereArray, $innerJoin);
+    }
+
+    public static function getCountOfCarAds($whereArray = null): int
+    {
+        return Core::getInstance()->db->count(self::$tableName, $whereArray);
     }
 
     public static function deactivateCarAdById($id)

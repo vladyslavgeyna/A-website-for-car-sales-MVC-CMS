@@ -37,12 +37,7 @@ class CaradController extends Controller
         }
         else
         {
-            $data = [];
-            $data["ads"] = Carad::getAllActiveCarAdsInnered();
-            return $this->render(null, [
-                "title" => "Оголошення",
-                "data" => $data
-            ]);
+            $this->redirect("/");
         }
     }
 
@@ -195,10 +190,19 @@ class CaradController extends Controller
                     {
                         $engine_capacity = trim($_POST["car_engine_capacity"]);
                     }
+                    $dollar_price = trim($_POST["car_price"]);
+                    if ($_POST["car_type_of_currency"] == 2)
+                    {
+                        $dollar_price = trim($_POST["car_price"]) / Utils::getCurrentEURToUSD();
+                    }
+                    else if ($_POST["car_type_of_currency"] == 3)
+                    {
+                        $dollar_price = trim($_POST["car_price"]) / Utils::getCurrentUSDToUAH();
+                    }
                     $car_id = Car::addCar($_POST["car_brand"], $_POST["car_model"], $_POST["car_year_of_production"], $engine_capacity,
                         $_POST["car_fuel"], $_POST["car_transmission"], trim($_POST["car_color"]), $_POST["car_region"], trim($_POST["car_district"]),
                         trim($_POST["car_city"]), trim($_POST["car_price"]), $_POST["car_type_of_currency"], $_POST["car_wheel_drive"], $_POST["car_number_of_seats"],
-                        $_POST["car_mileage"], $additional_options);
+                        $_POST["car_mileage"], $additional_options, $dollar_price);
 
                     Carad::addCarAd($car_id, trim($_POST["car_ad_title"]), nl2br($_POST["car_ad_text"]), date("Y-m-d H:i:s"), User::getCurrentUserId());
                     for ($i = 0; $i < count($_FILES["car_photos"]["name"]); $i++)
@@ -606,6 +610,18 @@ class CaradController extends Controller
                     {
                         $engine_capacity = trim($_POST["engine_capacity"]);
                     }
+                    $dollar_price = trim($_POST["price"]);
+                    if ($data["type_of_currency_id"] != $_POST["type_of_currency_id"])
+                    {
+                        if ($_POST["type_of_currency_id"] == 2)
+                        {
+                            $dollar_price = trim($_POST["price"]) / Utils::getCurrentEURToUSD();
+                        }
+                        else if ($_POST["type_of_currency_id"] == 3)
+                        {
+                            $dollar_price = trim($_POST["price"]) / Utils::getCurrentUSDToUAH();
+                        }
+                    }
                     $updateCarArray = [
                         "car_brand_id" => $_POST["car_brand_id"],
                         "car_model_id" => $_POST["car_model_id"],
@@ -623,6 +639,7 @@ class CaradController extends Controller
                         "number_of_seats" => $_POST["number_of_seats"],
                         "mileage" => trim($_POST["mileage"]),
                         "additional_options" => $additional_options,
+                        "dollar_price" => $dollar_price
                     ];
 
                     Car::updateCarById($data["car_id"], $updateCarArray);

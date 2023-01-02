@@ -25,7 +25,7 @@ Core::getInstance()->pageParams['title'] = 'Порівняння';
                         <td class="p-4" >
                             <div class="d-flex align-items-center justify-content-between gap-2">
                                 <a class="car-title primary-color" href="/carad/view/<?=$ad["id"]?>"><?=$ad["title"]?></a>
-                                <a href="/carcomparison/delete/<?=$ad["id"]?>"><i class="fa-solid fa-xmark"></i></a>
+                                <a href="/carcomparison/delete/<?=$ad["id"]?>" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Видалити з порівняння"><i class="fa-solid fa-xmark"></i></a>
                             </div>
                             <div class="image-wrapper mt-3">
                                 <a href="/carad/view/<?=$ad["id"]?>"><img src="/files/car/<?=$ad["car"]["main_image"]["name"]?>" alt="Зображення автомобіля"></a>
