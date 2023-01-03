@@ -34,6 +34,9 @@ use models\User;
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/" class="nav-link">Головна</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/user/edit" class="nav-link">Мій профіль</a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -51,21 +54,17 @@ use models\User;
         </ul>
     </nav>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-<!--        <a href="/" class="brand-link d-flex align-items-center justify-content-center" style="gap: 10px" >-->
-<!--            <i class="fa-solid fa-shield-halved img-circle" style="font-size: 1.3rem"></i>-->
-<!--            <span class="brand-text font-weight-light">Адмін панель</span>-->
-<!--        </a>-->
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
                 <div class="image">
                     <?php if(!User::hasCurrentUserImage()):?>
-                        <a href="/"><img src="/themes/images/default_avatar.svg" class="img-circle elevation-2" alt="Аватар користувача"></a>
+                        <a href="/user/edit"><img src="/themes/images/default_avatar.svg" class="img-circle elevation-2" alt="Аватар користувача"></a>
                     <?php else: ?>
-                        <a href="/"><img src="<?=User::getCurrentUserImagePath()?>" class="img-circle elevation-2" alt="Аватар користувача"></a>
+                        <a href="/user/edit"><img src="<?=User::getCurrentUserImagePath()?>" class="img-circle elevation-2" alt="Аватар користувача"></a>
                     <?php endif;?>
                 </div>
                 <div class="info">
-                    <a href="/" class="d-block"><?=User::getCurrentUserFullName()?></a>
+                    <a href="/user/edit" class="d-block"><?=User::getCurrentUserFullName()?></a>
                 </div>
             </div>
             <nav class="mt-2">

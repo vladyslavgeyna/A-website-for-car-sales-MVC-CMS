@@ -219,12 +219,10 @@ class UserController extends Controller
             return $this->render(null, [
                "data" => $data
             ]);
-
         }
-
         else
         {
-            // тут для адміна
+            return $this->error(404);
         }
     }
 
@@ -327,7 +325,9 @@ class UserController extends Controller
             }
             else
             {
-                // тут якщо адмін свій профіль видаляє
+                User::deleteUserById(User::getCurrentUserId());
+                $_SESSION['delete_profile_success'] = "Ваш профіль успішно видалено";
+                $this->redirect("/user/logout");
             }
         }
     }
@@ -370,31 +370,43 @@ class UserController extends Controller
     }
 
 
-    public function changepasswordAction()
+    public function changepasswordAction($params)
     {
         if (!User::isUserAuthenticated())
         {
             $this->redirect("/");
         }
-        if (!User::isUserAdmin())
+        $id = intval($params[0]);
+        if (!empty($id) && !User::isUserByIdExist($id))
         {
-            if(Core::getInstance()->requestMethod === "POST")
+            $this->redirect("/");
+        }
+        if (!empty($id) && !User::isUserAdmin())
+        {
+            $this->redirect("/");
+        }
+        if(Core::getInstance()->requestMethod === "POST")
+        {
+            $user = User::getCurrentAuthenticatedUser();
+            $errors = [];
+            if (!User::isUserAdmin())
             {
-                $user = User::getCurrentAuthenticatedUser();
-                $errors = [];
                 if(Utils::getHashedString($_POST['old_password']) != $user["password"])
                 {
                     $errors['old_password'] = "Невірно введений старий пароль";
                 }
-                if(($_POST["password1"] == $_POST["password2"]) && (mb_strlen($_POST["password2"]) < 6))
-                {
-                    $errors['password2'] = "Мінімальна довжина паролю 6 символів";
-                }
-                if($_POST["password1"] != $_POST["password2"])
-                {
-                    $errors['password2'] = "Паролі не співпадають";
-                }
-                if (count($errors) > 0)
+            }
+            if(($_POST["password1"] == $_POST["password2"]) && (mb_strlen($_POST["password2"]) < 6))
+            {
+                $errors['password2'] = "Мінімальна довжина паролю 6 символів";
+            }
+            if($_POST["password1"] != $_POST["password2"])
+            {
+                $errors['password2'] = "Паролі не співпадають";
+            }
+            if (count($errors) > 0)
+            {
+                if (!User::isUserAdmin())
                 {
                     return $this->render(null, [
                         "errors" => $errors
@@ -402,20 +414,38 @@ class UserController extends Controller
                 }
                 else
                 {
-                    $password = Utils::getHashedString(trim($_POST["password1"]));
-                    User::changeUserByIdPassword(User::getCurrentUserId(), $password);
-                    $_SESSION["success_edit"] = "Дані успішно змінено.<br>Тепер зробіть вхід в Ваш обліковий запис";
-                    $this->redirect("/user/logout");
+                    return $this->renderAdmin(null, [
+                        "errors" => $errors
+                    ]);
                 }
             }
             else
             {
-                return $this->render();
+                $user_id = empty($id) ? User::getCurrentUserId() : $id;
+                $password = Utils::getHashedString(trim($_POST["password1"]));
+                User::changeUserByIdPassword($user_id, $password);
+                if (empty($id))
+                {
+                    $_SESSION["success_edit"] = "Дані успішно змінено.<br>Тепер зробіть вхід в Ваш обліковий запис";
+                    $this->redirect("/user/logout");
+                }
+                else
+                {
+                    $_SESSION["success_user_edited"] = "Користувача #{$id} успішно відредаговано";
+                    $this->redirect("/user");
+                }
             }
         }
         else
         {
-            // тут для адміна
+            if (!User::isUserAdmin())
+            {
+                return $this->render();
+            }
+            else
+            {
+                return $this->renderAdmin();
+            }
         }
     }
 

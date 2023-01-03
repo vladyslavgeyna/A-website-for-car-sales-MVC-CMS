@@ -1784,3 +1784,19 @@ footer ul {
     border-color: rgb(112.520718,44.062154,249.437846) !important;
     color: rgb(112.520718,44.062154,249.437846) !important;
 }
+
+.section-user-changepassword-admin button {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: white;
+    font-weight: 700;
+}
+.section-user-changepassword-admin button:hover  {
+    border: 3px solid rgb(112.520718,44.062154,249.437846);
+    color: rgb(112.520718,44.062154,249.437846);
+    background-color: white;
+}
+.section-user-changepassword-admin button:active {
+    background-color: white;
+    border-color: rgb(112.520718,44.062154,249.437846) !important;
+    color: rgb(112.520718,44.062154,249.437846) !important;
+}

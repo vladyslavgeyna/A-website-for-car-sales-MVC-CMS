@@ -6,7 +6,7 @@
 use core\Core;
 use models\User;
 
-Core::getInstance()->pageParams['title'] = 'Редагування профілю';
+Core::getInstance()->pageParams['title'] = 'Адмін | Редагування профілю';
 
 $add_path = empty($user_id) ? "" : "/".$user_id;
 
