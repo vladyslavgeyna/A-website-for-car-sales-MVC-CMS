@@ -12,9 +12,9 @@ Core::getInstance()->pageParams['title'] = $title;
 <main class="main main-car-ad-index d-flex flex-column justify-content-between" style="row-gap: 30px">
     <div class="container container-car-ad-index " >
         <?php if (!empty($data["ads"])): ?>
-            <div class="mb-3 d-flex align-items-center justify-content-between" >
+            <div class="mb-3 d-flex align-items-start align-items-md-center justify-content-md-between gap-3 flex-column flex-md-row flex" >
                 <button data-bs-toggle="modal" data-bs-target="#filter-open-modal" type="button" class="btn btn-success btn-filter fw-bold"><i class="fa-solid fa-filter pe-1"></i>Фільтрація та сортування</button>
-                <p class="m-0 h4 fw-bold">За Вашим запитом знайдено оголошень: <?=$total_count_of_found_ads?></p>
+                <p class="m-0 h4 fw-bold">За Вашим запитом знайдено оголошень: <span style="font-weight: 1000"><?=$total_count_of_found_ads?></span></p>
             </div>
             <div class="modal modal-filter-open-modal fade" id="filter-open-modal" tabindex="-1" aria-hidden="false">
                 <div class="modal-dialog modal-dialog-centered" style="max-width: 800px !important;" >

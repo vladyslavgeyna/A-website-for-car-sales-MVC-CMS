@@ -253,6 +253,17 @@ class User
         }
     }
 
+    public static function isLoginExceptUserByidExists($id, $login): ?bool
+    {
+        $user1 = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        $user2 = Core::getInstance()->db->select(self::$tableName, "*", [
+            "login" => $login
+        ]);
+        return !empty($user2) && $user2[0]["id"] != $user1[0]["id"];
+    }
+
     public static function isUserByIdExist($id): bool
     {
         $user = Core::getInstance()->db->select(self::$tableName, "*", [
@@ -379,6 +390,17 @@ class User
             ]);
             return !empty($user) && $current_user["phone"] != $user[0]["phone"];
         }
+    }
+
+    public static function isPhoneExceptUserByidExists($id, $phone): ?bool
+    {
+        $user1 = Core::getInstance()->db->select(self::$tableName, "*", [
+            "id" => $id
+        ]);
+        $user2 = Core::getInstance()->db->select(self::$tableName, "*", [
+            "phone" => $phone
+        ]);
+        return !empty($user2) && $user1[0]["phone"] != $user2[0]["phone"];
     }
 
 

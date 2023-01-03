@@ -339,11 +339,23 @@ class UserController extends Controller
             $this->redirect("/");
         }
         $id = intval($params[0]);
+        if (!empty($id) && !User::isUserAdmin())
+        {
+            $this->redirect("/");
+        }
+        if (!empty($id) && !User::isUserByIdExist($id))
+        {
+            $this->redirect("/");
+        }
         if (empty($id) && !User::hasCurrentUserImage())
         {
             $this->redirect("/");
         }
-        if (!User::isUserAdmin())
+        if (!empty($id) && !User::hasUserByIdImage($id))
+        {
+            $this->redirect("/");
+        }
+        if (empty($id))
         {
             User::deleteUserByIdImage(User::getCurrentUserId());
             $_SESSION["success_edit"] = "Дані успішно змінено.<br>Тепер зробіть вхід в Ваш обліковий запис";
@@ -351,9 +363,10 @@ class UserController extends Controller
         }
         else
         {
-         // тут для адміна...
+            User::deleteUserByIdImage($id);
+            $_SESSION["success_user_edited"] = "Користувача #{$id} успішно відредаговано";
+            $this->redirect("/user");
         }
-
     }
 
 
@@ -417,135 +430,209 @@ class UserController extends Controller
         {
             $this->redirect("/");
         }
-        if (!User::isUserAdmin())
+        $image_path = null;
+        if (empty($user_id))
         {
-            $image_path = null;
             $data = User::getCurrentAuthenticatedUser();
+        }
+        else
+        {
+            $data = User::getUserById($user_id);
+        }
+        if (empty($user_id))
+        {
             if (User::hasCurrentUserImage())
             {
                 $image_path = User::getCurrentUserImagePath();
             }
-            if(Core::getInstance()->requestMethod === "POST")
+        }
+        else
+        {
+            if (User::hasUserByIdImage($user_id))
             {
-                $errors = [];
-                $new_image_id = null;
-                $isAvatarExist = false;
-                $is_anything_changed = false;
-                if(mb_strlen($_POST["name"]) <= 2)
-                {
-                    $errors['name'] = "Помилка при введенні імені";
-                }
-                if(mb_strlen($_POST["surname"]) <= 2)
-                {
-                    $errors['surname'] = "Помилка при введенні прізвища";
-                }
-                if(mb_strlen($_POST["lastname"]) <= 2)
-                {
-                    $errors['lastname'] = "Помилка при введенні по-батькові";
-                }
-                if (!filter_var($_POST["login"], FILTER_VALIDATE_EMAIL))
-                {
-                    $errors['login_error'] = "Помилка при введенні логіну";
-                }
+                $image_path = User::getUserByIdImagePath($user_id);
+            }
+        }
+        if(Core::getInstance()->requestMethod === "POST")
+        {
+            $errors = [];
+            $new_image_id = null;
+            $isAvatarExist = false;
+            $is_anything_changed = false;
+            if(mb_strlen($_POST["name"]) <= 2)
+            {
+                $errors['name'] = "Помилка при введенні імені";
+            }
+            if(mb_strlen($_POST["surname"]) <= 2)
+            {
+                $errors['surname'] = "Помилка при введенні прізвища";
+            }
+            if(mb_strlen($_POST["lastname"]) <= 2)
+            {
+                $errors['lastname'] = "Помилка при введенні по-батькові";
+            }
+            if (!filter_var($_POST["login"], FILTER_VALIDATE_EMAIL))
+            {
+                $errors['login_error'] = "Помилка при введенні логіну";
+            }
+            if (empty($user_id))
+            {
                 if(User::isLoginExceptCurrentUserExists($_POST["login"]))
                 {
                     $errors['login_exist'] = "Даний логін вже зайнятий";
                 }
-                if(mb_strlen($_POST["phone"]) < 10)
+            }
+            else
+            {
+                if(User::isLoginExceptUserByidExists($user_id, $_POST["login"]))
                 {
-                    $errors['phone_error'] = "Номер телефону повинен містити принаймні 10 символів";
+                    $errors['login_exist'] = "Даний логін вже зайнятий";
                 }
-                if (!preg_match('/^0[3569]\d{8}$/', $_POST["phone"]))
-                {
-                    $errors['phone_error'] = "Помилка при введені номеру телефону";
-                }
+            }
+            if(mb_strlen($_POST["phone"]) < 10)
+            {
+                $errors['phone_error'] = "Номер телефону повинен містити принаймні 10 символів";
+            }
+            if (!preg_match('/^0[3569]\d{8}$/', $_POST["phone"]))
+            {
+                $errors['phone_error'] = "Помилка при введені номеру телефону";
+            }
+            if (empty($user_id))
+            {
                 if (User::isPhoneExceptCurrentUserExists($_POST["phone"]))
                 {
                     $errors['phone_exist'] = "Користувач з таким номером вже зареєстрований";
                 }
-                if(empty($_FILES["avatar"]["error"]))
+            }
+            else
+            {
+                if (User::isPhoneExceptUserByidExists($user_id, $_POST["phone"]))
                 {
-                    if(!in_array($_FILES["avatar"]["type"], Image::ALLOWED_PHOTO_TYPES))
+                    $errors['phone_exist'] = "Користувач з таким номером вже зареєстрований";
+                }
+            }
+
+            if(empty($_FILES["avatar"]["error"]))
+            {
+                if(!in_array($_FILES["avatar"]["type"], Image::ALLOWED_PHOTO_TYPES))
+                {
+                    $errors['avatar'] = "Некоректний тип файлу. Дозволені типи: png та jpeg";
+                }
+                else
+                {
+                    $isAvatarExist = true;
+                    $is_anything_changed = true;
+                }
+            }
+            if (!$is_anything_changed)
+            {
+                $keys = array_keys($_POST);
+                foreach ($keys as $key)
+                {
+                    if ($data[$key] != $_POST[$key])
                     {
-                        $errors['avatar'] = "Некоректний тип файлу. Дозволені типи: png та jpeg";
-                    }
-                    else
-                    {
-                        $isAvatarExist = true;
                         $is_anything_changed = true;
+                        break;
                     }
                 }
-                if (!$is_anything_changed)
+            }
+            if(count($errors) > 0)
+            {
+                $data = $_POST;
+                if (!User::isUserAdmin())
                 {
-                    $keys = array_keys($_POST);
-                    foreach ($keys as $key)
-                    {
-                        if ($data[$key] != $_POST[$key])
-                        {
-                            $is_anything_changed = true;
-                            break;
-                        }
-                    }
-                }
-                if(count($errors) > 0)
-                {
-                    $data = $_POST;
                     return $this->render(null, [
                         "errors" => $errors,
                         "data" => $data,
                         "image_path" => $image_path
                     ]);
                 }
-                else if(!$is_anything_changed)
+                else
+                {
+                    return $this->renderAdmin(null, [
+                        "errors" => $errors,
+                        "data" => $data,
+                        "image_path" => $image_path
+                    ]);
+                }
+            }
+            else if(!$is_anything_changed)
+            {
+                if (empty($user_id))
                 {
                     $this->redirect("/user/edit");
                 }
                 else
                 {
+                    $this->redirect("/user/edit/{$user_id}");
+                }
+            }
+            else
+            {
+                if (empty($user_id))
+                {
                     if (User::hasCurrentUserImage())
                     {
                         $new_image_id = $data["image_id"];
                     }
-                    if($isAvatarExist === true)
+                }
+                else
+                {
+                    if (User::hasUserByIdImage($user_id))
                     {
-                        $extension = Utils::getFileExtension($_FILES["avatar"]["name"]);
-                        if (empty($data["image_id"]))
-                        {
-                            $new_image_id = Image::addImage($_FILES["avatar"]["tmp_name"], $extension);
-                        }
-                        else
-                        {
-                            $new_image_id = Image::updateImageById($data["image_id"], $_FILES["avatar"]["tmp_name"], $extension);
-                        }
+                        $new_image_id = $data["image_id"];
                     }
-                    $updateArray = [
-                        "name" => trim($_POST["name"]),
-                        "surname" => trim($_POST["surname"]),
-                        "lastname" => trim($_POST["lastname"]),
-                        "login" => trim($_POST["login"]),
-                        "phone" => trim($_POST["phone"]),
-                        "image_id" => $new_image_id
-                    ];
-                    User::updateUser(User::getCurrentUserId(), $updateArray);
+                }
+                if($isAvatarExist === true)
+                {
+                    $extension = Utils::getFileExtension($_FILES["avatar"]["name"]);
+                    if (empty($data["image_id"]))
+                    {
+                        $new_image_id = Image::addImage($_FILES["avatar"]["tmp_name"], $extension);
+                    }
+                    else
+                    {
+                        $new_image_id = Image::updateImageById($data["image_id"], $_FILES["avatar"]["tmp_name"], $extension);
+                    }
+                }
+                $updateArray = [
+                    "name" => trim($_POST["name"]),
+                    "surname" => trim($_POST["surname"]),
+                    "lastname" => trim($_POST["lastname"]),
+                    "login" => trim($_POST["login"]),
+                    "phone" => trim($_POST["phone"]),
+                    "image_id" => $new_image_id
+                ];
+                User::updateUser($data["id"], $updateArray);
+                if (empty($user_id))
+                {
                     $_SESSION["success_edit"] = "Дані успішно змінено.<br>Тепер зробіть вхід в Ваш обліковий запис";
                     $this->redirect("/user/logout");
                 }
+                else
+                {
+                    $_SESSION["success_user_edited"] = "Користувача #{$user_id} успішно відредаговано";
+                    $this->redirect("/user");
+                }
             }
-            else
+        }
+        else
+        {
+            if (!User::isUserAdmin())
             {
                 return $this->render(null, [
                     "data" => $data,
                     "image_path" => $image_path
                 ]);
             }
+            else
+            {
+                return $this->renderAdmin(null, [
+                    "data" => $data,
+                    "image_path" => $image_path,
+                    "user_id" => $user_id
+                ]);
+            }
         }
-        else
-        {
-            // тут для адміна
-        }
-
-
     }
-
-
 }
