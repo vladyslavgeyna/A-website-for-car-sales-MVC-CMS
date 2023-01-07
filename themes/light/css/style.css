@@ -91,12 +91,15 @@ a {
     line-height: 120%;
     position: relative;
 }
-.dropdown-menu[data-bs-popper] {
-    left: unset;
-    right: 0;
+@media (min-width:768px) {
+    .dropdown-menu[data-bs-popper] {
+        left: unset;
+        right: 0;
+    }
 }
 
-@media (min-width:768px) {
+
+@media (min-width:992px) {
     .header-layout .nav-link:after {
         content: "";
         position: absolute;
