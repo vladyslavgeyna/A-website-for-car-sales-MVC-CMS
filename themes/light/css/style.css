@@ -414,7 +414,7 @@ footer ul {
     display: none;
 }
 
-.main-carad-add form button {
+.main-carad-add form button[type=submit] {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
     border-radius: 25px;
     color: white;
@@ -422,19 +422,18 @@ footer ul {
     font-weight: 700;
     transition: all 0.3s ease;
 }
-.main-carad-add form button:hover {
+.main-carad-add form button[type=submit]:hover {
     border: 4px solid rgb(112.520718,44.062154,249.437846);
     color: rgb(112.520718,44.062154,249.437846);
+    background-color: white;
+
 }
-.container-carad-add form button:active{
+.container-carad-add form button[type=submit]:active{
     border-color: rgb(112.520718,44.062154,249.437846) !important;
     color: rgb(112.520718,44.062154,249.437846) !important;
+    background-color: white;
 }
 
-.container-carad-add form button:active{
-    border-color: rgb(112.520718,44.062154,249.437846) !important;
-    color: rgb(112.520718,44.062154,249.437846) !important;
-}
 .container-carad-add form hr {
     border-top: 2px solid;
     border-radius: 25px;
@@ -1803,3 +1802,24 @@ footer ul {
     border-color: rgb(112.520718,44.062154,249.437846) !important;
     color: rgb(112.520718,44.062154,249.437846) !important;
 }
+
+/*section.carad-edit-admin button[type="submit"], section.section-carad-add-admin button[type="submit"] {*/
+/*    border: 4px solid rgb(112.520718,44.062154,249.437846);*/
+/*    border-radius: 25px;*/
+/*    color: white;*/
+/*    font-size: 18px;*/
+/*    font-weight: 700;*/
+/*    transition: all 0.3s ease;*/
+/*}*/
+
+/*section.carad-edit-admin button[type="submit"]:hover, section.section-carad-add-admin button[type="submit"]:hover {*/
+/*    border: 4px solid rgb(112.520718,44.062154,249.437846);*/
+/*    color: rgb(112.520718,44.062154,249.437846);*/
+/*}*/
+
+/*section.carad-edit-admin button[type="submit"]:active, section.section-carad-add-admin button[type="submit"]:active {*/
+/*    border: 4px solid rgb(112.520718,44.062154,249.437846);*/
+/*    color: rgb(112.520718,44.062154,249.437846);*/
+/*}*/
+
+

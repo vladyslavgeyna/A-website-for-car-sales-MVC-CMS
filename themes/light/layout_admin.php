@@ -133,7 +133,7 @@ use models\User;
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/carad/add" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Додати оголошення</p>
                                 </a>
