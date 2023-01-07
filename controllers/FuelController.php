@@ -58,10 +58,9 @@ class FuelController extends \core\Controller
                 "data" => $data
             ]);
         }
-
         else
         {
-            // тут якщо НЕ адмін
+            return $this->error(403);
         }
     }
 

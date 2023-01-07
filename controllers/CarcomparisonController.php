@@ -29,10 +29,9 @@ class CarcomparisonController extends \core\Controller
                 "data" => $data
             ]);
         }
-
         else
         {
-            // тут для адміна
+            return $this->error(404);
         }
     }
 
@@ -41,6 +40,10 @@ class CarcomparisonController extends \core\Controller
         if (!User::isUserAuthenticated())
         {
             $this->redirect("/");
+        }
+        if (User::isUserAdmin())
+        {
+            return $this->error(404);
         }
         $id = intval($params[0]);
         if (!Carad::isCarAdByIdExist($id))
@@ -61,11 +64,6 @@ class CarcomparisonController extends \core\Controller
         {
             $this->redirect("/carad/view/{$id}");
         }
-
-        else
-        {
-            // тут для адміна
-        }
     }
 
     public function deleteAction($params)
@@ -73,6 +71,10 @@ class CarcomparisonController extends \core\Controller
         if (!User::isUserAuthenticated())
         {
             $this->redirect("/");
+        }
+        if (User::isUserAdmin())
+        {
+            return $this->error(404);
         }
         $id = intval($params[0]);
         if (!Carad::isCarAdByIdExist($id))
@@ -92,11 +94,6 @@ class CarcomparisonController extends \core\Controller
         if (!User::isUserAdmin())
         {
             $this->redirect($_SERVER["HTTP_REFERER"]);
-        }
-
-        else
-        {
-            // тут для адміна
         }
     }
 }

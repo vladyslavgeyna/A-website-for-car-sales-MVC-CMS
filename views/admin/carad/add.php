@@ -5,7 +5,7 @@
 /** @var array $auto_complete */
 use core\Core;
 
-Core::getInstance()->pageParams['title'] = 'Додавання оголошення';
+Core::getInstance()->pageParams['title'] = 'Адмін | Додавання оголошення';
 ?>
 
 <main class="main main-carad-add">

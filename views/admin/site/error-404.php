@@ -2,7 +2,7 @@
 
 use core\Core;
 
-Core::getInstance()->pageParams['title'] = 'Помилка 404';
+Core::getInstance()->pageParams['title'] = 'Адмін | Помилка 404';
 
 ?>
 

@@ -30,12 +30,10 @@ class FavoriteadController extends Controller
                 "data" => $data
             ]);
         }
-
         else
         {
-            // тут для адміна
+            return $this->error(404);
         }
-
     }
 
     public function addAction($params)
@@ -43,6 +41,10 @@ class FavoriteadController extends Controller
         if (!User::isUserAuthenticated())
         {
             $this->redirect("/");
+        }
+        if (User::isUserAdmin())
+        {
+            return $this->error(404);
         }
         $id = intval($params[0]);
         if (!Carad::isCarAdByIdExist($id))
@@ -63,11 +65,6 @@ class FavoriteadController extends Controller
         {
             $this->redirect("/carad/view/{$id}");
         }
-
-        else
-        {
-            // тут для адміна
-        }
     }
 
 
@@ -76,6 +73,10 @@ class FavoriteadController extends Controller
         if (!User::isUserAuthenticated())
         {
             $this->redirect("/");
+        }
+        if (User::isUserAdmin())
+        {
+            return $this->error(404);
         }
         $id = intval($params[0]);
         if (!Carad::isCarAdByIdExist($id))
@@ -95,11 +96,6 @@ class FavoriteadController extends Controller
         if (!User::isUserAdmin())
         {
             $this->redirect($_SERVER["HTTP_REFERER"]);
-        }
-
-        else
-        {
-            // тут для адміна
         }
     }
 }

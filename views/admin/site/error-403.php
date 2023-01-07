@@ -2,7 +2,7 @@
 
 use core\Core;
 
-Core::getInstance()->pageParams['title'] = 'Помилка 403';
+Core::getInstance()->pageParams['title'] = 'Адмін | Помилка 403';
 
 ?>
 <main>

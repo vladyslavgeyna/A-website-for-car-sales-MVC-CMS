@@ -59,10 +59,9 @@ class CarbrandController extends Controller
                 "data" => $data
             ]);
         }
-
         else
         {
-         // тут якщо НЕ адмін
+            return $this->error(403);
         }
     }
 
