@@ -568,6 +568,10 @@ class CaradController extends Controller
             }
             $_POST["text"] = nl2br($_POST["text"]);
             $_POST["additional_options"] = nl2br($_POST["additional_options"]);
+            if ($_POST["fuel_id"] == 4)
+            {
+                $_POST["engine_capacity"] = 0;
+            }
 
             if (!$is_anything_changed)
             {
@@ -588,104 +592,115 @@ class CaradController extends Controller
             if(count($errors) > 0)
             {
                 $data = $_POST;
-                return $this->render(null, [
-                    "data" => $data,
-                    "errors" => $errors,
-                    "complete_select" => $complete_select
-                ]);
+                if (!User::isUserAdmin())
+                {
+                    return $this->render(null, [
+                        "data" => $data,
+                        "errors" => $errors,
+                        "complete_select" => $complete_select
+                    ]);
+                }
+                else
+                {
+                    return $this->renderAdmin(null, [
+                        "data" => $data,
+                        "errors" => $errors,
+                        "complete_select" => $complete_select
+                    ]);
+                }
             }
             else if(!$is_anything_changed)
-            {// todo тут мабуть треба буде додати перевірку для адміна
+            {
                 $this->redirect("/carad/edit/{$id}");
             }
             else
             {
-                if (!User::isUserAdmin())
+                if ( Fuel::getFuelById($_POST["fuel_id"])["name"] == "Електро" || $_POST["fuel_id"] == 4)
                 {
-                    if ( Fuel::getFuelById($_POST["fuel_id"])["name"] == "Електро" || $_POST["fuel_id"] == 4)
-                    {
-                        $engine_capacity = 0;
-                    }
-                    else
-                    {
-                        $engine_capacity = trim($_POST["engine_capacity"]);
-                    }
-                    $dollar_price = trim($_POST["price"]);
-                    if ($data["type_of_currency_id"] != $_POST["type_of_currency_id"])
-                    {
-                        if ($_POST["type_of_currency_id"] == 2)
-                        {
-                            $dollar_price = trim($_POST["price"]) / Utils::getCurrentEURToUSD();
-                        }
-                        else if ($_POST["type_of_currency_id"] == 3)
-                        {
-                            $dollar_price = trim($_POST["price"]) / Utils::getCurrentUSDToUAH();
-                        }
-                    }
-                    $updateCarArray = [
-                        "car_brand_id" => $_POST["car_brand_id"],
-                        "car_model_id" => $_POST["car_model_id"],
-                        "year_of_production" => $_POST["year_of_production"],
-                        "engine_capacity" => $engine_capacity,
-                        "fuel_id" => $_POST["fuel_id"],
-                        "transmission_id" => $_POST["transmission_id"],
-                        "color" => trim($_POST["color"]),
-                        "region_id" => $_POST["region_id"],
-                        "district" => trim($_POST["district"]),
-                        "city" => trim($_POST["city"]),
-                        "price" => trim($_POST["price"]),
-                        "type_of_currency_id" => $_POST["type_of_currency_id"],
-                        "wheel_drive_id" => $_POST["wheel_drive_id"],
-                        "number_of_seats" => $_POST["number_of_seats"],
-                        "mileage" => trim($_POST["mileage"]),
-                        "additional_options" => $additional_options,
-                        "dollar_price" => $dollar_price
-                    ];
-
-                    Car::updateCarById($data["car_id"], $updateCarArray);
-
-                    $updateCarAdArray = [
-                        "title" => trim($_POST["title"]),
-                        "text" => trim($_POST["text"]),
-                    ];
-                    Carad::updateCarAdById($id, $updateCarAdArray);
-                    if ($is_photos_changed)
-                    {
-                        $car_images = Carimage::getAllCarImagesByCarId($data["car_id"]);
-                        if (!empty($car_images))
-                        {
-                            Carimage::deleteAllCarImagesByCarId($data["car_id"]);
-                        }
-                        for ($i = 0; $i < count($_FILES["car_photos"]["name"]); $i++)
-                        {
-                            $extension = Utils::getFileExtension($_FILES["car_photos"]["name"][$i]);
-                            $image_id = Image::addImage($_FILES["car_photos"]["tmp_name"][$i], $extension, "car");
-                            if ($_POST["main_photo"] != $_FILES["car_photos"]["name"][$i])
-                            {
-                                Carimage::addCarImage($image_id, $data["car_id"]);
-                            }
-                            else
-                            {
-                                Carimage::addCarImage($image_id, $data["car_id"], 1);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        $main_image = Carimage::getMainImageByCarId($data["car_id"]);
-                        if ($main_image["image_id"] != $new_main_image_id)
-                        {
-                            Carimage::setAsNotMainCarImageById($main_image["id"]);
-                            Carimage::setAsMainCarImageByImageId($new_main_image_id);
-                        }
-                    }
-                    $_SESSION["success_car_ad_edited"] = "Оголошення успішно відредаговано";
-                    $this->redirect("/carad/myads");// todo тут мабуть треба буде додати перевірку для адміна
+                    $engine_capacity = 0;
                 }
                 else
                 {
-                    // тут для адміна
+                    $engine_capacity = trim($_POST["engine_capacity"]);
                 }
+                $dollar_price = trim($_POST["price"]);
+                if ($data["type_of_currency_id"] != $_POST["type_of_currency_id"])
+                {
+                    if ($_POST["type_of_currency_id"] == 2)
+                    {
+                        $dollar_price = trim($_POST["price"]) / Utils::getCurrentEURToUSD();
+                    }
+                    else if ($_POST["type_of_currency_id"] == 3)
+                    {
+                        $dollar_price = trim($_POST["price"]) / Utils::getCurrentUSDToUAH();
+                    }
+                }
+                $updateCarArray = [
+                    "car_brand_id" => $_POST["car_brand_id"],
+                    "car_model_id" => $_POST["car_model_id"],
+                    "year_of_production" => $_POST["year_of_production"],
+                    "engine_capacity" => $engine_capacity,
+                    "fuel_id" => $_POST["fuel_id"],
+                    "transmission_id" => $_POST["transmission_id"],
+                    "color" => trim($_POST["color"]),
+                    "region_id" => $_POST["region_id"],
+                    "district" => trim($_POST["district"]),
+                    "city" => trim($_POST["city"]),
+                    "price" => trim($_POST["price"]),
+                    "type_of_currency_id" => $_POST["type_of_currency_id"],
+                    "wheel_drive_id" => $_POST["wheel_drive_id"],
+                    "number_of_seats" => $_POST["number_of_seats"],
+                    "mileage" => trim($_POST["mileage"]),
+                    "additional_options" => $additional_options,
+                    "dollar_price" => $dollar_price
+                ];
+                Car::updateCarById($data["car_id"], $updateCarArray);
+                $updateCarAdArray = [
+                    "title" => trim($_POST["title"]),
+                    "text" => trim($_POST["text"]),
+                ];
+                Carad::updateCarAdById($id, $updateCarAdArray);
+                if ($is_photos_changed)
+                {
+                    $car_images = Carimage::getAllCarImagesByCarId($data["car_id"]);
+                    if (!empty($car_images))
+                    {
+                        Carimage::deleteAllCarImagesByCarId($data["car_id"]);
+                    }
+                    for ($i = 0; $i < count($_FILES["car_photos"]["name"]); $i++)
+                    {
+                        $extension = Utils::getFileExtension($_FILES["car_photos"]["name"][$i]);
+                        $image_id = Image::addImage($_FILES["car_photos"]["tmp_name"][$i], $extension, "car");
+                        if ($_POST["main_photo"] != $_FILES["car_photos"]["name"][$i])
+                        {
+                            Carimage::addCarImage($image_id, $data["car_id"]);
+                        }
+                        else
+                        {
+                            Carimage::addCarImage($image_id, $data["car_id"], 1);
+                        }
+                    }
+                }
+                else
+                {
+                    $main_image = Carimage::getMainImageByCarId($data["car_id"]);
+                    if ($main_image["image_id"] != $new_main_image_id)
+                    {
+                        Carimage::setAsNotMainCarImageById($main_image["id"]);
+                        Carimage::setAsMainCarImageByImageId($new_main_image_id);
+                    }
+                }
+                if (!User::isUserAdmin())
+                {
+                    $_SESSION["success_car_ad_edited"] = "Оголошення успішно відредаговано";
+                    $this->redirect("/carad/myads");
+                }
+                else
+                {
+                    $_SESSION["success_car_ad_edited"] = "Оголошення #{$id} успішно відредаговано";
+                    $this->redirect("/carad");
+                }
+
             }
         }
         else
@@ -699,12 +714,12 @@ class CaradController extends Controller
             }
             else
             {
-                //тут для адміна
+                return $this->renderAdmin(null, [
+                    "data" => $data,
+                    "complete_select" => $complete_select,
+                ]);
             }
         }
-
-
-
     }
 
 }

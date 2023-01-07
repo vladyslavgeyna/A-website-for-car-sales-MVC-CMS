@@ -11,13 +11,6 @@ Core::getInstance()->pageParams['title'] = 'Редагування оголош�
 ?>
 <main class="main main-carad-add">
     <div class="container container-carad-add">
-        <?php if (!empty($_SESSION["success_car_ad_added"])): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-check"></i><span style="margin-left: 10px" ><?= $_SESSION["success_car_ad_added"]; ?></span></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php unset($_SESSION["success_car_ad_added"]); ?>
-        <?php endif; ?>
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <span class="h2 mb-0 fw-bold d-flex align-items-center"><i style="font-size: 40px" class="fa-solid fa-xmark"></i><span style="margin-left: 10px" >Перевірте коректність заповнених даних</span></span>

@@ -458,7 +458,10 @@ footer ul {
 .container-carad-add .images-block .column input[type="radio"], .container-carad-add .images-block .column label {
     cursor: pointer;
 }
-/*Сторінка перегляду всіх оголошень*/
+.container-carad-add .images-block .column label {
+    margin: 0;
+}
+    /*Сторінка перегляду всіх оголошень*/
 
 .container-car-ad-index .card .image-wrapper {
     overflow: hidden;

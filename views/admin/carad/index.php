@@ -36,6 +36,13 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі оголошен
                     </div>
                     <?php unset($_SESSION["success_car_ad_deleted"]); ?>
                 <?php endif; ?>
+                <?php if (!empty($_SESSION["success_car_ad_edited"])): ?>
+                    <div class="alert alert-admin alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4 class="m-0"><i class="icon fa fa-check"></i><?= $_SESSION["success_car_ad_edited"]; ?></h4>
+                    </div>
+                    <?php unset($_SESSION["success_car_ad_edited"]); ?>
+                <?php endif; ?>
             </div>
         </div>
         <section class="content section-carad-index-admin section-table-admin">
