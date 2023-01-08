@@ -42,7 +42,7 @@ Core::getInstance()->pageParams['title'] = 'Адмін | Всі приводи';
             <div class="container-fluid">
                 <?php if(!empty($data["wheeldrives"])): ?>
                     <div class="card">
-                        <div class="card-body p-0">
+                        <div class="card-body p-0" style="overflow: auto">
                             <table class="table table-striped projects">
                                 <thead>
                                 <tr>
