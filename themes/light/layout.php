@@ -14,6 +14,7 @@ use models\User;
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $siteName ?> — <?= $title ?></title>
+    <link type="image/x-icon" href="/themes/images/favicon.png" rel="shortcut icon">
     <link rel="stylesheet" href="/themes/bootstrap/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/themes/light/css/style.css">
     <link rel="stylesheet" href="/themes/bootstrap/bootstrap-icons/bootstrap-icons.css">
