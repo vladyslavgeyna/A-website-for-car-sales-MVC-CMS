@@ -28,9 +28,8 @@
 * перегляд профілю та його редагування, включаючи видалення
 
 **&copy; 2022 - 2023 Гейна Владислав Сергійович**
-
 ***
-
+***
 # A website for car sales
 This **content management system (CMS)** is made in the example of a website for car sales.
 
